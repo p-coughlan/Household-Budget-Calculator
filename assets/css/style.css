@@ -1,0 +1,78 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-size: cover; /* This will make the background image to cover the entire screen */
+    background-repeat: no-repeat; /* This will make the background image not to repeat */
+    background-attachment: fixed; /* This will make the background image to stay fixed */
+    background-position: center; /* This will make the background image to be centered */
+    /* ADD FONT FAMILY */
+    /* ADD BACKGROUND IMAGE */
+}
+
+header {
+    height: fit-content; 
+    display: flex; 
+    flex-direction: column; /* This will make the items to be stacked vertically */
+}
+
+h1, h2 {
+    text-align: center;
+    color: #333;
+}
+
+.sticky-navbar {
+    position: -webkit-sticky; /* For Safari */
+    position: sticky;
+    top: 0;
+    background-color: #ff0000; /* Temp working colour */
+    width: 100%; /* Full width */
+    /* add some box shadow? */
+}
+
+.container {
+    display: flex; 
+    justify-content: center; /* This will center the items horizontally */
+}
+
+.column {
+    width: 45%; /* 45% of the container */
+    max-width: 500px; /* This will make the column to have a maximum width of 400px */
+    background-color: #f2f2f2; /* This will give the column a background color */
+    border: 1px solid #ccc;
+    margin: 10px;
+    
+}
+
+.input-group {
+    height: 2.5rem; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    padding: 0 1rem;
+    border: solid;
+    border-radius: 1.5em;
+    }
+
+.input-box {
+    background-color: #f2f2f2;
+    border: none;
+}
+
+/* MEDIA QUERIES */
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .column {
+        width: 100%;
+        margin: 10px 0;
+        width: 80%;
+    }
+}

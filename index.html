@@ -1,77 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
-<!------------------------------- HEAD SECTION ------------------------------->
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!------------------------------- HEAD SECTION ------------------------------->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>Household Budget Calculator</title>
+    <title>Household Budget Calculator</title>
 
-<!------------------------------- Google Font Link ------------------------------->
-<!------------------------------- Favicon Link ------------------------------->
+    <!------------------------------- Google Font Link ------------------------------->
+    <!------------------------------- Favicon Link ------------------------------->
 
-<link rel="stylesheet" href="#">
-</head>
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
 
-<!------------------------------- BODY SECTION ------------------------------->
+  <!------------------------------- BODY SECTION ------------------------------->
 
-<body>
-<header>
-<div>
-<h1>Household Budget Calculator</h1>
-<h2>Mangaging your finances can be a real headache at times, our budget calculator will help.</h2>>
-</div>
+  <body>
+    <header>
+      <div>
+        <!--- Container for Heading and Sub-Heading --->
+        <h1>Household Budget Calculator</h1>
+        <h2>
+          Mangaging your finances can be a real headache at times, our budget
+          calculator will help.
+        </h2>
+      </div>
 
-<!------------------------------- Sticky Navbar ------------------------------->
-<nav class="sticky-navbar">
-<ul>
-<li><button id="dark-mode">Dark Mode</button></li>
-<li><button id="calculator">Calculator</button></li>
-</ul>
-</nav>
-</header>
+      <!------------------------------- Sticky Navbar ------------------------------->
+      <nav class="sticky-navbar">
+        <ul>
+          <li><button id="dark-mode">Dark Mode</button></li>
+          <li><button id="calculator">Calculator</button></li>
+        </ul>
+      </nav>
+    </header>
 
-<!------------------------------- MAIN FORM AND RESULTS SECTION ------------------------------->
+    <!------------------------------- MAIN FORM AND RESULTS SECTION ------------------------------->
 
-<div class="container"> <!-- Container for 2 Columns-->
+    <div class="container">
+      <!-- Container for 2 Columns-->
 
-<div class="column"> <!-- Input Form Column -->
-<h3>For each category you can choose to calculate how much you spend weekly, quarterly or yearly. Choose from the list and our calculator will show you what you spend.</h3>
-<form action="">
-<!------------------- categories to choose from ------------------->
-<div> <!---add class for CSS styling--->
-<label for="mortgage">Mortgage:</label>
-<input type="number" id="mortgage" placeholder="Enter amount" required>
-</div>
-<div>
-<label for="mortgage">Mortgage:</label>
-<input type="number" id="mortgage" placeholder="Enter amount" required>
-</div>
-<div>
-<label for="mortgage">Mortgage:</label>
-<input type="number" id="mortgage" placeholder="Enter amount" required>
-</div>
-</form>
-</div>
+      <div class="column">
+        <!-- Input Form Column -->
+        <h3>
+          For each category you can choose to calculate how much you spend
+          weekly, quarterly or yearly. Choose from the list and our calculator
+          will show you what you spend.
+        </h3>
+        <form action="">
+          <!------------------- categories to choose from ------------------->
+          <div class="input-group">
+            <!---add class for CSS styling--->
+            <label for="mortgage">Mortgage:</label>
+            <input
+              type="number"
+              id="mortgage"
+              placeholder="Enter amount"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <label for="mortgage">Mortgage:</label>
+            <input
+              type="number"
+              id="mortgage"
+              placeholder="Enter amount"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <label for="mortgage">Mortgage:</label>
+            <input
+              type="number"
+              id="mortgage"
+              placeholder="Enter amount"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <label for="mortgage">Mortgage:</label>
+            <input
+              type="number"
+              id="mortgage"
+              placeholder="Enter amount"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <label for="mortgage">Mortgage:</label>
+            <input
+              type="number"
+              id="mortgage"
+              placeholder="Enter amount"
+              required
+            />
+          </div>
+        </form>
+      </div>
 
+      <div class="column">
+        <!-- Output Column -->
+        <h3>Here is the total amount you spend on each category.</h3>
+        <div>
+          <!--- Results displayed in form of a pie chart -->
+        </div>
+        <div>PIE CHART</div>
+      </div>
+    </div>
+    <!------------------------------- FOOTER ------------------------------->
 
-<div class="column"> <!-- Output Column -->
-<h3>Here is the total amount you spend on each category.</h3>
-<div>
-<!--- Results displayed in form of a pie chart -->
-</div>
-</div>
+    <footer>
+      <p>&copy; 2024 Household Budget Calculator</p>
+    </footer>
 
-</div>
-<!------------------------------- FOOTER ------------------------------->
-
-<footer>
-<p>&copy; 2024 Household Budget Calculator</p>
-</footer>
-
-<script src="#"></script>
-</body>
-
+    <script src="#"></script>
+  </body>
 </html>
 
 <!------------------------------- COMMENTS ------------------------------->
