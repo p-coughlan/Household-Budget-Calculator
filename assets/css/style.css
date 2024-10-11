@@ -1,3 +1,13 @@
+/* font variables */
+:root {
+    --font-family-sans: 'Helvetica Neue', Arial, sans-serif;
+    --font-family-serif: 'Georgia', serif;
+    --font-size-base: 16px;
+    --font-size-large: calc(2rem + 1vw);
+    --font-size-medium: calc(1.5rem + 1vw);
+    --font-color-primary: #333;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -9,7 +19,9 @@ body {
     background-repeat: no-repeat; /* This will make the background image not to repeat */
     background-attachment: fixed; /* This will make the background image to stay fixed */
     background-position: center; /* This will make the background image to be centered */
-    /* ADD FONT FAMILY */
+    font-family: var(--font-family-sans); /* Use the sans-serif font family */
+    font-size: var(--font-size-base); /* Use the base font size */
+    color: var(--font-color-primary); /* Use the primary font color */
     /* ADD BACKGROUND IMAGE */
 }
 
@@ -17,11 +29,21 @@ header {
     height: fit-content; 
     display: flex; 
     flex-direction: column; /* This will make the items to be stacked vertically */
+    padding-left: 10%;
+    padding-right: 10%;
 }
 
 h1, h2 {
-    text-align: center;
-    color: #333;
+    text-align: left;
+    color: var(--font-color-primary); /* Use the primary font color */
+}
+
+h1 {
+    font-size: var(--font-size-large); /* Use the large font size */
+}
+
+h2 {
+    font-size: var(--font-size-medium); /* Use the medium font size */
 }
 
 .sticky-navbar {
@@ -36,15 +58,24 @@ h1, h2 {
 .container {
     display: flex; 
     justify-content: center; /* This will center the items horizontally */
+    ;
 }
 
 .column {
-    width: 45%; /* 45% of the container */
-    max-width: 500px; /* This will make the column to have a maximum width of 400px */
+    width: 40%; /* 40% of the container */
+     /* Style a max width that aligns with the header text */
     background-color: #f2f2f2; /* This will give the column a background color */
     border: 1px solid #ccc;
-    margin: 10px;
+    /* margin: 10px;*/
+    padding: 1rem;
+}
+
+.amounts { /*redundant class?*/
     
+}
+
+.results { /*redundant class?*/
+
 }
 
 .input-group {
