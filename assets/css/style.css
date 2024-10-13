@@ -1,6 +1,6 @@
 /* font variables */
 :root {
-    --font-family-sans: 'Helvetica Neue', Arial, sans-serif;
+    --font-family-sans: 'Rubik', sans-serif;
     --font-family-serif: 'Georgia', serif;
     --font-size-base: 16px;
     --font-size-large: calc(2rem + 1vw);
@@ -22,7 +22,23 @@ body {
     font-family: var(--font-family-sans); /* Use the sans-serif font family */
     font-size: var(--font-size-base); /* Use the base font size */
     color: var(--font-color-primary); /* Use the primary font color */
-    /* ADD BACKGROUND IMAGE */
+    background-image: url(/assets/images/budget-lg.jpg);
+}
+
+.sticky-banner {
+    background-color: #ff0000;
+    width: 100%;
+    height: 30px;
+    position: -webkit-sticky; /* For Safari */
+    position: sticky;
+    top: 0;
+}
+
+.calc-container {
+    background-color: blue;
+    width: 80%;
+    margin: 0 auto;
+    text-align: right;
 }
 
 header {
@@ -31,28 +47,31 @@ header {
     flex-direction: column; /* This will make the items to be stacked vertically */
     padding-left: 10%;
     padding-right: 10%;
-}
-
-h1, h2 {
     text-align: left;
     color: var(--font-color-primary); /* Use the primary font color */
 }
 
+hr {
+    width: 80%;
+    color: red;
+    
+}
+
+
 h1 {
     font-size: var(--font-size-large); /* Use the large font size */
+    font-weight: normal;
+    text-transform: uppercase;
 }
 
 h2 {
     font-size: var(--font-size-medium); /* Use the medium font size */
+    font-weight: lighter;
 }
 
-.sticky-navbar {
-    position: -webkit-sticky; /* For Safari */
-    position: sticky;
-    top: 0;
-    background-color: #ff0000; /* Temp working colour */
-    width: 100%; /* Full width */
-    /* add some box shadow? */
+h3 {
+    font-size: var(--font-size-base); /* Use the base font size */
+    font-weight: lighter;
 }
 
 .container {
@@ -105,5 +124,13 @@ h2 {
         width: 100%;
         margin: 10px 0;
         width: 80%;
+    }
+
+    h1 {
+        font-size: 1.25rem;
+    }
+
+    h2 {
+        font-size: 1.25rem;
     }
 }

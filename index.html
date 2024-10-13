@@ -8,7 +8,12 @@
     <title>Household Budget Calculator</title>
 
     <!------------------------------- Google Font Link ------------------------------->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <!------------------------------- Favicon Link ------------------------------->
+    <!------------------------------- Font Awesome Link ------------------------------->
+    <script src="https://kit.fontawesome.com/e54e191223.js" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="assets/css/style.css" />
   </head>
@@ -16,24 +21,23 @@
   <!------------------------------- BODY SECTION ------------------------------->
 
   <body>
+    <div class="sticky-banner"> <!--Container for calculator button-->
+        <div class="calc-container">
+          <i class="fa-solid fa-calculator"></i>
+        </div>
+    </div>
     <header>
       <div>
         <!--- Container for Heading and Sub-Heading --->
-        <h1><i class="fal fa-home"></i>Household Budget Calculator</h1>
+        <h1><i class="fa-solid fa-people-roof"></i> Household Budget Calculator</h1>
         <h2>
           Mangaging your finances can be a real headache at times, our budget
           calculator will help.
         </h2>
       </div>
-
-      <!------------------------------- Sticky Navbar ------------------------------->
-      <nav class="sticky-navbar">
-        <ul>
-          <li><button id="dark-mode">Dark Mode</button></li>
-          <li><button id="calculator">Calculator</button></li>
-        </ul>
-      </nav>
     </header>
+
+    <hr>
 
     <!------------------------------- MAIN FORM AND RESULTS SECTION ------------------------------->
 
