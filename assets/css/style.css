@@ -1,141 +1,147 @@
 /* font variables */
 :root {
-    --font-family-sans: 'Rubik', sans-serif;
-    --font-family-serif: 'Georgia', serif;
-    --font-size-base: 16px;
-    --font-size-large: calc(2rem + 1vw);
-    --font-size-medium: calc(1.5rem + 1vw);
-    --font-color-primary: #333;
+  --font-family-sans: "Rubik", sans-serif;
+  --font-family-serif: "Georgia", serif;
+  --font-size-base: 16px;
+  --font-size-large: calc(2rem + 1vw);
+  --font-size-medium: calc(1.5rem + 1vw);
+  --font-color-primary: #333;
 }
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    background-size: cover; /* This will make the background image to cover the entire screen */
-    background-repeat: no-repeat; /* This will make the background image not to repeat */
-    background-attachment: fixed; /* This will make the background image to stay fixed */
-    background-position: center; /* This will make the background image to be centered */
-    font-family: var(--font-family-sans); /* Use the sans-serif font family */
-    font-size: var(--font-size-base); /* Use the base font size */
-    color: var(--font-color-primary); /* Use the primary font color */
-    background-image: url(/assets/images/budget-lg.jpg);
+  margin: 0;
+  padding: 0;
+  background-size: cover; /* This will make the background image to cover the entire screen */
+  background-repeat: no-repeat; /* This will make the background image not to repeat */
+  background-attachment: fixed; /* This will make the background image to stay fixed */
+  background-position: center; /* This will make the background image to be centered */
+  font-family: var(--font-family-sans); /* Use the sans-serif font family */
+  font-size: var(--font-size-base); /* Use the base font size */
+  color: var(--font-color-primary); /* Use the primary font color */
+  background-image: url(/assets/images/budget-lg.jpg);
 }
 
 .sticky-banner {
-    background-color: #ff0000;
-    width: 100%;
-    height: 30px;
-    position: -webkit-sticky; /* For Safari */
-    position: sticky;
-    top: 0;
+  display: flex;
+  background-color: #333;
+  position: sticky;
+  top: 50%;
+  left: 0;
+  width: 50px; /* Adjust the width as needed */
+  height: 50px; /* Full height of the viewport */
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+  transform: translateY(-50%);
 }
 
 .calc-container {
-    background-color: blue;
-    width: 80%;
-    margin: 0 auto;
-    text-align: right;
+  width: 80%;
+  margin: 0 auto;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-size: 2rem;
 }
 
 header {
-    height: fit-content; 
-    display: flex; 
-    flex-direction: column; /* This will make the items to be stacked vertically */
-    padding-left: 10%;
-    padding-right: 10%;
-    text-align: left;
-    color: var(--font-color-primary); /* Use the primary font color */
+  height: fit-content;
+  display: flex;
+  flex-direction: column; /* This will make the items to be stacked vertically */
+  padding-left: 10%;
+  padding-right: 10%;
+  text-align: left;
+  color: var(--font-color-primary); /* Use the primary font color */
 }
 
 hr {
-    width: 80%;
-    color: red;
-    
+  width: 80%;
+  color: red;
 }
 
-
 h1 {
-    font-size: var(--font-size-large); /* Use the large font size */
-    font-weight: normal;
-    text-transform: uppercase;
+  font-size: var(--font-size-large); /* Use the large font size */
+  font-weight: normal;
+  text-transform: uppercase;
 }
 
 h2 {
-    font-size: var(--font-size-medium); /* Use the medium font size */
-    font-weight: lighter;
+  font-size: var(--font-size-medium); /* Use the medium font size */
+  font-weight: lighter;
 }
 
 h3 {
-    font-size: var(--font-size-base); /* Use the base font size */
-    font-weight: lighter;
+  font-size: var(--font-size-base); /* Use the base font size */
+  font-weight: lighter;
 }
 
 .container {
-    display: flex; 
-    justify-content: center; /* This will center the items horizontally */
-    ;
+  display: flex;
+  justify-content: center; /* This will center the items horizontally */
 }
 
 .column {
-    width: 40%; /* 40% of the container */
-     /* Style a max width that aligns with the header text */
-    background-color: #f2f2f2; /* This will give the column a background color */
-    border: 1px solid #ccc;
-    /* margin: 10px;*/
-    padding: 1rem;
+  width: 40%; /* 40% of the container */
+  /* Style a max width that aligns with the header text */
+  background-color: #f2f2f2; /* This will give the column a background color */
+  border: 1px solid #ccc;
+  /* margin: 10px;*/
+  padding: 1rem;
 }
 
-.amounts { /*redundant class?*/
-    
+.amounts {
+  /*redundant class?*/
 }
 
-.results { /*redundant class?*/
-/* MAKE THIS COLUMN STICKY WHEN SCROLLING - BANNER MUST BE VISIBLE */
-
+.results {
+  /*redundant class?*/
+  /* MAKE THIS COLUMN STICKY WHEN SCROLLING - BANNER MUST BE VISIBLE */
 }
 
 .input-group {
-    height: 2.5rem; 
-    display: flex;
-    justify-content: space-between;
-    align-items: center; 
-    padding: 0 1rem;
-    border: solid;
-    border-radius: 1.5em;
-    }
+  height: 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  border: solid;
+  border-radius: 1.5em;
+  margin-bottom: 0.25rem;
+  font-family: var();
+}
 
 .input-box {
-    background-color: #f2f2f2;
-    border: none;
+  background-color: #f2f2f2;
+  border: none;
 }
 
 select {
-    font-family: var(--font-family-sans);
+  font-family: var(--font-family-sans);
 }
 
 /* MEDIA QUERIES */
 
 @media (max-width: 1024px) {
-    .container {
-        flex-direction: column;
-        align-items: center;
-    }
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .column {
-        width: 100%;
-        margin: 10px 0;
-        width: 80%;
-    }
+  .column {
+    width: 100%;
+    margin: 10px 0;
+    width: 80%;
+  }
 
-    h1 {
-        font-size: 1.25rem;
-    }
+  h1 {
+    font-size: 1.25rem;
+  }
 
-    h2 {
-        font-size: 1.25rem;
-    }
+  h2 {
+    font-size: 1.25rem;
+  }
 }
