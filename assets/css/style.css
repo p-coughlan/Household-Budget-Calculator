@@ -131,6 +131,14 @@ select {
   border-color: black; /* working colour scheme */
 }
 
+.pie {
+  background-color: red;
+  margin: 0 auto;
+  width: 200px;
+  height: 200px; /* HOW TO MAKE THIS A % OF PARENT CONTAINER? */
+  border-radius: 50%;
+}
+
 footer {
   background-color: #333;
   color: white;
