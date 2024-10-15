@@ -73,3 +73,27 @@ Car (Travel Section) <i class="fa-solid fa-car"></i>
 Shopping Trolley (Household Section) <i class="fa-solid fa-cart-shopping"></i>
 Credit Card (Finance Section) <i class="fa-regular fa-credit-card"></i>
 Gifts (Additional Expenses Section) <i class="fa-solid fa-gifts"></i>
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+ 
+        <style>
+            form {
+                background-color: azure;
+                border: 2px solid blue;
+                border-top-left-radius: 5px;
+                border-bottom-right-radius: 5px;
+            }
+            label,
+            input {
+                margin: 2px;
+                background-color: beige;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="income"></div>
