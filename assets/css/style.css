@@ -102,6 +102,11 @@ h3 {
   /* MAKE THIS COLUMN STICKY WHEN SCROLLING - BANNER MUST BE VISIBLE */
 }
 
+table { /* WIP */
+  border: 1px solid black;
+}
+
+/* REDUNDANT CLASSES? */
 .input-group {
   height: 2.5rem;
   display: flex;
