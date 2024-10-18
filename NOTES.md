@@ -15,7 +15,7 @@ HOUSEHOLD BILLS  <i class="fa-solid fa-house"></i>
 Mortgage or Rent 
 Council Tax
 Maintenance
-Household Bills
+Utility Bills
 Other Household Costs
 
 LEISURE  <i class="fa-solid fa-plane-departure"></i>

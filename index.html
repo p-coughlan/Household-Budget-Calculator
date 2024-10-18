@@ -20,19 +20,21 @@
       src="https://kit.fontawesome.com/e54e191223.js"
       crossorigin="anonymous"
     ></script>
-
+    <!------------------------------- CSS Link ------------------------------->
     <link rel="stylesheet" href="assets/css/style.css" />
   </head>
 
   <!------------------------------- BODY SECTION ------------------------------->
 
   <body>
+
     <div class="sticky-banner">
       <!--Container for calculator button-->
       <div class="calc-container">
         <i class="fa-solid fa-calculator"></i>
       </div>
     </div>
+
     <header>
       <div>
         <!--- Container for Heading and Sub-Heading --->
@@ -64,213 +66,15 @@
 
         <!------------------------------- WIP JS POPULATION ------------------------------->
         <div id="income-category"></div>
+        <hr>
+        <div id="expenditure"></div>
+        <hr>
         <button type="submit" id="add-income">Add Income</button>
-        <div><H2 id="results">RESULTS</H2></div>
+        
       <hr>
-      <hr>
-      <hr>
+
         <!------------------------------- INCOME INPUT ------------------------------->
-        <h3><i class="fa-solid fa-coins"></i> INCOME</h3>
-        <form action="">
-          <!--- EMPLOYMENT INCOME --->
-          <div class="input-group">
-            <label for="mortgage">Employment Income:</label>
-            <select name="" id="">
-              <!--- ****** is the name value important here? ID?? ****** -->
-              <option value="weekly">Weekly</option>
-              <option value="monthly">Monthly</option>
-              <option value="quarterly">Quarterly</option>
-              <option value="yearly">Yearly</option>
-            </select>
-            <input
-              class="input-box income"
-              type="number"
-              id="mortgage"
-              placeholder="£0.00"
-              required
-            />
-          </div>
-
-          <!--- SELF EMPLOYMENT INCOME --->
-          <div class="input-group">
-            <label for="self-employment">Self Employment Income:</label>
-            <select name="" id="">
-              <!--- ****** is the name value important here? ID?? ****** -->
-              <option value="weekly">Weekly</option>
-              <option value="monthly">Monthly</option>
-              <option value="quarterly">Quarterly</option>
-              <option value="yearly">Yearly</option>
-            </select>
-            <input
-              class="income"
-              type="number"
-              id="self-employment"
-              placeholder="£0.00"
-              required
-            />
-          </div>
-
-          <!--- SAVINGS AND INVESTMENT INCOME --->
-          <div class="input-group">
-            <label for="savings">Savings and Investment Income:</label>
-            <select name="" id="">
-              <!--- ****** is the name value important here? ID?? ****** -->
-              <option value="weekly">Weekly</option>
-              <option value="monthly">Monthly</option>
-              <option value="quarterly">Quarterly</option>
-              <option value="yearly">Yearly</option>
-            </select>
-            <input
-              class="income"
-              type="number"
-              id="savings"
-              placeholder="£0.00"
-              required
-            />
-          </div>
-
-          <!--- STATE BENEFITS INCOME --->
-          <div class="input-group">
-            <label for="benefits">State Benefits:</label>
-            <select name="" id="">
-              <!--- ****** is the name value important here? ID?? ****** -->
-              <option value="weekly">Weekly</option>
-              <option value="monthly">Monthly</option>
-              <option value="quarterly">Quarterly</option>
-              <option value="yearly">Yearly</option>
-            </select>
-            <input
-              class="income"
-              type="number"
-              id="benefits"
-              placeholder="£0.00"
-              required
-            />
-          </div>
-
-          <!--- PROPERTY INCOME --->
-          <div class="input-group">
-            <label for="property">Property Income:</label>
-            <select name="" id="">
-              <!--- ****** is the name value important here? ID?? ****** -->
-              <option value="weekly">Weekly</option>
-              <option value="monthly">Monthly</option>
-              <option value="quarterly">Quarterly</option>
-              <option value="yearly">Yearly</option>
-            </select>
-            <input
-              class="income"
-              type="number"
-              id="property"
-              placeholder="£0.00"
-              required
-            />
-          </div>
-
-          <!--- OTHER INCOME --->
-          <div class="input-group">
-            <label for="other">Other Income:</label>
-            <select name="" id="">
-              <!--- ****** is the name value important here? ID?? ****** -->
-              <option value="weekly">Weekly</option>
-              <option value="monthly">Monthly</option>
-              <option value="quarterly">Quarterly</option>
-              <option value="yearly">Yearly</option>
-            </select>
-            <input
-              class="income"
-              type="number"
-              id="other"
-              placeholder="£0.00"
-              required
-            />
-          </div>
-
-          <hr />
-          <!------------------------------- EXPENDITURE INPUT ------------------------------->
-          <h3>EXPENDITURE</h3>
-
-          <h3><i class="fa-solid fa-house"></i> HOUSEHOLD BILLS</h3>
-          <div class="input-group">
-            <label for="mortgage">Mortgage:</label>
-            <select name="" id="">
-              <!--- ****** is the name value important here?****** -->
-              <option value="weekly">Weekly</option>
-              <option value="monthly">Monthly</option>
-              <option value="quarterly">Quarterly</option>
-              <option value="yearly">Yearly</option>
-            </select>
-            <input type="number" id="mortgage" placeholder="£0.00" required />
-          </div>
-
-          <h3><i class="fa-solid fa-plane-departure"></i> LEISURE</h3>
-          <div class="input-group">
-            <!---add class for CSS styling--->
-            <label for="mortgage">Mortgage:</label>
-            <select name="" id="">
-              <option value="weekly">Weekly</option>
-              <option value="monthly">Monthly</option>
-              <option value="quarterly">Quarterly</option>
-              <option value="yearly">Yearly</option>
-            </select>
-            <input type="number" id="mortgage" placeholder="£0.00" required />
-          </div>
-
-          <h3><i class="fa-solid fa-car"></i> TRAVEL</h3>
-          <div class="input-group">
-            <!---add class for CSS styling--->
-            <label for="mortgage">Mortgage:</label>
-            <select name="" id="">
-              <option value="weekly">Weekly</option>
-              <option value="monthly">Monthly</option>
-              <option value="quarterly">Quarterly</option>
-              <option value="yearly">Yearly</option>
-            </select>
-            <input type="number" id="mortgage" placeholder="£0.00" required />
-          </div>
-
-          <h3><i class="fa-solid fa-cart-shopping"></i> LIVING COSTS</h3>
-          <div class="input-group">
-            <!---add class for CSS styling--->
-            <label for="mortgage">Mortgage:</label>
-            <select name="" id="">
-              <option value="weekly">Weekly</option>
-              <option value="monthly">Monthly</option>
-              <option value="quarterly">Quarterly</option>
-              <option value="yearly">Yearly</option>
-            </select>
-            <input type="number" id="mortgage" placeholder="£0.00" required />
-          </div>
-
-          <h3><i class="fa-regular fa-credit-card"></i> FINANCE</h3>
-          <div class="input-group">
-            <!---add class for CSS styling--->
-            <label for="mortgage">Mortgage:</label>
-            <select name="" id="">
-              <option value="weekly">Weekly</option>
-              <option value="monthly">Monthly</option>
-              <option value="quarterly">Quarterly</option>
-              <option value="yearly">Yearly</option>
-            </select>
-            <input type="number" id="mortgage" placeholder="£0.00" required />
-          </div>
-
-          <h3><i class="fa-solid fa-gifts"></i> ADDITIONAL COSTS</h3>
-          <div class="input-group">
-            <!---add class for CSS styling--->
-            <label for="mortgage">Mortgage:</label>
-            <select name="" id="">
-              <option value="weekly">Weekly</option>
-              <option value="monthly">Monthly</option>
-              <option value="quarterly">Quarterly</option>
-              <option value="yearly">Yearly</option>
-            </select>
-            <input type="number" id="mortgage" placeholder="£0.00" required />
-          </div>
-          <button id="process" type="submit">SUBMIT</button>
-        </form>
-      </div>
-
+        <!-- REMOVED HTML -->
       <div class="column results">
         <!-- Output Column -->
         <h3>Here is the total amount you spend on each category.</h3>
@@ -280,10 +84,9 @@
         <h3><i class="fa-solid fa-cart-shopping"></i> LIVING COSTS</h3>
         <h3><i class="fa-regular fa-credit-card"></i> FINANCE</h3>
         <h3><i class="fa-solid fa-gifts"></i> ADDITIONAL COSTS</h3>
-        <div>
-          <!--- Results displayed in form of a pie chart -->
-        </div>
+        
         <div>PIE CHART</div>
+
         <div class="pie"></div>
       </div>
     </div>
