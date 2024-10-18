@@ -1,3 +1,11 @@
+//----- VARIABLES------------------------------------------------
+let totalIncome
+let totalExpenditure
+let totalBudget
+
+
+
+
 // dropdown options
 let dropDowns = ["weekly", "monthly", "quarterly", "annual"];
 
@@ -126,12 +134,6 @@ function buildIncome() {
 
 // ----------------------------------
 
-buildIncome();
-buildExpenditure();
-
-// ----------------------------------
-
-
 // Function to calculate total income
 function calculateTotalIncome() {
   let totalIncome = 0;
@@ -145,16 +147,42 @@ function calculateTotalIncome() {
   // Return the total income
   return totalIncome;
 }
-//update the income array with the values from the form
+//update the income array with the values from the form----------------------------------
+
+// Function to calculate total expenditure
+function calculateTotalExpenditure() {
+  let totalExpenditure = 0;
+  const rows = document.querySelectorAll(".table-row");
+  // Loop through each row and calculate the total expenditure
+  rows.forEach((row) => {
+    const amount = row.querySelector('input[type="number"]').value;
+    // add if statements to check value of select dropdown - weekly, monthly, quarterly, yearly and convert to weekly
+    totalExpenditure += parseFloat(amount) || 0;
+  });
+  // Return the total expenditure
+  return totalExpenditure;
+}
+//***** THESE FUNTIONS NEED TO TARGET THE INCOME AND EXPENDITURE FORMS SEPARATELY! */
+//*** CURRENTLY TAKING DATA FROM ALL ROWS IN FORM - USE IDs OR CLASSES TO IDENTIFY */
+
 
 // Add event listener to the add-income button
-document.getElementById("add-income").addEventListener("click", () => {
+document.getElementById("calculate-budget").addEventListener("click", () => {
   const total = calculateTotalIncome();
+
+
   // Display the total income in the results div
   document.getElementById(
-    "results"
-  ).textContent = `Total Income: £${total.toFixed(2)}`;
+    "income-results"
+  ).textContent = `Yout total income: £${total.toFixed(2)}`;
 });
 
 //-----------------------------------
 //  incomeTable += `<tr><td>${incomes[income][0]}</td><td>${incomes[income][1]}</td><td>${incomes[income][2]}</td></tr>`;
+
+// MAIN PROCESSING
+// CALL FUNCTIONS
+buildIncome();
+buildExpenditure();
+
+// ----------------------------------

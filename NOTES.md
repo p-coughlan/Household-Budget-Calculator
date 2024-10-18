@@ -97,3 +97,9 @@ Gifts (Additional Expenses Section) <i class="fa-solid fa-gifts"></i>
     </head>
     <body>
         <div id="income"></div>
+
+    Development Issues:
+    
+    Arrays for Income and Object for Expenditure - Why?
+
+    Separate Income and Expenditure functions both targeting all input data in table - how did I fix this?
