@@ -40,6 +40,7 @@ const expenditures = [
       ["Other Leisure Costs", "weekly", 0],
     ],
   },
+  //ADD TRAVEL ARRAY - MISSING!!!! ********************************
   {
     "LIVING COSTS": [
       ["Groceries", "weekly", 0],
@@ -66,6 +67,19 @@ const expenditures = [
     ],
   },
 ];
+
+//-------------------------------------------------------------------------
+
+// Font Awesome icons
+const icons = {
+  "HOUSEHOLD BILLS": "fa-solid fa-house",
+  "LEISURE": "fa-solid fa-plane-departure",
+  "TRAVEL": "fa-solid fa-car",
+  "LIVING COSTS": "fa-solid fa-cart-shopping",
+  "FINANCE": "fa-regular fa-credit-card",
+  "ADDITIONAL EXPENSES": "fa-solid fa-gifts",
+}
+
 //-------------------------------------------------------------------------
 
 // Function to build the expenditure form
@@ -132,7 +146,33 @@ function buildIncome() {
   document.getElementById("income-category").innerHTML = incomeForm;
 }
 
-// ----------------------------------
+// -------------------------------------------------------------------------
+// Function to build results table
+// docstring for function
+
+function buildResults() {
+  let resultsTable = "<table id='results-table'>"; // Create a table and add ID so we can target it later
+  resultsTable += "<tr><th>RESULTS</th><th></th><th></th></tr>"; // Add table headers
+
+  // Loop through the expenditure categories and build the form
+  for (let expenditure in expenditures) { // Loop through the categories
+    for (let category in expenditures[expenditure]) { // Loop through the items in the category
+      resultsTable += `
+        <tr class="table-row">
+          <td>${category}</td>
+          <td>: AMOUNT</td>
+        </tr>`;
+    }
+  }
+  // Close the table
+  resultsTable += "</table>";
+
+  // Add the form to the results div
+  document.getElementById("results-display").innerHTML = resultsTable;
+}
+
+// -------------------------------------------------------------------------
+
 
 // Function to calculate total income
 function calculateTotalIncome() {
@@ -267,5 +307,6 @@ document.addEventListener("click", function (event) {
 // CALL FUNCTIONS
 buildIncome(); // Call the function to build the income form
 buildExpenditure(); // Call the function to build the expenditure form
+buildResults(); // Call the function to build the results table
 
 // ----------------------------------
