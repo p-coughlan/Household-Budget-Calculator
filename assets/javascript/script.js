@@ -13,9 +13,9 @@ let dropDowns = ["weekly", "monthly", "quarterly", "annual"];
 // 0 = income type, 1 = frequency, 2 = amount
 let incomes = [ // Array of income types
   ["Employment Income", "weekly", 0], // Array of sub categories, frequency, amount)
-  ["Self Employment", "weekly", 0],
+  ["Self Employment", "weekly", 0], // access by
   ["Savings & Investment Income", "weekly", 0],
-  ["Savings & Investment Income", "weekly", 0],
+  ["State Benefits", "weekly", 0],
   ["Property Income", "weekly", 0],
   ["Other Income", "weekly", 0],
 ];
@@ -49,7 +49,7 @@ const expenditures = [
     ],
   },
   {
-    "FINANCE": [
+    "FINANCE": [ //let finance = 
       ["Insurance", "weekly", 0],
       ["Loan Repayments", "weekly", 0],
       ["Savings Payments", "weekly", 0],
@@ -83,7 +83,7 @@ function buildExpenditure() {
           <td>
           <select name="" id=""> 
                 <option value="weekly">Weekly</option>
-                <option value="monthly">Monthly</option>
+                <option value="monthly" selected>Monthly</option>
                 <option value="quarterly">Quarterly</option>
                 <option value="yearly">Yearly</option>
           </select>
@@ -116,7 +116,7 @@ function buildIncome() {
         <td>
         <select name="" id=""> 
               <option value="weekly">Weekly</option>
-              <option value="monthly">Monthly</option>
+              <option value="monthly" selected>Monthly</option>
               <option value="quarterly">Quarterly</option>
               <option value="yearly">Yearly</option>
         </select>
@@ -141,24 +141,53 @@ function calculateTotalIncome() {
   // Loop through each row and calculate the total income
   rows.forEach((row) => {
     const amount = row.querySelector('input[type="number"]').value;
+    // add variable for frequency
+    const frequency = row.querySelector('select').value;
+    // if else statement to check frequency and convert to monthly
+    // MONTHLY IS THE DEFAULT VALUE
+    if (frequency === "weekly") {
+      totalIncome += parseFloat(amount) * 4.33 || 0; // Convert to monthly by multiplying by 4.33
+    } else if (frequency === "quarterly") { 
+      totalIncome += parseFloat(amount) / 3 || 0; // Convert to monthly by dividing by 3
+    } else if (frequency === "yearly") {
+      totalIncome += parseFloat(amount) / 12 || 0; // Convert to monthly by dividing by 12
 
-    // add if statements to check value of select dropdown - weekly, monthly, quarterly, yearly and convert to weekly
-    if (row.querySelector('select').value === "monthly") { // If the value of the select dropdown is monthly, convert to weekly
-      totalIncome += parseFloat(amount) * 4.33 || 0; // Convert to weekly by multiplying by 4.33
+    } else {
+      totalIncome += parseFloat(amount) || 0; // Add the amount to the total income
     }
-    if (row.querySelector('select').value === "quarterly") { // If the value of the select dropdown is quarterly, convert to weekly
-      totalIncome += parseFloat(amount) / 13 || 0; // Convert to weekly by dividing by 13
-    }
-    if (row.querySelector('select').value === "yearly") { // If the value of the select dropdown is yearly, convert to weekly
-      totalIncome += parseFloat(amount) / 52 || 0; // Convert to weekly by dividing by 52
-    }
-
-    totalIncome += parseFloat(amount) || 0; // Add the amount to the total income
   });
+
+
   // Return the total income
   return totalIncome;
 }
-//update the income array with the values from the form----------------------------------
+//-------------------------------------------------------------------------
+// EXAMPLE CODE
+// Check the frequency and apply the appropriate conversion
+
+//    if (frequency === 'weekly') {
+//      monthlyValue = value * 4.33; // Convert weekly to monthly
+//  } else if (frequency === 'quarterly') {
+//      monthlyValue = value / 3; // Convert quarterly to monthly
+//  } else if (frequency === 'yearly') {
+//      monthlyValue = value / 12; // Convert yearly to monthly
+//  } else if (frequency === 'monthly') {
+//      monthlyValue = value; // No conversion needed, already monthly
+//  } else {
+//      console.error('Unknown frequency'); // Handle unexpected input
+//      return null;
+//  }
+
+//  return monthlyValue;
+//  }
+
+
+
+
+
+
+
+//-------------------------------------------------------------------------
 
 // Function to calculate total expenditure
 function calculateTotalExpenditure() {
@@ -166,21 +195,25 @@ function calculateTotalExpenditure() {
   const rows = document.querySelectorAll("#expenditure-table .table-row");
   // Loop through each row and calculate the total expenditure
   rows.forEach((row) => {
-    const amount = row.querySelector('input[type="number"]').value;
-    // add if statements to check value of select dropdown - weekly, monthly, quarterly, yearly and convert to weekly
+    
+    const amount = row.querySelector('input[type="number"]').value; 
+    // add variable for frequency
+    const frequency = row.querySelector('select').value;
+    // MONTHLY IS THE DEFAULT VALUE
+    if (frequency === "weekly") {
+      totalExpenditure += parseFloat(amount) * 4.33 || 0; // Convert to monthly by multiplying by 4.33
+    } else if (frequency === "quarterly") { 
+      totalExpenditure += parseFloat(amount) / 3 || 0; // Convert to monthly by dividing by 3
+    } else if (frequency === "yearly") {
+      totalExpenditure += parseFloat(amount) / 12 || 0; // Convert to monthly by dividing by 12
 
-    if (row.querySelector('select').value === "monthly") { // If the value of the select dropdown is monthly, convert to weekly
-      totalExpenditure += parseFloat(amount) * 4.33 || 0; // Convert to weekly by multiplying by 4.33
+    } else {
+      totalExpenditure += parseFloat(amount) || 0; // Add the amount to the total income
     }
-    if (row.querySelector('select').value === "quarterly") { // If the value of the select dropdown is quarterly, convert to weekly
-      totalExpenditure += parseFloat(amount) / 13 || 0; // Convert to weekly by dividing by 13
-    }
-    if (row.querySelector('select').value === "yearly") { // If the value of the select dropdown is yearly, convert to weekly
-      totalExpenditure += parseFloat(amount) / 52 || 0; // Convert to weekly by dividing by 52
-    }
-
-    totalExpenditure += parseFloat(amount) || 0;
   });
+  //update arrays***************************************************
+  
+
   // Return the total expenditure
   return totalExpenditure;
 }
@@ -214,9 +247,9 @@ document.addEventListener("click", function (event) {
     //console.log(categoryTotals);
     console.log(totalBudget);
 
-    document.getElementById("income-results").innerHTML = `Your total income is: £${totalIncome.toFixed(2)}`;
-    document.getElementById("expenditure-results").innerHTML = `Your total expenditure is: £${totalExpenditure.toFixed(2)}`;
-    document.getElementById("budget-results").innerHTML = `Your total budget is: £${totalBudget.toFixed(2)}`;
+    document.getElementById("income-results").innerHTML = `Your total monthly income is: £${totalIncome.toFixed(2)}`; // Display the total income
+    document.getElementById("expenditure-results").innerHTML = `Your total expenditure is: £${totalExpenditure.toFixed(2)}`; // Display the total expenditure
+    document.getElementById("budget-results").innerHTML = `Your total budget is: £${totalBudget.toFixed(2)}`; // Display the total budget
   }
 });
 

@@ -103,3 +103,7 @@ Gifts (Additional Expenses Section) <i class="fa-solid fa-gifts"></i>
     Arrays for Income and Object for Expenditure - Why?
 
     Separate Income and Expenditure functions both targeting all input data in table - how did I fix this?
+
+    During testing of the table inputs I was getting incorrect calculations - how did I find this? Attributable to incorrect if else statements that converted the frequency to a base figure.
+
+    Parse float - why did I use this?
