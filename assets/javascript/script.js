@@ -1,17 +1,16 @@
 //----- VARIABLES------------------------------------------------
-let totalIncome
-let totalExpenditure
-let totalBudget
-
-
-
+let totalIncome; // Variable to store the total income
+let totalExpenditure; // Variable to store the total expenditure
+let totalBudget; // Variable to store the total budget
+let categoryTotals = []; // Array to store the total of each category
 
 // dropdown options
 let dropDowns = ["weekly", "monthly", "quarterly", "annual"];
 
-// Income array WIP
+// Income array
 // 0 = income type, 1 = frequency, 2 = amount
-let incomes = [ // Array of income types
+let incomes = [
+  // Array of income types
   ["Employment Income", "weekly", 0], // Array of sub categories, frequency, amount)
   ["Self Employment", "weekly", 0], // access by
   ["Savings & Investment Income", "weekly", 0],
@@ -22,25 +21,47 @@ let incomes = [ // Array of income types
 
 // Expenditure array conatining objects with arrays of items. Each object has a key (category) and an array of items (sub categories, frequency, amount)
 const expenditures = [
+  // Array of expenditure categories as objects
   {
-    "HOUSEHOLD BILLS": [                      // category (key) access by expenditures[0]["HOUSEHOLD BILLS"]
-      ["Mortgage or Rent", "weekly", 0],      // Value (as an array of sub categories, frequency, amount)
-      ["Council Tax", "weekly", 0],           // Value
-      ["Maintenance", "weekly", 0],           // Value
-      ["Utility Bills", "weekly", 0],         // Value
-      ["Other Household Costs", "weekly", 0], // Value access by expenditures[0]["HOUSEHOLD BILLS"][4]
+    "HOUSEHOLD BILLS": [
+      // category (key) access by expenditures[0]["HOUSEHOLD BILLS"]
+      ["Mortgage or Rent", "weekly", 0], //
+      ["Council Tax", "weekly", 0],
+      ["Maintenance", "weekly", 0],
+      ["Utility Bills", "weekly", 0],
+      ["Other Household Costs", "weekly", 0],
     ],
   },
   {
-    "LEISURE": [
-      ["Holidays", "weekly", 0], // access third item in the array by expenditures[1]["LEISURE"][2]
+    LEISURE: [
+      ["Holidays", "weekly", 0],
       ["Hobbies", "weekly", 0],
       ["Sports Memberships", "weekly", 0],
       ["Entertainment", "weekly", 0],
       ["Other Leisure Costs", "weekly", 0],
     ],
   },
-  //ADD TRAVEL ARRAY - MISSING!!!! ********************************
+  {
+    TRAVEL: [
+      ["Fuel", "weekly", 0],
+      ["Vehicle Maintenance", "weekly", 0],
+      ["Vehicle Tax", "weekly", 0],
+      ["Parking Costs", "weekly", 0],
+      ["Public Transport", "weekly", 0],
+      ["Other Travel Costs", "weekly", 0],
+    ],
+  },
+  {
+    "HOUSEHOLD BILLS": [
+      ["Fuel", "weekly", 0],
+      ["Vehicle Maintenance", "weekly", 0],
+      ["Vehicle Tax", "weekly", 0],
+      ["Parking Costs", "weekly", 0],
+      ["Public Transport", "weekly", 0],
+      ["Other Travel Costs", "weekly", 0],
+    ],
+  },
+
   {
     "LIVING COSTS": [
       ["Groceries", "weekly", 0],
@@ -50,7 +71,8 @@ const expenditures = [
     ],
   },
   {
-    "FINANCE": [ //let finance = 
+    FINANCE: [
+      // let finance = expenditures[4]
       ["Insurance", "weekly", 0],
       ["Loan Repayments", "weekly", 0],
       ["Savings Payments", "weekly", 0],
@@ -63,34 +85,68 @@ const expenditures = [
       ["Charity Donations", "weekly", 0],
       ["School & Childcare", "weekly", 0],
       ["Pet Costs", "weekly", 0],
-      ["Other", "weekly", 0]
+      ["Other", "weekly", 0],
     ],
   },
 ];
 
 //-------------------------------------------------------------------------
 
-// Font Awesome icons
+// Font Awesome icons for each category as an object
 const icons = {
   "HOUSEHOLD BILLS": "fa-solid fa-house",
-  "LEISURE": "fa-solid fa-plane-departure",
-  "TRAVEL": "fa-solid fa-car",
+  LEISURE: "fa-solid fa-plane-departure",
+  TRAVEL: "fa-solid fa-car",
   "LIVING COSTS": "fa-solid fa-cart-shopping",
-  "FINANCE": "fa-regular fa-credit-card",
+  FINANCE: "fa-regular fa-credit-card",
   "ADDITIONAL EXPENSES": "fa-solid fa-gifts",
+};
+
+//-------------------------------------------------------------------------
+
+// Function to build the income form
+function buildIncome() {
+  let incomeForm = "<table id='income-table'>"; // Create a table and add ID so we can target it later
+  incomeForm += "<tr><th>INCOME</th><th></th><th></th><tr>"; // Add table headers
+  // Loop through the incomes array and build the form
+  for (income in incomes) {
+    incomeForm += `
+        <tr class="table-row">
+        <td>${incomes[income][0]}</td>
+        <td>
+        <select name="" id=""> 
+              <option value="weekly">Weekly</option>
+              <option value="monthly" selected>Monthly</option>
+              <option value="quarterly">Quarterly</option>
+              <option value="yearly">Yearly</option>
+        </select>
+        </td>
+        <td>
+        <input type="number" placeholder="£0.00">
+        </td>
+        </tr>`;
+  }
+  // Close the table
+  incomeForm += "</table>";
+  // Add the form to the income div
+  document.getElementById("income-category").innerHTML = incomeForm;
 }
 
 //-------------------------------------------------------------------------
 
 // Function to build the expenditure form
+
 function buildExpenditure() {
   let expenditureForm = "<table id='expenditure-table'>"; // Create a table and add ID so we can target it later
   expenditureForm += "<tr><th>EXPENDITURE</th><th></th><th></th><tr>"; // Add table headers
   // Loop through the expenditures array and build the form
-  for (expenditure in expenditures) { //
-    for (category in expenditures[expenditure]) { // Loop through the categories
+  for (expenditure in expenditures) {
+    //
+    for (category in expenditures[expenditure]) {
+      // Loop through the categories
       expenditureForm += `<tr><td>${category}</td></tr>`; // Add the category to the table
-      for (item in expenditures[expenditure][category]) { // Loop through the items in the category
+      for (item in expenditures[expenditure][category]) {
+        // Loop through the items in the category
         expenditureForm += `
           <tr class="table-row">
           <td>${expenditures[expenditure][category][item][0]}</td>
@@ -115,48 +171,22 @@ function buildExpenditure() {
   document.getElementById("expenditure").innerHTML = expenditureForm;
 }
 
-
 //-------------------------------------------------------------------------
 
-// Function to build the income form
-function buildIncome() {
-  let incomeForm = "<table id='income-table'>"; // Create a table and add ID so we can target it later
-  incomeForm += "<tr><th>INCOME</th><th></th><th></th><tr>"; // Add table headers
-  // Loop through the incomes array and build the form
-  for (income in incomes) { 
-    incomeForm += `
-        <tr class="table-row">
-        <td>${incomes[income][0]}</td>
-        <td>
-        <select name="" id=""> 
-              <option value="weekly">Weekly</option>
-              <option value="monthly" selected>Monthly</option>
-              <option value="quarterly">Quarterly</option>
-              <option value="yearly">Yearly</option>
-        </select>
-        </td>
-        <td>
-        <input type="number" placeholder="£0.00">
-        </td>
-        </tr>`;
-  }
-  // Close the table
-  incomeForm += "</table>";
-  // Add the form to the income div
-  document.getElementById("income-category").innerHTML = incomeForm;
-}
-
 // -------------------------------------------------------------------------
+
 // Function to build results table
-// docstring for function
 
 function buildResults() {
   let resultsTable = "<table id='results-table'>"; // Create a table and add ID so we can target it later
-  resultsTable += "<tr><th>RESULTS</th><th></th><th></th></tr>"; // Add table headers
+  resultsTable +=
+    "<tr><th>This is the total amount you spend on each category:</th><th></th><th></th></tr>"; // Add table headers
 
   // Loop through the expenditure categories and build the form
-  for (let expenditure in expenditures) { // Loop through the categories
-    for (let category in expenditures[expenditure]) { // Loop through the items in the category
+  for (let expenditure in expenditures) {
+    // Loop through the categories
+    for (let category in expenditures[expenditure]) {
+      // Loop through the items in the category
       resultsTable += `
         <tr class="table-row">
           <td>${category}</td>
@@ -173,7 +203,6 @@ function buildResults() {
 
 // -------------------------------------------------------------------------
 
-
 // Function to calculate total income
 function calculateTotalIncome() {
   let totalIncome = 0;
@@ -182,50 +211,32 @@ function calculateTotalIncome() {
   rows.forEach((row) => {
     const amount = row.querySelector('input[type="number"]').value;
     // add variable for frequency
-    const frequency = row.querySelector('select').value;
+    const frequency = row.querySelector("select").value;
     // if else statement to check frequency and convert to monthly
     // MONTHLY IS THE DEFAULT VALUE
     if (frequency === "weekly") {
       totalIncome += parseFloat(amount) * 4.33 || 0; // Convert to monthly by multiplying by 4.33
-    } else if (frequency === "quarterly") { 
+    } else if (frequency === "quarterly") {
       totalIncome += parseFloat(amount) / 3 || 0; // Convert to monthly by dividing by 3
     } else if (frequency === "yearly") {
       totalIncome += parseFloat(amount) / 12 || 0; // Convert to monthly by dividing by 12
-
     } else {
       totalIncome += parseFloat(amount) || 0; // Add the amount to the total income
     }
   });
 
-
   // Return the total income
   return totalIncome;
 }
 //-------------------------------------------------------------------------
-// EXAMPLE CODE
-// Check the frequency and apply the appropriate conversion
 
-//    if (frequency === 'weekly') {
-//      monthlyValue = value * 4.33; // Convert weekly to monthly
-//  } else if (frequency === 'quarterly') {
-//      monthlyValue = value / 3; // Convert quarterly to monthly
-//  } else if (frequency === 'yearly') {
-//      monthlyValue = value / 12; // Convert yearly to monthly
-//  } else if (frequency === 'monthly') {
-//      monthlyValue = value; // No conversion needed, already monthly
-//  } else {
-//      console.error('Unknown frequency'); // Handle unexpected input
-//      return null;
-//  }
+// Function to calculate the total of each category
+// add the total of each category to an array for use in the chart
+// each amount in the category should be added to create a category total
 
-//  return monthlyValue;
-//  }
+// function calculateCategoryTotals() {
 
-
-
-
-
-
+//}
 
 //-------------------------------------------------------------------------
 
@@ -235,38 +246,27 @@ function calculateTotalExpenditure() {
   const rows = document.querySelectorAll("#expenditure-table .table-row");
   // Loop through each row and calculate the total expenditure
   rows.forEach((row) => {
-    
-    const amount = row.querySelector('input[type="number"]').value; 
+    const amount = row.querySelector('input[type="number"]').value;
     // add variable for frequency
-    const frequency = row.querySelector('select').value;
+    const frequency = row.querySelector("select").value;
     // MONTHLY IS THE DEFAULT VALUE
     if (frequency === "weekly") {
       totalExpenditure += parseFloat(amount) * 4.33 || 0; // Convert to monthly by multiplying by 4.33
-    } else if (frequency === "quarterly") { 
+    } else if (frequency === "quarterly") {
       totalExpenditure += parseFloat(amount) / 3 || 0; // Convert to monthly by dividing by 3
     } else if (frequency === "yearly") {
       totalExpenditure += parseFloat(amount) / 12 || 0; // Convert to monthly by dividing by 12
-
     } else {
       totalExpenditure += parseFloat(amount) || 0; // Add the amount to the total income
     }
   });
   //update arrays***************************************************
-  
 
   // Return the total expenditure
   return totalExpenditure;
 }
 
 // -------------------------------------------------------------------------------------------
-
-// Function to calculate the total of each category
-// add the total of each category to an array for use in the chart
-// each amount in the category should be added to create a category total
-// use a forEach loop to loop through the categories
-
-// FUNCTION TO CALCULATE CATEGORY TOTALS***************
-
 
 // Function to calculate the total budget including individual categories
 function calculateTotalBudget() {
@@ -276,37 +276,37 @@ function calculateTotalBudget() {
 }
 
 document.addEventListener("click", function (event) {
+  // Event listener for the calculate button
   if (event.target.id === "calculate") {
-    totalIncome = calculateTotalIncome();
-    totalExpenditure = calculateTotalExpenditure();
-    //categoryTotals = calculateCategoryTotals();
-    totalBudget = calculateTotalBudget();
+    // If the calculate button is clicked
+    totalIncome = calculateTotalIncome(); // Calculate the total income
+    totalExpenditure = calculateTotalExpenditure(); // Calculate the total expenditure
+    categoryTotals = calculateCategoryTotals(); // Calculate the total of each category
+    totalBudget = calculateTotalBudget(); // Calculate the total budget - income minus expenditure
 
     console.log(totalIncome);
     console.log(totalExpenditure);
-    //console.log(categoryTotals);
+    console.log(categoryTotals);
     console.log(totalBudget);
 
-    document.getElementById("income-results").innerHTML = `Your total monthly income is: £${totalIncome.toFixed(2)}`; // Display the total income
-    document.getElementById("expenditure-results").innerHTML = `Your total expenditure is: £${totalExpenditure.toFixed(2)}`; // Display the total expenditure
-    document.getElementById("budget-results").innerHTML = `Your total budget is: £${totalBudget.toFixed(2)}`; // Display the total budget
+    document.getElementById(
+      "income-results"
+    ).innerHTML = `Your total monthly income is: £${totalIncome.toFixed(2)}`; // Display the total income
+    document.getElementById(
+      "expenditure-results"
+    ).innerHTML = `Your total expenditure is: £${totalExpenditure.toFixed(2)}`; // Display the total expenditure
+    document.getElementById(
+      "budget-results"
+    ).innerHTML = `Your total budget is: £${totalBudget.toFixed(2)}`; // Display the total budget
   }
 });
 
-//-----------------------------------
-// BUILD INCOME TABLE
-// BUILD EXPENDITURE TABLE
-// function() FOR CALCULATING TOTAL INCOME
-// function() FOR CALCULATING TOTAL EXPENDITURE
-// function() FOR CALCULATING CATEGORY TOTALS AND STORING IN ARRAY FOR USE IN CHART
-// function() FOR CALCULATING TOTAL BUDGET
-//-----------------------------------
-
+//-------------------------------------------------------------------------
 
 // MAIN PROCESSING
 // CALL FUNCTIONS
-buildIncome(); // Call the function to build the income form
-buildExpenditure(); // Call the function to build the expenditure form
-buildResults(); // Call the function to build the results table
+buildIncome(); // Call the function to build the income form (on page load?)
+buildExpenditure(); // Call the function to build the expenditure form (on page load?)
+buildResults(); // Call the function to build the results table (hidden until calculate button is clicked)
 
 // ----------------------------------

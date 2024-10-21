@@ -27,7 +27,6 @@
   <!------------------------------- BODY SECTION ------------------------------->
 
   <body>
-
     <div class="sticky-banner">
       <!--Container for calculator button-->
       <div class="calc-container">
@@ -52,63 +51,41 @@
 
     <!------------------------------- MAIN FORM AND RESULTS SECTION ------------------------------->
 
-    <div class="container amounts">
-      <!-- Container for 2 Columns-->
+    <div class="container"> 
 
-      <div class="column">
+      <div class="input-section">
         <!-- Input Form Column -->
         <h3>
           For each category you can choose to calculate how much you spend
           weekly, quarterly or yearly. Choose from the list and our calculator
           will show you what you spend.
         </h3>
-        <hr>
+        <hr />
 
         <!------------------------------- WIP JS POPULATION ------------------------------->
         <div id="income-category"></div>
-        <hr>
+        <hr />
         <div id="expenditure"></div>
-        <hr>
+        <hr />
         <button type="submit" id="calculate">Calculate Budget</button>
-        
-      <hr>
+        <hr />
+      </div>
 
-        <!------------------------------- RESULTS SECTION  JS WIP------------------------------->
+      <!------------------------------- RESULTS SECTION  JS WIP------------------------------->
 
-        <div id="results-section">
-          <h3>RESULTS</h3>
-        <!---------------RESULTS TO BE HIDDEN UNTIL PROCESSING COMPLETE---------->
-        <h3 id="income-results">Your total income is: (placeholder)</h3>
-        <h3 id="expenditure-results">Your total expenditure is: (placeholder)></h3>
-        <h3 id="budget-results">Your available income, after all expenses is: (placeholder)</h3>
-        <h4>Here is the total amount you spend on each category:</h4>
-          <div id="results-display"></div>
-          <div class="pie-chart"></div> 
-        </div>
-
-
-        <!------------------------------- RESULTS SECTION  ------------------------------->
-        
-      <div class="column results">
-        <!-- Output Column -->
+      <div id="results-section">
         <h3>RESULTS</h3>
         <!---------------RESULTS TO BE HIDDEN UNTIL PROCESSING COMPLETE---------->
         <h3 id="income-results">Your total income is: (placeholder)</h3>
-        <h3 id="expenditure-results">Your total expenditure is: (placeholder)></h3>
-        <h3 id="budget-results">(placeholder)</h3>
-
-
-        <h4>Here is the total amount you spend on each category.</h4>
-        <h4><i class="fa-solid fa-house"></i> HOUSEHOLD BILLS:</h4>
-        <h4><i class="fa-solid fa-plane-departure"></i> LEISURE</h4>
-        <h4><i class="fa-solid fa-car"></i> TRAVEL</h4>
-        <h4><i class="fa-solid fa-cart-shopping"></i> LIVING COSTS</h4>
-        <h4><i class="fa-regular fa-credit-card"></i> FINANCE</h4>
-        <h4><i class="fa-solid fa-gifts"></i> ADDITIONAL COSTS</h4>
-        
-        <div>PIE CHART</div>
-
-        <div class="pie"></div>
+        <h3 id="expenditure-results">
+          Your total expenditure is: (placeholder)>
+        </h3>
+        <h3 id="budget-results">
+          Your available income, after all expenses is: (placeholder)
+        </h3>
+        <h4>Here is the total amount you spend on each category:</h4>
+        <div id="results-display"></div>
+        <div class="pie-chart"></div>
       </div>
     </div>
     <!------------------------------- FOOTER ------------------------------->
@@ -122,3 +99,11 @@
 </html>
 
 <!------------------------------- COMMENTS ------------------------------->
+
+<h4>Here is the total amount you spend on each category.</h4>
+<h4><i class="fa-solid fa-house"></i> HOUSEHOLD BILLS:</h4>
+<h4><i class="fa-solid fa-plane-departure"></i> LEISURE</h4>
+<h4><i class="fa-solid fa-car"></i> TRAVEL</h4>
+<h4><i class="fa-solid fa-cart-shopping"></i> LIVING COSTS</h4>
+<h4><i class="fa-regular fa-credit-card"></i> FINANCE</h4>
+<h4><i class="fa-solid fa-gifts"></i> ADDITIONAL COSTS</h4>
