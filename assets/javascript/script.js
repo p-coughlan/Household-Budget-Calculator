@@ -33,7 +33,7 @@ const expenditures = [
     ],
   },
   {
-    LEISURE: [
+    "LEISURE": [
       ["Holidays", "weekly", 0],
       ["Hobbies", "weekly", 0],
       ["Sports Memberships", "weekly", 0],
@@ -42,7 +42,7 @@ const expenditures = [
     ],
   },
   {
-    TRAVEL: [
+    "TRAVEL": [
       ["Fuel", "weekly", 0],
       ["Vehicle Maintenance", "weekly", 0],
       ["Vehicle Tax", "weekly", 0],
@@ -51,17 +51,6 @@ const expenditures = [
       ["Other Travel Costs", "weekly", 0],
     ],
   },
-  {
-    "HOUSEHOLD BILLS": [
-      ["Fuel", "weekly", 0],
-      ["Vehicle Maintenance", "weekly", 0],
-      ["Vehicle Tax", "weekly", 0],
-      ["Parking Costs", "weekly", 0],
-      ["Public Transport", "weekly", 0],
-      ["Other Travel Costs", "weekly", 0],
-    ],
-  },
-
   {
     "LIVING COSTS": [
       ["Groceries", "weekly", 0],
@@ -71,8 +60,7 @@ const expenditures = [
     ],
   },
   {
-    FINANCE: [
-      // let finance = expenditures[4]
+    "FINANCE": [
       ["Insurance", "weekly", 0],
       ["Loan Repayments", "weekly", 0],
       ["Savings Payments", "weekly", 0],
@@ -92,13 +80,13 @@ const expenditures = [
 
 //-------------------------------------------------------------------------
 
-// Font Awesome icons for each category as an object
+// Font Awesome icons for each category as an object - add these to the category objects?
 const icons = {
   "HOUSEHOLD BILLS": "fa-solid fa-house",
-  LEISURE: "fa-solid fa-plane-departure",
-  TRAVEL: "fa-solid fa-car",
+  "LEISURE": "fa-solid fa-plane-departure",
+  "TRAVEL": "fa-solid fa-car",
   "LIVING COSTS": "fa-solid fa-cart-shopping",
-  FINANCE: "fa-regular fa-credit-card",
+  "FINANCE": "fa-regular fa-credit-card",
   "ADDITIONAL EXPENSES": "fa-solid fa-gifts",
 };
 
@@ -230,16 +218,6 @@ function calculateTotalIncome() {
 }
 //-------------------------------------------------------------------------
 
-// Function to calculate the total of each category
-// add the total of each category to an array for use in the chart
-// each amount in the category should be added to create a category total
-
-// function calculateCategoryTotals() {
-
-//}
-
-//-------------------------------------------------------------------------
-
 // Function to calculate total expenditure
 function calculateTotalExpenditure() {
   let totalExpenditure = 0;
@@ -300,6 +278,13 @@ document.addEventListener("click", function (event) {
     ).innerHTML = `Your total budget is: £${totalBudget.toFixed(2)}`; // Display the total budget
   }
 });
+
+//-------------------------------------------------------------------------
+
+// Function to calculate the total of each category
+// add the total of each category to an array for use in the chart
+// each amount in the category should be added to create a category total
+
 
 //-------------------------------------------------------------------------
 
