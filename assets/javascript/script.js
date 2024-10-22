@@ -25,11 +25,11 @@ const expenditures = [
   {
     "HOUSEHOLD BILLS": [
       // category (key) access by expenditures[0]["HOUSEHOLD BILLS"]
-      ["Mortgage or Rent", "weekly", 0], //
-      ["Council Tax", "weekly", 0],
-      ["Maintenance", "weekly", 0],
-      ["Utility Bills", "weekly", 0],
-      ["Other Household Costs", "weekly", 0],
+      ["Mortgage or Rent", "weekly", 0], // access by expenditures[0]["HOUSEHOLD BILLS"][0][2]
+      ["Council Tax", "weekly", 0], // access by expenditures[0]["HOUSEHOLD BILLS"][1][2]
+      ["Maintenance", "weekly", 0], // access by expenditures[0]["HOUSEHOLD BILLS"][2]
+      ["Utility Bills", "weekly", 0], // access by expenditures[0]["HOUSEHOLD BILLS"][3]
+      ["Other Household Costs", "weekly", 0], // access by expenditures[0]["HOUSEHOLD BILLS"][4]
     ],
   },
   {
@@ -93,11 +93,11 @@ const icons = {
 //-------------------------------------------------------------------------
 
 // Function to build the income form
-function buildIncome() {
+function buildIncome() { 
   let incomeForm = "<table id='income-table'>"; // Create a table and add ID so we can target it later
   incomeForm += "<tr><th>INCOME</th><th></th><th></th><tr>"; // Add table headers
   // Loop through the incomes array and build the form
-  for (income in incomes) {
+  for (income in incomes) { // Loop through the income types
     incomeForm += `
         <tr class="table-row">
         <td>${incomes[income][0]}</td>
@@ -197,9 +197,17 @@ function calculateTotalIncome() {
   const rows = document.querySelectorAll("#income-table .table-row");
   // Loop through each row and calculate the total income
   rows.forEach((row) => {
+
+    // add variable for income amount
     const amount = row.querySelector('input[type="number"]').value;
+    // update array
+    incomes[income][2] = parseFloat(amount) || 0;
+
     // add variable for frequency
     const frequency = row.querySelector("select").value;
+    // update array
+    incomes[income][1] = frequency;
+
     // if else statement to check frequency and convert to monthly
     // MONTHLY IS THE DEFAULT VALUE
     if (frequency === "weekly") {
@@ -225,6 +233,9 @@ function calculateTotalExpenditure() {
   // Loop through each row and calculate the total expenditure
   rows.forEach((row) => {
     const amount = row.querySelector('input[type="number"]').value;
+    //update arrays***************************************************
+
+    
     // add variable for frequency
     const frequency = row.querySelector("select").value;
     // MONTHLY IS THE DEFAULT VALUE
@@ -246,9 +257,11 @@ function calculateTotalExpenditure() {
 
 // -------------------------------------------------------------------------------------------
 
-// Function to calculate the total budget including individual categories
+// Function to calculate the total budget (*******including individual categories??********)
 function calculateTotalBudget() {
   let totalBudget = calculateTotalIncome() - calculateTotalExpenditure();
+  console.log(expenditures[0]["HOUSEHOLD BILLS"][0][2])
+  console.log(expenditures[0]["HOUSEHOLD BILLS"][1][2])
   // Return the total budget
   return totalBudget;
 }
@@ -287,6 +300,9 @@ document.addEventListener("click", function (event) {
 
 
 //-------------------------------------------------------------------------
+//Functions for buttons to display weekly, monthly, quarterly, yearly
+// add event listeners to buttons
+// better as an up/down button to change the timeframe (interactive arrows that move the timeframe up or down)
 function resetButton() {
   // reset the form
   // clear the results
