@@ -74,29 +74,6 @@ Shopping Trolley (Household Section) <i class="fa-solid fa-cart-shopping"></i>
 Credit Card (Finance Section) <i class="fa-regular fa-credit-card"></i>
 Gifts (Additional Expenses Section) <i class="fa-solid fa-gifts"></i>
 
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
- 
-        <style>
-            form {
-                background-color: azure;
-                border: 2px solid blue;
-                border-top-left-radius: 5px;
-                border-bottom-right-radius: 5px;
-            }
-            label,
-            input {
-                margin: 2px;
-                background-color: beige;
-            }
-        </style>
-    </head>
-    <body>
-        <div id="income"></div>
 
     Development Issues:
     
@@ -107,3 +84,11 @@ Gifts (Additional Expenses Section) <i class="fa-solid fa-gifts"></i>
     During testing of the table inputs I was getting incorrect calculations - how did I find this? Attributable to incorrect if else statements that converted the frequency to a base figure.
 
     Parse float - why did I use this?
+
+<h4>Here is the total amount you spend on each category.</h4>
+<h4><i class="fa-solid fa-house"></i> HOUSEHOLD BILLS:</h4>
+<h4><i class="fa-solid fa-plane-departure"></i> LEISURE</h4>
+<h4><i class="fa-solid fa-car"></i> TRAVEL</h4>
+<h4><i class="fa-solid fa-cart-shopping"></i> LIVING COSTS</h4>
+<h4><i class="fa-regular fa-credit-card"></i> FINANCE</h4>
+<h4><i class="fa-solid fa-gifts"></i> ADDITIONAL COSTS</h4>

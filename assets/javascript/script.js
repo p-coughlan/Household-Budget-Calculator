@@ -5,7 +5,7 @@ let totalBudget; // Variable to store the total budget
 let categoryTotals = []; // Array to store the total of each category
 
 // dropdown options
-let dropDowns = ["weekly", "monthly", "quarterly", "annual"];
+let dropDowns = ["weekly", "monthly", "quarterly", "annual"]; //**** are these needed?****
 
 // Income array
 // 0 = income type, 1 = frequency, 2 = amount
@@ -259,12 +259,12 @@ document.addEventListener("click", function (event) {
     // If the calculate button is clicked
     totalIncome = calculateTotalIncome(); // Calculate the total income
     totalExpenditure = calculateTotalExpenditure(); // Calculate the total expenditure
-    categoryTotals = calculateCategoryTotals(); // Calculate the total of each category
+    //categoryTotals = calculateCategoryTotals(); // Calculate the total of each category
     totalBudget = calculateTotalBudget(); // Calculate the total budget - income minus expenditure
 
     console.log(totalIncome);
     console.log(totalExpenditure);
-    console.log(categoryTotals);
+    //console.log(categoryTotals);
     console.log(totalBudget);
 
     document.getElementById(
@@ -286,6 +286,25 @@ document.addEventListener("click", function (event) {
 // each amount in the category should be added to create a category total
 
 
+//-------------------------------------------------------------------------
+function resetButton() {
+  // reset the form
+  // clear the results
+  // hide the results
+}
+function displayWeekly() {
+  // display weekly amounts
+}
+function displayMonthly() {
+  // display monthly amounts
+}
+function displayQuarterly() {
+  // display quarterly amounts
+}
+function displayYearly() {
+  // display annually
+  
+}
 //-------------------------------------------------------------------------
 
 // MAIN PROCESSING
