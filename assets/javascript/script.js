@@ -17,6 +17,7 @@ let incomes = [
   ["State Benefits", "weekly", 0], // access by incomes[3][2]
   ["Property Income", "weekly", 0], // access by incomes[4][2]
   ["Other Income", "weekly", 0], // access by incomes[5][2] how to access the amount?
+  
 ];
 
 // Expenditure array conatining objects with arrays of items. Each object has a key (category) and an array of items (sub categories, frequency, amount)
@@ -197,16 +198,17 @@ function calculateTotalIncome() {
   const rows = document.querySelectorAll("#income-table .table-row");
   // Loop through each row and calculate the total income
   rows.forEach((row) => {
+    // check if the amount is a number
 
     // add variable for income amount
-    const amount = row.querySelector('input[type="number"]').value;
-    // update array
-    incomes[income][2] = amount;
-
+    const amount = row.querySelector('input[type="number"]').value; // Get the amount of the income
+    const incomeIndex = Array.from(rows).indexOf(row); // Get the index of the row
+    incomes[incomeIndex][2] = amount; // Update the amount in the incomes array
+    
     // add variable for frequency
-    const frequency = row.querySelector("select").value;
-    // update array
-    incomes[income][1] = frequency;
+    const frequency = row.querySelector("select").value; // Get the frequency of the income
+    const income = Array.from(rows).indexOf(row); // Get the index of the row
+    incomes[income][1] = frequency; // Update the frequency in the incomes array
 
     // if else statement to check frequency and convert to monthly
     // MONTHLY IS THE DEFAULT VALUE
@@ -221,8 +223,6 @@ function calculateTotalIncome() {
     }
   });
   
-console.log(incomes[income][2]);
-console.log(incomes[0][2]);
 console.log(incomes);
 
   // Return the total income
