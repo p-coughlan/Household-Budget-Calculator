@@ -10,13 +10,13 @@ let dropDowns = ["weekly", "monthly", "quarterly", "annual"]; //**** are these n
 // Income array
 // 0 = income type, 1 = frequency, 2 = amount
 let incomes = [
-  // Array of income types
-  ["Employment Income", "weekly", 0], // Array of sub categories, frequency, amount)
-  ["Self Employment", "weekly", 0], // access by
-  ["Savings & Investment Income", "weekly", 0],
-  ["State Benefits", "weekly", 0],
-  ["Property Income", "weekly", 0],
-  ["Other Income", "weekly", 0],
+  // Array of income types // access by incomes[0]
+  ["Employment Income", "weekly", 0], // Array of sub categories, frequency, amount)// access by incomes[0][2]
+  ["Self Employment", "weekly", 0], // access by incomes[1][2]
+  ["Savings & Investment Income", "weekly", 0], // access by incomes[2][2]
+  ["State Benefits", "weekly", 0], // access by incomes[3][2]
+  ["Property Income", "weekly", 0], // access by incomes[4][2]
+  ["Other Income", "weekly", 0], // access by incomes[5][2] how to access the amount?
 ];
 
 // Expenditure array conatining objects with arrays of items. Each object has a key (category) and an array of items (sub categories, frequency, amount)
@@ -201,7 +201,7 @@ function calculateTotalIncome() {
     // add variable for income amount
     const amount = row.querySelector('input[type="number"]').value;
     // update array
-    incomes[income][2] = parseFloat(amount) || 0;
+    incomes[income][2] = amount;
 
     // add variable for frequency
     const frequency = row.querySelector("select").value;
@@ -220,6 +220,10 @@ function calculateTotalIncome() {
       totalIncome += parseFloat(amount) || 0; // Add the amount to the total income
     }
   });
+  
+console.log(incomes[income][2]);
+console.log(incomes[0][2]);
+console.log(incomes);
 
   // Return the total income
   return totalIncome;
