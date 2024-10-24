@@ -20,76 +20,69 @@ let incomes = [
   
 ];
 
-// Expenditure array conatining objects with arrays of items. Each object has a key (category) and an array of items (sub categories, frequency, amount)
-const expenditures = [
-  // Array of expenditure categories as objects
+// Alternative expenditure array
+//Alernative expenditure structure
+let expenditures = [
   {
-    "HOUSEHOLD BILLS": [
-      // category (key) access by expenditures[0]["HOUSEHOLD BILLS"]
-      ["Mortgage or Rent", "weekly", 0], // access by expenditures[0]["HOUSEHOLD BILLS"][0][2]
-      ["Council Tax", "weekly", 0], // access by expenditures[0]["HOUSEHOLD BILLS"][1][2]
-      ["Maintenance", "weekly", 0], // access by expenditures[0]["HOUSEHOLD BILLS"][2]
-      ["Utility Bills", "weekly", 0], // access by expenditures[0]["HOUSEHOLD BILLS"][3]
-      ["Other Household Costs", "weekly", 0], // access by expenditures[0]["HOUSEHOLD BILLS"][4]
-    ],
+      category: "HOUSEHOLD BILLS",
+      items: [
+          { description: "Mortgage or Rent", frequency: "monthly", value: 0 },
+          { description: "Council Tax", frequency: "monthly", value: 0 },
+          { description: "Maintenance", frequency: "monthly", value: 0 },
+          { description: "Utility Bills", frequency: "monthly", value: 0 },
+          { description: "Other Household Costs", frequency: "monthly", value: 0 }
+      ]
   },
   {
-    "LEISURE": [
-      ["Holidays", "weekly", 0],
-      ["Hobbies", "weekly", 0],
-      ["Sports Memberships", "weekly", 0],
-      ["Entertainment", "weekly", 0],
-      ["Other Leisure Costs", "weekly", 0],
-    ],
-  },
-  {
-    "TRAVEL": [
-      ["Fuel", "weekly", 0],
-      ["Vehicle Maintenance", "weekly", 0],
-      ["Vehicle Tax", "weekly", 0],
-      ["Parking Costs", "weekly", 0],
-      ["Public Transport", "weekly", 0],
-      ["Other Travel Costs", "weekly", 0],
-    ],
-  },
-  {
-    "LIVING COSTS": [
-      ["Groceries", "weekly", 0],
-      ["Healthcare", "weekly", 0],
-      ["Cigarettes & Tobacco", "weekly", 0],
-      ["Other Living Costs", "weekly", 0],
-    ],
-  },
-  {
-    "FINANCE": [
-      ["Insurance", "weekly", 0],
-      ["Loan Repayments", "weekly", 0],
-      ["Savings Payments", "weekly", 0],
-      ["Other Financial Costs", "weekly", 0],
-    ],
-  },
-  {
-    "ADDITIONAL EXPENSES": [
-      ["Gifts", "weekly", 0],
-      ["Charity Donations", "weekly", 0],
-      ["School & Childcare", "weekly", 0],
-      ["Pet Costs", "weekly", 0],
-      ["Other", "weekly", 0],
-    ],
-  },
+    category: "LEISURE",
+    items: [
+        { description: "Holidays", frequency: "monthly", value: 0 },
+        { description: "Hobbies", frequency: "monthly", value: 0 },
+        { description: "Sports Memberships", frequency: "monthly", value: 0 },
+        { description: "Entertainment", frequency: "monthly", value: 0 },
+        { description: "Other Leisure Costs", frequency: "monthly", value: 0 }
+    ]
+},
+{
+  category: "TRAVEL",
+  items: [
+      { description: "Fuel", frequency: "monthly", value: 0 },
+      { description: "Vehicle Maintenance", frequency: "monthly", value: 0 },
+      { description: "Vehicle Tax", frequency: "monthly", value: 0 },
+      { description: "Parking Costs", frequency: "monthly", value: 0 },
+      { description: "Public Transport", frequency: "monthly", value: 0 },
+      { description: "Other Travel Costs", frequency: "monthly", value: 0 }
+  ]
+},
+{
+  category: "LIVING COSTS",
+  items: [
+      { description: "Groceries", frequency: "monthly", value: 0 },
+      { description: "Healthcare", frequency: "monthly", value: 0 },
+      { description: "Cigarettes & Tobacco", frequency: "monthly", value: 0 },
+      { description: "Other Living Costs", frequency: "monthly", value: 0 },
+  ]
+},
+{
+  category: "FINANCE",
+  items: [
+      { description: "Insurance", frequency: "monthly", value: 0 },
+      { description: "Loan Repayments", frequency: "monthly", value: 0 },
+      { description: "Savings Payments", frequency: "monthly", value: 0 },
+      { description: "Other Fianancial Costs", frequency: "monthly", value: 0 },
+  ]
+},
+{
+  category: "ADDITIONAL EXPENSES",
+  items: [
+      { description: "Gifts", frequency: "monthly", value: 0 },
+      { description: "Charity Donations", frequency: "monthly", value: 0 },
+      { description: "School & Childcare", frequency: "monthly", value: 0 },
+      { description: "Pet Costs", frequency: "monthly", value: 0 },
+      { description: "Other", frequency: "monthly", value: 0 },
+  ]
+}
 ];
-
-//-------------------------------------------------------------------------
-
-// Font Awesome icons for each category as an object - add these to the category objects?
-const icons = {
-  "HOUSEHOLD BILLS": "fa-solid fa-house",
-  "LEISURE": "fa-solid fa-plane-departure",
-  "TRAVEL": "fa-solid fa-car",
-  "LIVING COSTS": "fa-solid fa-cart-shopping",
-  "FINANCE": "fa-regular fa-credit-card",
-  "ADDITIONAL EXPENSES": "fa-solid fa-gifts",
-};
 
 //-------------------------------------------------------------------------
 
@@ -124,45 +117,43 @@ function buildIncome() {
 //-------------------------------------------------------------------------
 
 // Function to build the expenditure form
-
 function buildExpenditure() {
   let expenditureForm = "<table id='expenditure-table'>"; // Create a table and add ID so we can target it later
-  expenditureForm += "<tr><th>EXPENDITURE</th><th></th><th></th><tr>"; // Add table headers
-  // Loop through the expenditures array and build the form
-  for (expenditure in expenditures) {
-    //
-    for (category in expenditures[expenditure]) {
-      // Loop through the categories
-      expenditureForm += `<tr><td>${category}</td></tr>`; // Add the category to the table
-      for (item in expenditures[expenditure][category]) {
-        // Loop through the items in the category
-        expenditureForm += `
-          <tr class="table-row">
-          <td>${expenditures[expenditure][category][item][0]}</td>
+  expenditureForm += "<tr><th>EXPENDITURE</th><th></th><th></th></tr>"; // Add table headers
+
+  // Loop through the expenditure categories and build the form
+  expenditures.forEach((expenditure) => {
+    // Add the category row
+    expenditureForm += `<tr><td colspan="3"><strong>${expenditure.category}</strong></td></tr>`;
+
+    // Loop through the items in the category
+    expenditure.items.forEach((item) => {
+      expenditureForm += `
+        <tr class="table-row">
+          <td>${item.description}</td>
           <td>
-          <select name="" id=""> 
-                <option value="weekly">Weekly</option>
-                <option value="monthly" selected>Monthly</option>
-                <option value="quarterly">Quarterly</option>
-                <option value="yearly">Yearly</option>
-          </select>
+            <select name="" id=""> 
+              <option value="weekly" ${item.frequency === "weekly" ? "selected" : ""}>Weekly</option>
+              <option value="monthly" ${item.frequency === "monthly" ? "selected" : ""}>Monthly</option>
+              <option value="quarterly" ${item.frequency === "quarterly" ? "selected" : ""}>Quarterly</option>
+              <option value="yearly" ${item.frequency === "yearly" ? "selected" : ""}>Yearly</option>
+            </select>
           </td>
           <td>
-          <input type="number" placeholder="£0.00">
+            <input type="number" placeholder="£0.00" value="${item.amount}">
           </td>
-          </tr>`;
-      }
-    }
-  }
+        </tr>`;
+    });
+  });
+
   // Close the table
   expenditureForm += "</table>";
+
   // Add the form to the expenditure div
-  document.getElementById("expenditure").innerHTML = expenditureForm;
+  document.getElementById("expenditure-sectionz`").innerHTML = expenditureForm;
 }
 
 //-------------------------------------------------------------------------
-
-// -------------------------------------------------------------------------
 
 // Function to build results table
 
@@ -236,12 +227,16 @@ function calculateTotalExpenditure() {
   const rows = document.querySelectorAll("#expenditure-table .table-row");
   // Loop through each row and calculate the total expenditure
   rows.forEach((row) => {
-    const amount = row.querySelector('input[type="number"]').value;
-    //update arrays***************************************************
-
     
+    
+    
+    const amount = row.querySelector('input[type="number"]').value;
+    // update the amount in the correct category in the expenditures array
     // add variable for frequency
     const frequency = row.querySelector("select").value;
+    // update the frequency in the expenditures array
+
+    // if else statement to check frequency and convert to monthly
     // MONTHLY IS THE DEFAULT VALUE
     if (frequency === "weekly") {
       totalExpenditure += parseFloat(amount) * 4.33 || 0; // Convert to monthly by multiplying by 4.33
@@ -264,8 +259,6 @@ function calculateTotalExpenditure() {
 // Function to calculate the total budget (*******including individual categories??********)
 function calculateTotalBudget() {
   let totalBudget = calculateTotalIncome() - calculateTotalExpenditure();
-  console.log(expenditures[0]["HOUSEHOLD BILLS"][0][2])
-  console.log(expenditures[0]["HOUSEHOLD BILLS"][1][2])
   // Return the total budget
   return totalBudget;
 }
@@ -276,12 +269,10 @@ document.addEventListener("click", function (event) {
     // If the calculate button is clicked
     totalIncome = calculateTotalIncome(); // Calculate the total income
     totalExpenditure = calculateTotalExpenditure(); // Calculate the total expenditure
-    //categoryTotals = calculateCategoryTotals(); // Calculate the total of each category
     totalBudget = calculateTotalBudget(); // Calculate the total budget - income minus expenditure
 
     console.log(totalIncome);
     console.log(totalExpenditure);
-    //console.log(categoryTotals);
     console.log(totalBudget);
 
     document.getElementById(
