@@ -3,9 +3,9 @@ let totalIncome; // Variable to store the total income
 let totalExpenditure; // Variable to store the total expenditure
 let totalBudget; // Variable to store the total budget
 let categoryTotals = []; // Array to store the total of each category
+let expenditureForm
 
-// dropdown options
-let dropDowns = ["weekly", "monthly", "quarterly", "annual"]; //**** are these needed?****
+//-------------------------------------------------------------------------
 
 // Income array
 // 0 = income type, 1 = frequency, 2 = amount
@@ -13,15 +13,16 @@ let incomes = [
   // Array of income types // access by incomes[0]
   ["Employment Income", "weekly", 0], // Array of sub categories, frequency, amount)// access by incomes[0][2]
   ["Self Employment", "weekly", 0], // access by incomes[1][2]
-  ["Savings & Investment Income", "weekly", 0], // access by incomes[2][2]
-  ["State Benefits", "weekly", 0], // access by incomes[3][2]
-  ["Property Income", "weekly", 0], // access by incomes[4][2]
-  ["Other Income", "weekly", 0], // access by incomes[5][2] how to access the amount?
+  ["Savings & Investment Income", "weekly", 0], 
+  ["State Benefits", "weekly", 0],
+  ["Property Income", "weekly", 0],
+  ["Other Income", "weekly", 0], 
   
 ];
 
-// Alternative expenditure array
-//Alernative expenditure structure
+//-------------------------------------------------------------------------
+
+//Alernative expenditure array structure replacing previous
 let expenditures = [
   {
       category: "HOUSEHOLD BILLS",
@@ -118,13 +119,13 @@ function buildIncome() {
 
 // Function to build the expenditure form
 function buildExpenditure() {
-  let expenditureForm = "<table id='expenditure-table'>"; // Create a table and add ID so we can target it later
+  expenditureForm = "<table id='expenditure-table'>"; // Create a table and add ID so we can target it later
   expenditureForm += "<tr><th>EXPENDITURE</th><th></th><th></th></tr>"; // Add table headers
 
   // Loop through the expenditure categories and build the form
   expenditures.forEach((expenditure) => {
     // Add the category row
-    expenditureForm += `<tr><td colspan="3"><strong>${expenditure.category}</strong></td></tr>`;
+    expenditureForm += `<tr><td><strong>${expenditure.category}</strong></td></tr>`;
 
     // Loop through the items in the category
     expenditure.items.forEach((item) => {
@@ -150,34 +151,29 @@ function buildExpenditure() {
   expenditureForm += "</table>";
 
   // Add the form to the expenditure div
-  document.getElementById("expenditure-sectionz`").innerHTML = expenditureForm;
+  document.getElementById("expenditure-section").innerHTML = expenditureForm;
 }
 
 //-------------------------------------------------------------------------
 
 // Function to build results table
-
 function buildResults() {
   let resultsTable = "<table id='results-table'>"; // Create a table and add ID so we can target it later
-  resultsTable +=
-    "<tr><th>This is the total amount you spend on each category:</th><th></th><th></th></tr>"; // Add table headers
+  resultsTable += "<tr><th>Category</th><th>Total Amount</th></tr>"; // Add table headers
 
-  // Loop through the expenditure categories and build the form
-  for (let expenditure in expenditures) {
-    // Loop through the categories
-    for (let category in expenditures[expenditure]) {
-      // Loop through the items in the category
-      resultsTable += `
-        <tr class="table-row">
-          <td>${category}</td>
-          <td>: AMOUNT</td>
-        </tr>`;
-    }
-  }
+  // Loop through the expenditure categories and build the table rows
+  expenditures.forEach((expenditure) => { // Loop through the expenditure categories
+    resultsTable += `
+      <tr class="table-row">
+        <td>${expenditure.category}</td>
+        <td id="${expenditure.category.replace(/\s+/g, '-').toLowerCase()}-total">£0.00</td> <!-- Placeholder for total amount -->
+      </tr>`;
+  });
+  // above uses a regular expression to replace spaces with hyphens and convert to lowercase
   // Close the table
   resultsTable += "</table>";
 
-  // Add the form to the results div
+  // Add the table to the results div
   document.getElementById("results-display").innerHTML = resultsTable;
 }
 
@@ -221,44 +217,73 @@ console.log(incomes);
 }
 //-------------------------------------------------------------------------
 
-// Function to calculate total expenditure
+// Function to calculate total expenditure and update the expenditures array
 function calculateTotalExpenditure() {
   let totalExpenditure = 0;
+  let categoryTotals = {}; // Initialize an object to store category totals
   const rows = document.querySelectorAll("#expenditure-table .table-row");
+
   // Loop through each row and calculate the total expenditure
   rows.forEach((row) => {
-    
-    
-    
-    const amount = row.querySelector('input[type="number"]').value;
-    // update the amount in the correct category in the expenditures array
-    // add variable for frequency
+    const amount = parseFloat(row.querySelector('input[type="number"]').value) || 0;
     const frequency = row.querySelector("select").value;
-    // update the frequency in the expenditures array
+    const category = row.closest('table').querySelector('tr strong').textContent.trim(); // Get the category name
+    const description = row.querySelector('td').textContent.trim(); // Get the description
 
-    // if else statement to check frequency and convert to monthly
-    // MONTHLY IS THE DEFAULT VALUE
+    // Find the correct category and item in the expenditures array
+    const categoryObj = expenditures.find(exp => exp.category === category);
+    if (categoryObj) {
+      const item = categoryObj.items.find(it => it.description === description);
+      if (item) {
+        // Update the amount and frequency in the expenditures array
+        item.amount = amount;
+        item.frequency = frequency;
+      }
+    }
+
+    // Initialize the category total if it doesn't exist
+    if (!categoryTotals[category]) {
+      categoryTotals[category] = 0;
+    }
+
+    // Convert the amount to monthly and add to the total expenditure and category total
     if (frequency === "weekly") {
-      totalExpenditure += parseFloat(amount) * 4.33 || 0; // Convert to monthly by multiplying by 4.33
+      categoryTotals[category] += amount * 4.33;
     } else if (frequency === "quarterly") {
-      totalExpenditure += parseFloat(amount) / 3 || 0; // Convert to monthly by dividing by 3
+      categoryTotals[category] += amount / 3;
     } else if (frequency === "yearly") {
-      totalExpenditure += parseFloat(amount) / 12 || 0; // Convert to monthly by dividing by 12
+      categoryTotals[category] += amount / 12;
     } else {
-      totalExpenditure += parseFloat(amount) || 0; // Add the amount to the total income
+      categoryTotals[category] += amount; // Assume monthly if no match
     }
   });
-  //update arrays***************************************************
 
-  // Return the total expenditure
-  return totalExpenditure;
+  // Calculate the total expenditure
+  for (let category in categoryTotals) {
+    totalExpenditure += categoryTotals[category];
+  }
+
+  // Update the results table with the category totals
+  for (let category in categoryTotals) {
+    const totalElement = document.getElementById(`${category.replace(/\s+/g, '-').toLowerCase()}-total`); 
+    if (totalElement) {
+      totalElement.textContent = `£${categoryTotals[category].toFixed(2)}`;
+    }
+  }
+
+  console.log(expenditures);
+
+  // Return the total expenditure and category totals
+  return { totalExpenditure, categoryTotals };
 }
 
 // -------------------------------------------------------------------------------------------
 
 // Function to calculate the total budget (*******including individual categories??********)
 function calculateTotalBudget() {
-  let totalBudget = calculateTotalIncome() - calculateTotalExpenditure();
+  const totalIncome = calculateTotalIncome(); // Calculate the total income
+  const totalExpenditure = calculateTotalExpenditure().totalExpenditure; // Calculate the total expenditure
+  const totalBudget = totalIncome - totalExpenditure; // Calculate the total budget
   // Return the total budget
   return totalBudget;
 }
@@ -267,9 +292,9 @@ document.addEventListener("click", function (event) {
   // Event listener for the calculate button
   if (event.target.id === "calculate") {
     // If the calculate button is clicked
-    totalIncome = calculateTotalIncome(); // Calculate the total income
-    totalExpenditure = calculateTotalExpenditure(); // Calculate the total expenditure
-    totalBudget = calculateTotalBudget(); // Calculate the total budget - income minus expenditure
+    const totalIncome = calculateTotalIncome(); // Calculate the total income
+    const { totalExpenditure, categoryTotals } = calculateTotalExpenditure(); // Calculate the total expenditure and get category totals
+    const totalBudget = calculateTotalBudget(); // Calculate the total budget - income minus expenditure
 
     console.log(totalIncome);
     console.log(totalExpenditure);
@@ -284,9 +309,16 @@ document.addEventListener("click", function (event) {
     document.getElementById(
       "budget-results"
     ).innerHTML = `Your total budget is: £${totalBudget.toFixed(2)}`; // Display the total budget
+
+    // Update the results table with the category totals
+    for (let category in categoryTotals) {
+      const totalElement = document.getElementById(`${category.replace(/\s+/g, '-').toLowerCase()}-total`);
+      if (totalElement) {
+        totalElement.textContent = `£${categoryTotals[category].toFixed(2)}`;
+      }
+    }
   }
 });
-
 //-------------------------------------------------------------------------
 
 // Function to calculate the total of each category
