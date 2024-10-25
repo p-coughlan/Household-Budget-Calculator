@@ -128,7 +128,9 @@ function buildExpenditure() {
     expenditureForm += `<tr><td colspan="3"><strong>${expenditure.category}</strong></td></tr>`;
 
     // Loop through the items in the category
-    expenditure.items.forEach((item) => {
+    expenditure.items.forEach((item) => { 
+      const categoryClass = expenditure.category.toLowerCase().replace(/\s+/g, '-'); // Create a class name based on the category
+      console.log(categoryClass); // Debugging statement to check the class name
       expenditureForm += `
         <tr class="table-row">
           <td>${item.description}</td>
@@ -216,6 +218,18 @@ console.log(incomes);
   return totalIncome;
 }
 //-------------------------------------------------------------------------
+
+// Function to calculate total expenditure
+//STEPS
+// 1. Loop through each row in the expenditure table
+// 2. Get the amount and frequency of each item
+// 3. Update the expenditures array with the amount and frequency
+// 4. Calculate the total expenditure and category totals
+// 5. Update the results table with the category totals
+// 6. Return the total expenditure and category totals
+
+//-------------------------------------------------------------------------
+/* COMMENT OUT FOR NOW
 
 // Helper function to update the expenditures array
 function updateExpendituresArray(category, description, amount, frequency) {
@@ -322,6 +336,8 @@ function calculateTotalExpenditure() {
   // Return the total expenditure and category totals
   return { totalExpenditure, categoryTotals };
 }
+ END OF COMMENT OUT */
+//-------------------------------------------------------------------------
 
 // Function to calculate the total budget
 function calculateTotalBudget() {
