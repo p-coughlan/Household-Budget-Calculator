@@ -25,7 +25,7 @@ let incomes = [
 //Alernative expenditure array structure replacing previous
 let expenditures = [
   {
-      category: "HOUSEHOLD BILLS",
+      category: "HOUSEHOLD BILLS", 
       items: [
           { description: "Mortgage or Rent", frequency: "monthly", value: 0 },
           { description: "Council Tax", frequency: "monthly", value: 0 },
