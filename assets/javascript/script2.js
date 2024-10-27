@@ -37,6 +37,7 @@ let incomes = [
     ["Other Income", "monthly", 0], 
     ];
 
+// CONSOLE LOGS FOR ABOVE SECTION
     console.log("Logging from incomes array section:", incomes); 
 
 //-----------------------------------------------------------------
@@ -113,9 +114,9 @@ let expenditures = [
   }
   ];
 
-    console.log("logging from expenditures array section:", expenditures);
-
 // CONSOLE LOGS FOR ABOVE SECTION
+
+console.log("logging from expenditures array section:", expenditures);
 
 //-----------------------------------------------------------------
 
@@ -165,35 +166,35 @@ function buildIncomeTable() {
  * A table row is created for each item within the category, with input fields for the frequency and amount.
  */
 function buildExpenditureTable() {
-    // Create a table element
-    let expenditureTable = "<form><h3>EXPENDITURE</H3><table id='expenditure-table'>"; // wrap in form element and add table id
-    // Loop through the expenditures array
-    for (category in expenditures) {
-        // Add a row for the category
-        expenditureTable += `<tr><th colspan="3">${expenditures[category].category}</th></tr>`;
-        // Loop through the items in the category
-        for (item in expenditures[category].items) {
-            expenditureTable += `
-            <tr class="table-row">
-            <td>${expenditures[category].items[item].description}</td>
-            <td>
-            <select name="" id=""> 
-                  <option value="weekly">Weekly</option>
-                  <option value="monthly" selected>Monthly</option>
-                  <option value="quarterly">Quarterly</option>
-                  <option value="yearly">Yearly</option>
-            </select>
-            </td>
-            <td>
-            <input type="number" placeholder="£0.00">
-            </td>
-            </tr>`;
-        }
-    }
-    // Close the table
-    expenditureTable += "</table></form>";
-    // Add the form to the expenditure div in index.html
-    document.getElementById("expenditure-section").innerHTML = expenditureTable;
+  let expenditureTable = "<form><h3>EXPENDITURE</H3><table id='expenditure-table'>";
+  // Loop through expenditures to dynamically build the table
+  expenditures.forEach((categoryObj, catIndex) => { 
+      // Add row for the category title
+      expenditureTable += `<tr><th colspan="3">${categoryObj.category}</th></tr>`;
+      
+      // Loop through each item in the category to add rows
+      categoryObj.items.forEach((item, itemIndex) => {
+          // Use data attributes to store the indices for easy reference
+          expenditureTable += `
+          <tr class="table-row">
+              <td>${item.description}</td>
+              <td>
+                  <select data-cat="${catIndex}" data-item="${itemIndex}" class="frequency-select"> 
+                      <option value="weekly">Weekly</option>
+                      <option value="monthly" selected>Monthly</option>
+                      <option value="quarterly">Quarterly</option>
+                      <option value="yearly">Yearly</option>
+                  </select>
+              </td>
+              <td>
+                  <input type="number" class="amount-input" data-cat="${catIndex}" data-item="${itemIndex}" placeholder="£0.00">
+              </td>
+          </tr>`;
+      });
+  });
+
+  expenditureTable += "</table></form>";
+  document.getElementById("expenditure-section").innerHTML = expenditureTable;
 }
 
 // CONSOLE LOGS FOR ABOVE SECTION
@@ -208,6 +209,8 @@ function buildExpenditureTable() {
 
 /**
  * Calculates the total income by looping through the incomes array and adding the amount of each income type to the totalIncome variable
+ * Updates the amount in the incomes array based on user input
+ * @returns {number} The total income
  */
 
 function calculateTotalIncome() {
@@ -247,10 +250,67 @@ console.log("logging updated array from calculateTotalIncome():",incomes);
 }
 
 
-// CONSOLE LOGS FOR ABOVE SECTION
+// CONSOLE LOGS FOR ABOVE SECTION (inside function)
 
 //-----------------------------------------------------------------
 
+// FUNCTION TO CALCULATE TOTAL EXPENDITURE
+/**
+ * Calculates the total expenditure by looping through the expenditures array and adding the amount of each item to the totalExpenditure variable
+ * Updates the amount in the expenditures array based on user input
+ * Returns the total expenditure
+ * @returns {number} The total expenditure
+*/
+
+function calculateTotalExpenditure() {
+  let totalExpenditure = 0;
+  categoryTotals = []; // Reset category totals before calculation
+
+  // Loop through each category and item
+  expenditures.forEach((categoryObj, catIndex) => {
+      let categoryTotal = 0; // Reset category total for each category
+
+      categoryObj.items.forEach((item, itemIndex) => {
+          // Get input values using data attributes
+          const amountInput = document.querySelector(`input[data-cat="${catIndex}"][data-item="${itemIndex}"]`).value;
+          const frequencySelect = document.querySelector(`select[data-cat="${catIndex}"][data-item="${itemIndex}"]`).value;
+
+          // Update expenditures array with user input
+          expenditures[catIndex].items[itemIndex].value = parseFloat(amountInput) || 0;
+          expenditures[catIndex].items[itemIndex].frequency = frequencySelect;
+
+          // Calculate monthly equivalent based on frequency
+          let monthlyAmount = parseFloat(amountInput) || 0;
+          if (frequencySelect === "weekly") {
+              monthlyAmount *= 4.33;
+          } else if (frequencySelect === "quarterly") {
+              monthlyAmount /= 3;
+          } else if (frequencySelect === "yearly") {
+              monthlyAmount /= 12;
+          }
+
+          // Update category and total expenditure
+          categoryTotal += monthlyAmount;
+          totalExpenditure += monthlyAmount;
+      });
+
+      // Store the category total in the categoryTotals array
+      categoryTotals.push({
+          category: categoryObj.category,
+          total: categoryTotal.toFixed(2)
+      });
+  });
+
+  console.log("Total Expenditure:", totalExpenditure.toFixed(2));
+  console.log("Category Totals:", categoryTotals);
+
+  return totalExpenditure;
+}
+
+
+// CONSOLE LOGS FOR ABOVE SECTION (inside function)
+
+//-----------------------------------------------------------------
 
 // EVENT LISTENER FOR CALCULATE BUTTON AND DISPLAY RESULTS
 
@@ -262,18 +322,26 @@ console.log("logging updated array from calculateTotalIncome():",incomes);
  * Stores the total of each category in the categoryTotals array for later use
  */
 
-document.addEventListener("click", function (event) { // Listen for a click event
-    if (event.target.id === "calculate-button") { // If the calculate button is clicked
-    
-    const totalIncome = calculateTotalIncome(); // Calculate the total income
 
-    console.log(totalIncome);
+document.addEventListener("click", function (event) {
+  if (event.target.id === "calculate-button") {
 
-    document.getElementById(
-      "income-results"
-    ).innerHTML = `Your total monthly income is: £${totalIncome.toFixed(2)}`; // Display the total income
+      const totalIncome = calculateTotalIncome(); // Calculate total income
+      const totalExpenditure = calculateTotalExpenditure(); // Calculate total expenditure
+
+      document.getElementById("income-results").innerHTML = `Your total monthly income is: £${totalIncome.toFixed(2)}`;
+      document.getElementById("expenditure-results").innerHTML = `Your total monthly expenditure is: £${totalExpenditure.toFixed(2)}`;
+
+      // Display category totals
+      let categoryTotalsHTML = "<ul>";
+      categoryTotals.forEach(cat => {
+          categoryTotalsHTML += `<li>${cat.category}: £${cat.total}</li>`;
+      });
+      categoryTotalsHTML += "</ul>";
+      document.getElementById("results-display").innerHTML = categoryTotalsHTML;
   }
 });
+
 
 //-----------------------------------------------------------------
 
