@@ -15,9 +15,9 @@ Project Plan:
 
 //-----------------------------------------------------------------
 
-// DECLARE VARIABLES
+// DECLARE VARIABLES // 
 
-let totalIncome; // Variable to store the total income
+let totalIncome; // Variable to store the total income 
 let totalExpenditure; // Variable to store the total expenditure
 let totalBudget; // Variable to store the total budget
 let categoryTotals = []; // Array to store the total of each category
@@ -28,7 +28,7 @@ let categoryTotalsPercentages = []; // Array to store the total of each category
 //-----------------------------------------------------------------
 
 
-// INCOMES ARRAY
+// INCOMES ARRAY //
 // 0 = income type, 1 = frequency, 2 = amount
 let incomes = [
     ["Employment Income", "monthly", 0], // Array of sub categories, frequency, amount)// access by incomes[0][2]
@@ -278,6 +278,7 @@ function calculateTotalExpenditure() {
   categoryTotals = []; // Reset category totals before calculation
 
   // Loop through each category and item to calculate the total expenditure
+  // categoryObj = object, catIndex = index
   expenditures.forEach((categoryObj, catIndex) => { // Loop through each category and item
       let categoryTotal = 0; // Reset category total for each category
 
@@ -349,10 +350,121 @@ function calculateTotalExpenditure() {
 //-----------------------------------------------------------------
 // Create Pie Chart
 
+function drawPieChart() {
+  const canvas = document.getElementById("pie-chart-canvas");
+  const ctx = canvas.getContext("2d");
+  const totalExpenditure = categoryTotals.reduce((sum, cat) => sum + parseFloat(cat.total), 0);
+
+  // Clear canvas before drawing new chart
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Draw pie chart
+  let startAngle = 0;
+  categoryTotals.forEach((cat, index) => {
+      const categoryValue = parseFloat(cat.total);
+      const categoryPercentage = (categoryValue / totalExpenditure) * 100;
+      const sliceAngle = (categoryPercentage / 100) * 2 * Math.PI;
+
+      // Set color for the slice
+      const color = categoryColours[index % categoryColours.length];
+      ctx.fillStyle = color;
+
+      // Draw slice
+      ctx.beginPath();
+      ctx.moveTo(canvas.width / 2, canvas.height / 2); // Move to center of canvas
+      ctx.arc(canvas.width / 2, canvas.height / 2, canvas.height / 2, startAngle, startAngle + sliceAngle);
+      ctx.closePath();
+      ctx.fill();
+
+      // Update startAngle for the next slice
+      startAngle += sliceAngle;
+  });
+
+  // Draw legend
+  const legendContainer = document.getElementById("pie-chart-legend");
+  legendContainer.innerHTML = ""; // Clear existing legend
+
+  categoryTotals.forEach((cat, index) => {
+      const categoryValue = parseFloat(cat.total);
+      const categoryPercentage = ((categoryValue / totalExpenditure) * 100).toFixed(1);
+      const color = categoryColours[index % categoryColours.length];
+
+      // Create legend item
+      const legendItem = document.createElement("div");
+      legendItem.style.display = "flex";
+      legendItem.style.alignItems = "center";
+      legendItem.style.marginBottom = "5px";
+
+      // Color box
+      const colorBox = document.createElement("div");
+      colorBox.style.width = "15px";
+      colorBox.style.height = "15px";
+      colorBox.style.backgroundColor = color;
+      colorBox.style.marginRight = "10px";
+      
+      // Legend text
+      const legendText = document.createElement("span");
+      legendText.textContent = `${cat.category}: ${categoryPercentage}% (£${categoryValue.toFixed(2)})`;
+
+      // Append to legend container
+      legendItem.appendChild(colorBox);
+      legendItem.appendChild(legendText);
+      legendContainer.appendChild(legendItem);
+  });
+}
+
+
 
 // CONSOLE LOGS FOR ABOVE SECTION (inside function)
 
 //-----------------------------------------------------------------
+
+// FUNCTION FOR RESET BUTTON
+/**
+ * Resets the budgeting tool by setting the total income, total expenditure, and total budget to 0
+ * Resets the amounts in the incomes and expenditures arrays to 0
+ * Clears the input fields in the income and expenditure tables
+ * Clears the results section
+ */
+function resetBudget() {
+  totalIncome = 0;
+  totalExpenditure = 0;
+  totalBudget = 0;
+  categoryTotals = [];
+
+  // Reset incomes array
+  incomes.forEach((income) => {
+      income[2] = 0;
+  });
+
+  // Reset expenditures array
+  expenditures.forEach((category) => {
+      category.items.forEach((item) => {
+          item.value = 0;
+      });
+  });
+
+  // Clear input fields in income table
+  document.querySelectorAll("#income-table input").forEach((input) => {
+      input.value = "";
+  });
+
+  // Clear input fields in expenditure table
+  document.querySelectorAll("#expenditure-table input").forEach((input) => {
+      input.value = "";
+  });
+
+  // Clear results section
+  document.getElementById("income-results").innerHTML = "";
+  document.getElementById("expenditure-results").innerHTML = "";
+  document.getElementById("budget-results").innerHTML = "";
+  document.getElementById("pie-chart-legend").innerHTML = "";
+
+  // Clear pie chart
+  const canvas = document.getElementById("pie-chart-canvas");
+  const ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
 
 // EVENT LISTENER FOR CALCULATE BUTTON AND DISPLAY RESULTS
 
@@ -376,14 +488,9 @@ document.addEventListener("click", function (event) {
       document.getElementById("expenditure-results").innerHTML = `Your total monthly expenditure is: £${totalExpenditure.toFixed(2)}`;
       document.getElementById("budget-results").innerHTML = `Your total monthly budget is: £${totalBudget.toFixed(2)}`;
 
-      // Display category totals 
-      let categoryTotalsHTML = "<ul>";
-      categoryTotals.forEach((cat, index) => {
-        const color = categoryColours[index % categoryColours.length];
-        categoryTotalsHTML += `<li style="color: ${color};">${cat.category}: £${cat.total}</li>`;
-      });
-      categoryTotalsHTML += "</ul>";
-      document.getElementById("results-display").innerHTML = categoryTotalsHTML;
+
+
+      drawPieChart(); // Draw the pie chart
       
   }
 });
