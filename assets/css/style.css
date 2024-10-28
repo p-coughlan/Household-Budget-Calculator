@@ -2,8 +2,8 @@
 :root {
   --font-family-sans: "Rubik", sans-serif;
   --font-family-serif: "Georgia", serif;
-  --font-size-base: 16px;
-  --font-size-large: calc(2rem + 1vw);
+  --font-size-base: 18px;
+  --font-size-large: calc(2rem + 1vw); /* what is this?  */
   --font-size-medium: calc(1.5rem + 1vw);
   --font-color-primary: #333;
 }
@@ -23,6 +23,62 @@ body {
   font-size: var(--font-size-base); /* Use the base font size */
   color: var(--font-color-primary); /* Use the primary font color */
   background-image: url(/assets/images/budget-lg.jpg);
+  letter-spacing: 0.5px;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.input-section {
+  width: 80%;
+  margin: 0 auto;
+}
+
+form {
+  width: 100%;
+  margin: 0 auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+th {
+  border: 1px solid #333;
+  padding: 8px;
+  text-align: left;
+  font-size:large;
+}
+
+td {
+  padding: 5px 8px 5px 8px;
+  text-align: left;
+  /*border: 1px solid #333;*/
+  width: 120px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+input, select {
+  float: right;
+  width: 120px;
+  padding: 12px 20px;
+  margin: 4px 0;
+  border: 1px solid #ccc;
+  border-radius: 1.5rem;
+  box-sizing: border-box;
+  font-size: 16px;
+  text-align: center;
+  font-family: var(--font-family-sans);
 }
 
 .sticky-banner {
@@ -84,6 +140,23 @@ table { /* WIP */
   border: 1px solid black;
 }
 
+button {
+  background-color: #4CAF50; /* Calm financial green */
+  width : 200px;
+  color: white;
+  padding: 10px 20px;
+  border: 0.5px solid #333;
+  border-radius: 1.5rem;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  font-family: var(--font-family-sans);
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
 
 footer {
   background-color: #333;
@@ -92,11 +165,6 @@ footer {
   padding: 1rem;
   margin-top: 10%;
   width: 100%;
-}
-
-#category-list li {
-  font-weight: bold;
-  margin: 5px 0;
 }
 
 #pie-chart {
