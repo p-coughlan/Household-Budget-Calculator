@@ -21,7 +21,9 @@ let totalIncome; // Variable to store the total income
 let totalExpenditure; // Variable to store the total expenditure
 let totalBudget; // Variable to store the total budget
 let categoryTotals = []; // Array to store the total of each category
-let IncomeTable
+let IncomeTable // Variable to store the IncomeTable
+let ExpenditureTable // Variable to store the ExpenditureTable
+let categoryTotalsPercentages = []; // Array to store the total of each category as a percentage of the total budget
 
 //-----------------------------------------------------------------
 
@@ -120,6 +122,13 @@ console.log("logging from expenditures array section:", expenditures);
 
 //-----------------------------------------------------------------
 
+// CATEGORY COLOURS FOR PIE CHART
+let categoryColours = [
+  "crimson", "teal", "green", "orange", "purple", "grey"
+];
+
+//-----------------------------------------------------------------
+
 // FUNCTION TO BUILD INCOME TABLE
 /**
  * Builds the income table using HTML and the incomes array
@@ -168,6 +177,7 @@ function buildIncomeTable() {
 function buildExpenditureTable() {
   let expenditureTable = "<form><h3>EXPENDITURE</H3><table id='expenditure-table'>";
   // Loop through expenditures to dynamically build the table
+  //categoryObj = object, catIndex = index
   expenditures.forEach((categoryObj, catIndex) => { 
       // Add row for the category title
       expenditureTable += `<tr><th colspan="3">${categoryObj.category}</th></tr>`;
@@ -257,6 +267,7 @@ console.log("logging updated array from calculateTotalIncome():",incomes);
 // FUNCTION TO CALCULATE TOTAL EXPENDITURE
 /**
  * Calculates the total expenditure by looping through the expenditures array and adding the amount of each item to the totalExpenditure variable
+ * Uses data attributes to reference the correct item in the expenditures array
  * Updates the amount in the expenditures array based on user input
  * Returns the total expenditure
  * @returns {number} The total expenditure
@@ -266,14 +277,14 @@ function calculateTotalExpenditure() {
   let totalExpenditure = 0;
   categoryTotals = []; // Reset category totals before calculation
 
-  // Loop through each category and item
-  expenditures.forEach((categoryObj, catIndex) => {
+  // Loop through each category and item to calculate the total expenditure
+  expenditures.forEach((categoryObj, catIndex) => { // Loop through each category and item
       let categoryTotal = 0; // Reset category total for each category
 
       categoryObj.items.forEach((item, itemIndex) => {
-          // Get input values using data attributes
-          const amountInput = document.querySelector(`input[data-cat="${catIndex}"][data-item="${itemIndex}"]`).value;
-          const frequencySelect = document.querySelector(`select[data-cat="${catIndex}"][data-item="${itemIndex}"]`).value;
+          // Get input values using data attributes to reference the correct item
+          const amountInput = document.querySelector(`input[data-cat="${catIndex}"][data-item="${itemIndex}"]`).value; // Get the amount of the item
+          const frequencySelect = document.querySelector(`select[data-cat="${catIndex}"][data-item="${itemIndex}"]`).value; // Get the frequency of the item
 
           // Update expenditures array with user input
           expenditures[catIndex].items[itemIndex].value = parseFloat(amountInput) || 0;
@@ -299,6 +310,10 @@ function calculateTotalExpenditure() {
           category: categoryObj.category,
           total: categoryTotal.toFixed(2)
       });
+
+      // convert categoryTotals to percentages for use in pie chart and store in new array
+
+
   });
 
   console.log("Total Expenditure:", totalExpenditure.toFixed(2));
@@ -306,6 +321,33 @@ function calculateTotalExpenditure() {
 
   return totalExpenditure;
 }
+
+// CONSOLE LOGS FOR ABOVE SECTION (inside function)
+//-----------------------------------------------------------------
+// FUNCTION TO CALCULATE TOTAL BUDGET
+/**
+ * Calculates the total budget by subtracting the total expenditure from the total income
+ * Updates the totalBudget variable
+  * @returns {number} The total budget
+  */
+ function calculateTotalBudget() {
+  totalBudget = totalIncome - totalExpenditure;
+  console.log("Logging from calculateTotalBudget(). Total Budget:", totalBudget.toFixed(2));
+  return totalBudget;
+}
+//-----------------------------------------------------------------
+// FUNCTION TO SWITCH RESULTS DISPLAY TO WEEKLY, MONTHLY, QUARTERLY, YEARLY
+/**
+ * This function will switch the results display between weekly, monthly, quarterly, and yearly
+ * It will update the total income, total expenditure, and total budget based on the selected frequency
+ * It will update the category totals based on the selected frequency
+ */
+// function switchResultsDisplay() {
+//}
+
+
+//-----------------------------------------------------------------
+// Create Pie Chart
 
 
 // CONSOLE LOGS FOR ABOVE SECTION (inside function)
@@ -326,19 +368,23 @@ function calculateTotalExpenditure() {
 document.addEventListener("click", function (event) {
   if (event.target.id === "calculate-button") {
 
-      const totalIncome = calculateTotalIncome(); // Calculate total income
-      const totalExpenditure = calculateTotalExpenditure(); // Calculate total expenditure
+      totalIncome = calculateTotalIncome(); // Calculate total income
+      totalExpenditure = calculateTotalExpenditure(); // Calculate total expenditure
+      totalBudget = calculateTotalBudget(); // Calculate total budget
 
       document.getElementById("income-results").innerHTML = `Your total monthly income is: £${totalIncome.toFixed(2)}`;
       document.getElementById("expenditure-results").innerHTML = `Your total monthly expenditure is: £${totalExpenditure.toFixed(2)}`;
+      document.getElementById("budget-results").innerHTML = `Your total monthly budget is: £${totalBudget.toFixed(2)}`;
 
-      // Display category totals
+      // Display category totals 
       let categoryTotalsHTML = "<ul>";
-      categoryTotals.forEach(cat => {
-          categoryTotalsHTML += `<li>${cat.category}: £${cat.total}</li>`;
+      categoryTotals.forEach((cat, index) => {
+        const color = categoryColours[index % categoryColours.length];
+        categoryTotalsHTML += `<li style="color: ${color};">${cat.category}: £${cat.total}</li>`;
       });
       categoryTotalsHTML += "</ul>";
       document.getElementById("results-display").innerHTML = categoryTotalsHTML;
+      
   }
 });
 

@@ -94,5 +94,16 @@ footer {
   width: 100%;
 }
 
+#category-list li {
+  font-weight: bold;
+  margin: 5px 0;
+}
+
+#pie-chart {
+  display: block;
+  margin: 20px auto;
+}
+
+
 /* MEDIA QUERIES */
 
