@@ -15,32 +15,31 @@ Project Plan:
 
 //-----------------------------------------------------------------
 
-// DECLARE VARIABLES // 
+// DECLARE VARIABLES //
 
-let totalIncome; // Variable to store the total income 
+let totalIncome; // Variable to store the total income
 let totalExpenditure; // Variable to store the total expenditure
 let totalBudget; // Variable to store the total budget
 let categoryTotals = []; // Array to store the total of each category
-let IncomeTable // Variable to store the IncomeTable
-let ExpenditureTable // Variable to store the ExpenditureTable
+let IncomeTable; // Variable to store the IncomeTable
+let ExpenditureTable; // Variable to store the ExpenditureTable
 let categoryTotalsPercentages = []; // Array to store the total of each category as a percentage of the total budget
 
 //-----------------------------------------------------------------
 
-
 // INCOMES ARRAY //
 // 0 = income type, 1 = frequency, 2 = amount
 let incomes = [
-    ["Employment Income", "monthly", 0], // Array of sub categories, frequency, amount)// access by incomes[0][2]
-    ["Self Employment", "monthly", 0], // access by incomes[1][2]
-    ["Savings & Investment Income", "monthly", 0], 
-    ["State Benefits", "monthly", 0],
-    ["Property Income", "monthly", 0],
-    ["Other Income", "monthly", 0], 
-    ];
+  ["Employment Income", "monthly", 0], // Array of sub categories, frequency, amount)// access by incomes[0][2]
+  ["Self Employment", "monthly", 0], // access by incomes[1][2]
+  ["Savings & Investment Income", "monthly", 0],
+  ["State Benefits", "monthly", 0],
+  ["Property Income", "monthly", 0],
+  ["Other Income", "monthly", 0],
+];
 
 // CONSOLE LOGS FOR ABOVE SECTION
-    console.log("Logging from incomes array section:", incomes); 
+console.log("Logging from incomes array section:", incomes);
 
 //-----------------------------------------------------------------
 
@@ -55,66 +54,66 @@ Each item object within the items array has description, frequency, and value pr
  */
 
 let expenditures = [
-    {
-        category: "HOUSEHOLD BILLS", 
-        items: [
-            { description: "Mortgage or Rent", frequency: "monthly", value: 0 },
-            { description: "Council Tax", frequency: "monthly", value: 0 },
-            { description: "Maintenance", frequency: "monthly", value: 0 },
-            { description: "Utility Bills", frequency: "monthly", value: 0 },
-            { description: "Other Household Costs", frequency: "monthly", value: 0 }
-        ]
-    },
-    {
-      category: "LEISURE",
-      items: [
-          { description: "Holidays", frequency: "monthly", value: 0 },
-          { description: "Hobbies", frequency: "monthly", value: 0 },
-          { description: "Sports Memberships", frequency: "monthly", value: 0 },
-          { description: "Entertainment", frequency: "monthly", value: 0 },
-          { description: "Other Leisure Costs", frequency: "monthly", value: 0 }
-      ]
+  {
+    category: "HOUSEHOLD BILLS",
+    items: [
+      { description: "Mortgage or Rent", frequency: "monthly", value: 0 },
+      { description: "Council Tax", frequency: "monthly", value: 0 },
+      { description: "Maintenance", frequency: "monthly", value: 0 },
+      { description: "Utility Bills", frequency: "monthly", value: 0 },
+      { description: "Other Household Costs", frequency: "monthly", value: 0 },
+    ],
+  },
+  {
+    category: "LEISURE",
+    items: [
+      { description: "Holidays", frequency: "monthly", value: 0 },
+      { description: "Hobbies", frequency: "monthly", value: 0 },
+      { description: "Sports Memberships", frequency: "monthly", value: 0 },
+      { description: "Entertainment", frequency: "monthly", value: 0 },
+      { description: "Other Leisure Costs", frequency: "monthly", value: 0 },
+    ],
   },
   {
     category: "TRAVEL",
     items: [
-        { description: "Fuel", frequency: "monthly", value: 0 },
-        { description: "Vehicle Maintenance", frequency: "monthly", value: 0 },
-        { description: "Vehicle Tax", frequency: "monthly", value: 0 },
-        { description: "Parking Costs", frequency: "monthly", value: 0 },
-        { description: "Public Transport", frequency: "monthly", value: 0 },
-        { description: "Other Travel Costs", frequency: "monthly", value: 0 }
-    ]
+      { description: "Fuel", frequency: "monthly", value: 0 },
+      { description: "Vehicle Maintenance", frequency: "monthly", value: 0 },
+      { description: "Vehicle Tax", frequency: "monthly", value: 0 },
+      { description: "Parking Costs", frequency: "monthly", value: 0 },
+      { description: "Public Transport", frequency: "monthly", value: 0 },
+      { description: "Other Travel Costs", frequency: "monthly", value: 0 },
+    ],
   },
   {
     category: "LIVING COSTS",
     items: [
-        { description: "Groceries", frequency: "monthly", value: 0 },
-        { description: "Healthcare", frequency: "monthly", value: 0 },
-        { description: "Cigarettes & Tobacco", frequency: "monthly", value: 0 },
-        { description: "Other Living Costs", frequency: "monthly", value: 0 },
-    ]
+      { description: "Groceries", frequency: "monthly", value: 0 },
+      { description: "Healthcare", frequency: "monthly", value: 0 },
+      { description: "Cigarettes & Tobacco", frequency: "monthly", value: 0 },
+      { description: "Other Living Costs", frequency: "monthly", value: 0 },
+    ],
   },
   {
     category: "FINANCE",
     items: [
-        { description: "Insurance", frequency: "monthly", value: 0 },
-        { description: "Loan Repayments", frequency: "monthly", value: 0 },
-        { description: "Savings Payments", frequency: "monthly", value: 0 },
-        { description: "Other Fianancial Costs", frequency: "monthly", value: 0 },
-    ]
+      { description: "Insurance", frequency: "monthly", value: 0 },
+      { description: "Loan Repayments", frequency: "monthly", value: 0 },
+      { description: "Savings Payments", frequency: "monthly", value: 0 },
+      { description: "Other Fianancial Costs", frequency: "monthly", value: 0 },
+    ],
   },
   {
     category: "ADDITIONAL EXPENSES",
     items: [
-        { description: "Gifts", frequency: "monthly", value: 0 },
-        { description: "Charity Donations", frequency: "monthly", value: 0 },
-        { description: "School & Childcare", frequency: "monthly", value: 0 },
-        { description: "Pet Costs", frequency: "monthly", value: 0 },
-        { description: "Other", frequency: "monthly", value: 0 },
-    ]
-  }
-  ];
+      { description: "Gifts", frequency: "monthly", value: 0 },
+      { description: "Charity Donations", frequency: "monthly", value: 0 },
+      { description: "School & Childcare", frequency: "monthly", value: 0 },
+      { description: "Pet Costs", frequency: "monthly", value: 0 },
+      { description: "Other", frequency: "monthly", value: 0 },
+    ],
+  },
+];
 
 // CONSOLE LOGS FOR ABOVE SECTION
 
@@ -123,9 +122,7 @@ console.log("logging from expenditures array section:", expenditures);
 //-----------------------------------------------------------------
 
 // CATEGORY COLOURS FOR PIE CHART
-let categoryColours = [
-  "crimson", "teal", "green", "orange", "purple", "grey"
-];
+let categoryColours = ["crimson", "teal", "green", "orange", "purple", "grey"];
 
 //-----------------------------------------------------------------
 
@@ -135,13 +132,13 @@ let categoryColours = [
  * A table row is created for each income type, with input fields for the frequency and amount.
  */
 function buildIncomeTable() {
-    // Create a table element
-    let incomeTable = "<form><H3>INCOME</H3><table id='income-table'>"; // wrap in form element and add table id
-    // add table headers
-    incomeTable += "<tr></tr>";
-    // Loop through the incomes array
-    for (income in incomes) {
-        incomeTable += `
+  // Create a table element
+  let incomeTable = "<form><H3>INCOME</H3><table id='income-table'>"; // wrap in form element and add table id
+  // add table headers
+  incomeTable += "<tr></tr>";
+  // Loop through the incomes array
+  for (income in incomes) {
+    incomeTable += `
         <tr class="table-row">
         <td class="table-category">${incomes[income][0]}</td>
         <td>
@@ -160,11 +157,10 @@ function buildIncomeTable() {
   // Close the table
   incomeTable += "</table></form>";
   // Add the form to the income div in index.html
-  document.getElementById("income-section").innerHTML = incomeTable; 
+  document.getElementById("income-section").innerHTML = incomeTable;
 }
 
 // CONSOLE LOGS FOR ABOVE SECTION
-
 
 //-----------------------------------------------------------------
 
@@ -175,17 +171,18 @@ function buildIncomeTable() {
  * A table row is created for each item within the category, with input fields for the frequency and amount.
  */
 function buildExpenditureTable() {
-  let expenditureTable = "<form><h3>EXPENDITURE</H3><table id='expenditure-table'>";
+  let expenditureTable =
+    "<form><h3>EXPENDITURE</H3><table id='expenditure-table'>";
   // Loop through expenditures to dynamically build the table
   //categoryObj = object, catIndex = index
-  expenditures.forEach((categoryObj, catIndex) => { 
-      // Add row for the category title
-      expenditureTable += `<tr><th colspan="3">${categoryObj.category}</th></tr>`;
-      
-      // Loop through each item in the category to add rows
-      categoryObj.items.forEach((item, itemIndex) => {
-          // Use data attributes to store the indices for easy reference
-          expenditureTable += `
+  expenditures.forEach((categoryObj, catIndex) => {
+    // Add row for the category title
+    expenditureTable += `<tr><th colspan="3">${categoryObj.category}</th></tr>`;
+
+    // Loop through each item in the category to add rows
+    categoryObj.items.forEach((item, itemIndex) => {
+      // Use data attributes to store the indices for easy reference
+      expenditureTable += `
           <tr class="table-row">
               <td class="table-category">${item.description}</td>
               <td>
@@ -200,7 +197,7 @@ function buildExpenditureTable() {
                   <input type="number" class="amount-input" data-cat="${catIndex}" data-item="${itemIndex}" placeholder="£0.00">
               </td>
           </tr>`;
-      });
+    });
   });
 
   expenditureTable += "</table></form>";
@@ -209,9 +206,7 @@ function buildExpenditureTable() {
 
 // CONSOLE LOGS FOR ABOVE SECTION
 
-
 //-----------------------------------------------------------------
-
 
 //-----------------------------------------------------------------
 
@@ -234,7 +229,7 @@ function calculateTotalIncome() {
     const amount = row.querySelector('input[type="number"]').value; // Get the amount of the income
     const incomeIndex = Array.from(rows).indexOf(row); // Get the index of the row
     incomes[incomeIndex][2] = amount; // Update the amount in the incomes array
-    
+
     // add variable for frequency
     const frequency = row.querySelector("select").value; // Get the frequency of the income
     const income = Array.from(rows).indexOf(row); // Get the index of the row
@@ -252,13 +247,12 @@ function calculateTotalIncome() {
       totalIncome += parseFloat(amount) || 0; // Add the amount to the total income
     }
   });
-  
-console.log("logging updated array from calculateTotalIncome():",incomes);
+
+  console.log("logging updated array from calculateTotalIncome():", incomes);
 
   // Return the total income
   return totalIncome;
 }
-
 
 // CONSOLE LOGS FOR ABOVE SECTION (inside function)
 
@@ -271,7 +265,7 @@ console.log("logging updated array from calculateTotalIncome():",incomes);
  * Updates the amount in the expenditures array based on user input
  * Returns the total expenditure
  * @returns {number} The total expenditure
-*/
+ */
 
 function calculateTotalExpenditure() {
   let totalExpenditure = 0;
@@ -279,42 +273,46 @@ function calculateTotalExpenditure() {
 
   // Loop through each category and item to calculate the total expenditure
   // categoryObj = object, catIndex = index
-  expenditures.forEach((categoryObj, catIndex) => { // Loop through each category and item
-      let categoryTotal = 0; // Reset category total for each category
+  expenditures.forEach((categoryObj, catIndex) => {
+    // Loop through each category and item
+    let categoryTotal = 0; // Reset category total for each category
 
-      categoryObj.items.forEach((item, itemIndex) => {
-          // Get input values using data attributes to reference the correct item
-          const amountInput = document.querySelector(`input[data-cat="${catIndex}"][data-item="${itemIndex}"]`).value; // Get the amount of the item
-          const frequencySelect = document.querySelector(`select[data-cat="${catIndex}"][data-item="${itemIndex}"]`).value; // Get the frequency of the item
+    categoryObj.items.forEach((item, itemIndex) => {
+      // Get input values using data attributes to reference the correct item
+      const amountInput = document.querySelector(
+        `input[data-cat="${catIndex}"][data-item="${itemIndex}"]`
+      ).value; // Get the amount of the item
+      const frequencySelect = document.querySelector(
+        `select[data-cat="${catIndex}"][data-item="${itemIndex}"]`
+      ).value; // Get the frequency of the item
 
-          // Update expenditures array with user input
-          expenditures[catIndex].items[itemIndex].value = parseFloat(amountInput) || 0;
-          expenditures[catIndex].items[itemIndex].frequency = frequencySelect;
+      // Update expenditures array with user input
+      expenditures[catIndex].items[itemIndex].value =
+        parseFloat(amountInput) || 0;
+      expenditures[catIndex].items[itemIndex].frequency = frequencySelect;
 
-          // Calculate monthly equivalent based on frequency
-          let monthlyAmount = parseFloat(amountInput) || 0;
-          if (frequencySelect === "weekly") {
-              monthlyAmount *= 4.33;
-          } else if (frequencySelect === "quarterly") {
-              monthlyAmount /= 3;
-          } else if (frequencySelect === "yearly") {
-              monthlyAmount /= 12;
-          }
+      // Calculate monthly equivalent based on frequency
+      let monthlyAmount = parseFloat(amountInput) || 0;
+      if (frequencySelect === "weekly") {
+        monthlyAmount *= 4.33;
+      } else if (frequencySelect === "quarterly") {
+        monthlyAmount /= 3;
+      } else if (frequencySelect === "yearly") {
+        monthlyAmount /= 12;
+      }
 
-          // Update category and total expenditure
-          categoryTotal += monthlyAmount;
-          totalExpenditure += monthlyAmount;
-      });
+      // Update category and total expenditure
+      categoryTotal += monthlyAmount;
+      totalExpenditure += monthlyAmount;
+    });
 
-      // Store the category total in the categoryTotals array
-      categoryTotals.push({
-          category: categoryObj.category,
-          total: categoryTotal.toFixed(2)
-      });
+    // Store the category total in the categoryTotals array
+    categoryTotals.push({
+      category: categoryObj.category,
+      total: categoryTotal.toFixed(2),
+    });
 
-      // convert categoryTotals to percentages for use in pie chart and store in new array
-
-
+    // convert categoryTotals to percentages for use in pie chart and store in new array
   });
 
   console.log("Total Expenditure:", totalExpenditure.toFixed(2));
@@ -329,11 +327,14 @@ function calculateTotalExpenditure() {
 /**
  * Calculates the total budget by subtracting the total expenditure from the total income
  * Updates the totalBudget variable
-  * @returns {number} The total budget
-  */
- function calculateTotalBudget() {
+ * @returns {number} The total budget
+ */
+function calculateTotalBudget() {
   totalBudget = totalIncome - totalExpenditure;
-  console.log("Logging from calculateTotalBudget(). Total Budget:", totalBudget.toFixed(2));
+  console.log(
+    "Logging from calculateTotalBudget(). Total Budget:",
+    totalBudget.toFixed(2)
+  );
   return totalBudget;
 }
 //-----------------------------------------------------------------
@@ -346,14 +347,16 @@ function calculateTotalExpenditure() {
 // function switchResultsDisplay() {
 //}
 
-
 //-----------------------------------------------------------------
 // Create Pie Chart
 
 function drawPieChart() {
   const canvas = document.getElementById("pie-chart-canvas");
   const ctx = canvas.getContext("2d");
-  const totalExpenditure = categoryTotals.reduce((sum, cat) => sum + parseFloat(cat.total), 0);
+  const totalExpenditure = categoryTotals.reduce(
+    (sum, cat) => sum + parseFloat(cat.total),
+    0
+  );
 
   // Clear canvas before drawing new chart
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -361,23 +364,29 @@ function drawPieChart() {
   // Draw pie chart
   let startAngle = 0;
   categoryTotals.forEach((cat, index) => {
-      const categoryValue = parseFloat(cat.total);
-      const categoryPercentage = (categoryValue / totalExpenditure) * 100;
-      const sliceAngle = (categoryPercentage / 100) * 2 * Math.PI;
+    const categoryValue = parseFloat(cat.total);
+    const categoryPercentage = (categoryValue / totalExpenditure) * 100;
+    const sliceAngle = (categoryPercentage / 100) * 2 * Math.PI;
 
-      // Set color for the slice
-      const color = categoryColours[index % categoryColours.length];
-      ctx.fillStyle = color;
+    // Set color for the slice
+    const color = categoryColours[index % categoryColours.length];
+    ctx.fillStyle = color;
 
-      // Draw slice
-      ctx.beginPath();
-      ctx.moveTo(canvas.width / 2, canvas.height / 2); // Move to center of canvas
-      ctx.arc(canvas.width / 2, canvas.height / 2, canvas.height / 2, startAngle, startAngle + sliceAngle);
-      ctx.closePath();
-      ctx.fill();
+    // Draw slice
+    ctx.beginPath();
+    ctx.moveTo(canvas.width / 2, canvas.height / 2); // Move to center of canvas
+    ctx.arc(
+      canvas.width / 2,
+      canvas.height / 2,
+      canvas.height / 2,
+      startAngle,
+      startAngle + sliceAngle
+    );
+    ctx.closePath();
+    ctx.fill();
 
-      // Update startAngle for the next slice
-      startAngle += sliceAngle;
+    // Update startAngle for the next slice
+    startAngle += sliceAngle;
   });
 
   // Draw legend
@@ -385,35 +394,38 @@ function drawPieChart() {
   legendContainer.innerHTML = ""; // Clear existing legend
 
   categoryTotals.forEach((cat, index) => {
-      const categoryValue = parseFloat(cat.total);
-      const categoryPercentage = ((categoryValue / totalExpenditure) * 100).toFixed(1);
-      const color = categoryColours[index % categoryColours.length];
+    const categoryValue = parseFloat(cat.total);
+    const categoryPercentage = (
+      (categoryValue / totalExpenditure) *
+      100
+    ).toFixed(1);
+    const color = categoryColours[index % categoryColours.length];
 
-      // Create legend item
-      const legendItem = document.createElement("div");
-      legendItem.style.display = "flex";
-      legendItem.style.alignItems = "center";
-      legendItem.style.marginBottom = "5px";
+    // Create legend item
+    const legendItem = document.createElement("div");
+    legendItem.style.display = "flex";
+    legendItem.style.alignItems = "center";
+    legendItem.style.marginBottom = "5px";
 
-      // Color box
-      const colorBox = document.createElement("div");
-      colorBox.style.width = "15px";
-      colorBox.style.height = "15px";
-      colorBox.style.backgroundColor = color;
-      colorBox.style.marginRight = "10px";
-      
-      // Legend text
-      const legendText = document.createElement("span");
-      legendText.textContent = `${cat.category}: ${categoryPercentage}% (£${categoryValue.toFixed(2)})`;
+    // Color box
+    const colorBox = document.createElement("div");
+    colorBox.style.width = "15px";
+    colorBox.style.height = "15px";
+    colorBox.style.backgroundColor = color;
+    colorBox.style.marginRight = "10px";
 
-      // Append to legend container
-      legendItem.appendChild(colorBox);
-      legendItem.appendChild(legendText);
-      legendContainer.appendChild(legendItem);
+    // Legend text
+    const legendText = document.createElement("span");
+    legendText.textContent = `${
+      cat.category
+    }: ${categoryPercentage}% (£${categoryValue.toFixed(2)})`;
+
+    // Append to legend container
+    legendItem.appendChild(colorBox);
+    legendItem.appendChild(legendText);
+    legendContainer.appendChild(legendItem);
   });
 }
-
-
 
 // CONSOLE LOGS FOR ABOVE SECTION (inside function)
 
@@ -434,24 +446,24 @@ function resetBudget() {
 
   // Reset incomes array
   incomes.forEach((income) => {
-      income[2] = 0;
+    income[2] = 0;
   });
 
   // Reset expenditures array
   expenditures.forEach((category) => {
-      category.items.forEach((item) => {
-          item.value = 0;
-      });
+    category.items.forEach((item) => {
+      item.value = 0;
+    });
   });
 
   // Clear input fields in income table
   document.querySelectorAll("#income-table input").forEach((input) => {
-      input.value = "";
+    input.value = "";
   });
 
   // Clear input fields in expenditure table
   document.querySelectorAll("#expenditure-table input").forEach((input) => {
-      input.value = "";
+    input.value = "";
   });
 
   // Clear results section
@@ -476,30 +488,34 @@ function resetBudget() {
  * Stores the total of each category in the categoryTotals array for later use
  */
 
-
 document.addEventListener("click", function (event) {
   if (event.target.id === "calculate-button") {
+    totalIncome = calculateTotalIncome(); // Calculate total income
+    totalExpenditure = calculateTotalExpenditure(); // Calculate total expenditure
+    totalBudget = calculateTotalBudget(); // Calculate total budget
 
-      totalIncome = calculateTotalIncome(); // Calculate total income
-      totalExpenditure = calculateTotalExpenditure(); // Calculate total expenditure
-      totalBudget = calculateTotalBudget(); // Calculate total budget
+    document.getElementById(
+      "income-results"
+    ).innerHTML = `Your total monthly income is: £${totalIncome.toFixed(2)}`;
+    document.getElementById(
+      "expenditure-results"
+    ).innerHTML = `Your total monthly expenditure is: £${totalExpenditure.toFixed(
+      2
+    )}`;
+    document.getElementById(
+      "budget-results"
+    ).innerHTML = `Your total monthly budget is: £${totalBudget.toFixed(2)}`;
 
-      document.getElementById("income-results").innerHTML = `Your total monthly income is: £${totalIncome.toFixed(2)}`;
-      document.getElementById("expenditure-results").innerHTML = `Your total monthly expenditure is: £${totalExpenditure.toFixed(2)}`;
-      document.getElementById("budget-results").innerHTML = `Your total monthly budget is: £${totalBudget.toFixed(2)}`;
+    drawPieChart(); // Draw the pie chart
 
+    // Create results heading
+    document.getElementById("results-heading").innerHTML = "<h3>RESULTS</h3>";
 
-
-      drawPieChart(); // Draw the pie chart
-
-      // Create results heading
-      document.getElementById("results-heading").innerHTML = "<h3>RESULTS</h3>";
-    
-
-      
-      // Scroll to results section when generated or updated
-      document.getElementById("results-section").scrollIntoView({ behavior: "smooth" });
-      // 
+    // Scroll to results section when generated or updated
+    document
+      .getElementById("results-section")
+      .scrollIntoView({ behavior: "smooth" });
+    //
   }
 });
 
@@ -510,11 +526,7 @@ document.addEventListener("click", function (event) {
  */
 document.getElementById("reset").addEventListener("click", resetBudget);
 
-
 //-----------------------------------------------------------------
-
-
-
 
 buildIncomeTable();
 buildExpenditureTable();

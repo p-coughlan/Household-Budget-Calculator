@@ -21,13 +21,30 @@ body {
   letter-spacing: 0.5px; /* Add a little space between letters */
 }
 
-.container {
-  margin: 0 auto;
+.input-section-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5%;
 }
+
+.results-section-container {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 
 .input-section {
   width: 80%;
   margin: 0 auto;
+}
+
+.results-section {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
 }
 
 
@@ -229,10 +246,11 @@ footer {
 /* Default styles for mobile */
 @media (max-width: 768px) {
   /* Table - Take up 90-95% viewport width */
-
-  .input-section {
-   width: 100%;
+  .input-section,
+  .results-section {
+    width: 95%;
   }
+
   table {
     width: 100%;
     font-size: 0.9rem; /* Adjust font size for smaller screens */
@@ -249,14 +267,13 @@ footer {
   }
 
   /* Ensure buttons take up full width for accessibility on smaller screens */
-
   .button-div {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  
   }
+
   button {
     width: 100%;
     margin-top: 10px;

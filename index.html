@@ -51,7 +51,7 @@
 
     <!------------------------------- MAIN FORM AND RESULTS SECTION ------------------------------->
 
-    <div class="container">
+    <div class="input-section-container">
       <div class="input-section">
         <!-- Input Form Column -->
         <h3>
@@ -59,46 +59,36 @@
           weekly, quarterly or yearly. Choose from the list and our calculator
           will show you what you spend.
         </h3>
-        
 
         <!------------------------------- WIP JS POPULATION ------------------------------->
         <div id="income-section"></div>
-        
+
         <div id="expenditure-section"></div>
-        
+
         <div class="button-div">
           <button type="submit" id="calculate-button">Calculate Budget</button>
-          
-        <button id="reset">Reset</button>
-        </div>
-        
-      </div>
 
-      <!------------------------------- RESULTS SECTION  JS WIP------------------------------->
-
-      <div id="results-section">
-        <h3 id="results-heading"></h3>
-          <div class="dropdown">
-            <button class="dropbtn">Display Frequency</button>
-            <div class="dropdown-content">
-              <p>Weekly</p>
-              <p>Monthly</p>
-              <p>Quarterly</p>
-              <p>Yearly</p>
-            </div>
-          </div>
-        
-        <!---------------RESULTS TO BE HIDDEN UNTIL PROCESSING COMPLETE---------->
-        <h3 id="income-results"></h3>
-        <h3 id="expenditure-results"></h3>
-        <h3 id="budget-results"></h3>
-        
-        <div id="pie-chart">
-          <canvas id="pie-chart-canvas" width="300" height="300"></canvas>
-          <div id="pie-chart-legend"></div>
+          <button id="reset">Reset</button>
         </div>
       </div>
     </div>
+
+    <!------------------------------- RESULTS SECTION  JS WIP------------------------------->
+    <div class="results-section-container">
+      <div id="results-section">
+
+      <h3 id="results-heading"></h3>
+      <h3 id="income-results"></h3>
+      <h3 id="expenditure-results"></h3>
+      <h3 id="budget-results"></h3>
+
+      <div id="pie-chart">
+        <canvas id="pie-chart-canvas" width="300" height="300"></canvas>
+        <div id="pie-chart-legend"></div>
+      </div>
+    </div>
+    </div>
+
     <!------------------------------- FOOTER ------------------------------->
 
     <footer>
