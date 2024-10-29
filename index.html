@@ -59,27 +59,35 @@
           weekly, quarterly or yearly. Choose from the list and our calculator
           will show you what you spend.
         </h3>
-        <hr />
+        
 
         <!------------------------------- WIP JS POPULATION ------------------------------->
         <div id="income-section"></div>
-        <hr />
+        
         <div id="expenditure-section"></div>
-        <hr />
-        <button type="submit" id="calculate-button">Calculate Budget</button>
-        <hr />
+        
+        <div class="button-div">
+          <button type="submit" id="calculate-button">Calculate Budget</button>
+          
+        <button id="reset">Reset</button>
+        </div>
+        
       </div>
 
       <!------------------------------- RESULTS SECTION  JS WIP------------------------------->
 
       <div id="results-section">
-        <div id="results-bar">
-          <h3>RESULTS</h3>
-          <button id="reset">Reset</button>
-          <button id="weekly">Display Weekly</button>
-          <button id="quarterly">Display Quarterly</button>
-          <button id="yearly">Display Yearly</button>
-        </div>
+        <h3 id="results-heading"></h3>
+          <div class="dropdown">
+            <button class="dropbtn">Display Frequency</button>
+            <div class="dropdown-content">
+              <p>Weekly</p>
+              <p>Monthly</p>
+              <p>Quarterly</p>
+              <p>Yearly</p>
+            </div>
+          </div>
+        
         <!---------------RESULTS TO BE HIDDEN UNTIL PROCESSING COMPLETE---------->
         <h3 id="income-results"></h3>
         <h3 id="expenditure-results"></h3>

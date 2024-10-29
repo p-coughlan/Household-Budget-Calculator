@@ -143,7 +143,7 @@ function buildIncomeTable() {
     for (income in incomes) {
         incomeTable += `
         <tr class="table-row">
-        <td>${incomes[income][0]}</td>
+        <td class="table-category">${incomes[income][0]}</td>
         <td>
         <select name="" id=""> 
               <option value="weekly">Weekly</option>
@@ -187,7 +187,7 @@ function buildExpenditureTable() {
           // Use data attributes to store the indices for easy reference
           expenditureTable += `
           <tr class="table-row">
-              <td>${item.description}</td>
+              <td class="table-category">${item.description}</td>
               <td>
                   <select data-cat="${catIndex}" data-item="${itemIndex}" class="frequency-select"> 
                       <option value="weekly">Weekly</option>
@@ -491,9 +491,24 @@ document.addEventListener("click", function (event) {
 
 
       drawPieChart(); // Draw the pie chart
+
+      // Create results heading
+      document.getElementById("results-heading").innerHTML = "<h3>RESULTS</h3>";
+    
+
       
+      // Scroll to results section when generated or updated
+      document.getElementById("results-section").scrollIntoView({ behavior: "smooth" });
+      // 
   }
 });
+
+// EVENT LISTENER FOR RESET BUTTON
+/**
+ * Event listener for the reset button
+ * Calls the resetBudget function to reset the budgeting tool
+ */
+document.getElementById("reset").addEventListener("click", resetBudget);
 
 
 //-----------------------------------------------------------------

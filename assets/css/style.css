@@ -1,7 +1,6 @@
 /* font variables */
 :root {
   --font-family-sans: "Rubik", sans-serif;
-  --font-family-serif: "Georgia", serif;
   --font-size-base: 18px;
   --font-size-large: calc(2rem + 1vw); /* what is this?  */
   --font-size-medium: calc(1.5rem + 1vw);
@@ -9,25 +8,20 @@
 }
 
 * {
-  box-sizing: border-box;
+  box-sizing: border-box; /* This will make the padding and border to be included in the element's total width and height */
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  background-size: cover; /* This will make the background image to cover the entire screen */
-  background-repeat: no-repeat; /* This will make the background image not to repeat */
-  background-attachment: fixed; /* This will make the background image to stay fixed */
-  background-position: center; /* This will make the background image to be centered */
+  margin: 0; /* This will remove the default margin of the body */
+  padding: 0; /* This will remove the default padding of the body */
+  background: url(/assets/images/budget-lg.jpg) no-repeat center/cover fixed;
   font-family: var(--font-family-sans); /* Use the sans-serif font family */
   font-size: var(--font-size-base); /* Use the base font size */
   color: var(--font-color-primary); /* Use the primary font color */
-  background-image: url(/assets/images/budget-lg.jpg);
-  letter-spacing: 0.5px;
+  letter-spacing: 0.5px; /* Add a little space between letters */
 }
 
 .container {
-  width: 100%;
   margin: 0 auto;
 }
 
@@ -36,18 +30,16 @@ body {
   margin: 0 auto;
 }
 
-form {
-  width: 100%;
-  margin: 0 auto;
-}
 
 table {
   width: 100%;
   border-collapse: collapse;
   margin: 0 auto;
+  border: 0.5px solid #555;
+  
 }
 
-th {
+th { 
   border: 1px solid #333;
   padding: 8px;
   text-align: left;
@@ -75,11 +67,12 @@ input, select {
   margin: 4px 0;
   border: 1px solid #ccc;
   border-radius: 1.5rem;
-  box-sizing: border-box;
   font-size: 16px;
   text-align: center;
   font-family: var(--font-family-sans);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
 }
+
 
 .sticky-banner {
   display: flex;
@@ -116,7 +109,7 @@ header {
 
 hr {
   width: 80%;
-  color: red;
+  color: #4CAF50;
 }
 
 h1 {
@@ -136,10 +129,6 @@ h3 h4 {
 }
 
 
-table { /* WIP */
-  border: 1px solid black;
-}
-
 button {
   background-color: #4CAF50; /* Calm financial green */
   width : 200px;
@@ -156,6 +145,68 @@ button {
 button:hover {
   background-color: #45a049;
 }
+
+
+.button-div {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+#calculate-button {
+  flex-grow: 1;
+}
+
+#reset {
+  flex-shrink: 1;
+  background-color: #555;
+}
+
+
+
+
+
+/* Dropdown Button */
+.dropbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  text-align: center;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
 
 
 footer {
@@ -175,3 +226,60 @@ footer {
 
 /* MEDIA QUERIES */
 
+/* Default styles for mobile */
+@media (max-width: 768px) {
+  /* Table - Take up 90-95% viewport width */
+
+  .input-section {
+   width: 100%;
+  }
+  table {
+    width: 100%;
+    font-size: 0.9rem; /* Adjust font size for smaller screens */
+    margin: 0 auto;
+  }
+  
+  /* Centered and resized select, number input fields */
+  input, select {
+    float: none; /* Reset floating */
+    width: 100%; /* Full width */
+    padding: 4px 8px; /* Slightly smaller padding for mobile */
+    margin: 8px auto; /* Center and add space between */
+    font-size: 14px;
+  }
+
+  /* Ensure buttons take up full width for accessibility on smaller screens */
+
+  .button-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  
+  }
+  button {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  #calculate-button {
+    width: 100%;
+  }
+
+  #reset {
+    width: 100%;
+  }
+
+  /* Adjust container width */
+  .container {
+    width: 96%;
+    padding: 0;
+    margin: 0 auto;
+  }
+
+  /* Adjust header for mobile */
+  header {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+}
