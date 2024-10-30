@@ -476,6 +476,13 @@ function resetBudget() {
   const canvas = document.getElementById("pie-chart-canvas");
   const ctx = canvas.getContext("2d");
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Clear results heading
+  document.getElementById("results-heading").innerHTML = "";
+
+  // scroll to top of page smoothly
+  document.body.scrollIntoView({ behavior: "smooth" });
+  
 }
 
 // EVENT LISTENER FOR CALCULATE BUTTON AND DISPLAY RESULTS
