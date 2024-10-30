@@ -20,13 +20,14 @@ body {
   color: var(--font-color-primary); /* Use the primary font color */
   letter-spacing: 0.5px; /* Add a little space between letters */
 }
-
+/*
 .input-section-container {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 5%;
 }
+*/
 /*
 .results-section-container {
   display: flex;
@@ -42,7 +43,6 @@ body {
 
 .results-section {
   width: 80%;
-  padding-left: 20%;
   margin: 0 auto;
   text-align: center;
   align-items: center;
@@ -50,7 +50,7 @@ body {
 
   /* make width 100% of parent*/
 }
-
+/* RESULTS TABLE AND CONTAINER */
 .results-table-div {
   width : 80%;
   height: auto;
@@ -58,10 +58,14 @@ body {
   margin-top: 20px;
 }
 
-#results table tr {
-  height : 50px;
- 
-  
+
+
+#results-table tr {
+  height : 60px;
+ }
+
+.td-results {
+  text-align: right;
 }
 
 table {
@@ -173,6 +177,7 @@ button {
   font-size: 16px;
   transition: background-color 0.3s;
   font-family: var(--font-family-sans);
+  text-transform: uppercase;
 }
 
 button:hover {
@@ -197,22 +202,7 @@ button:hover {
 
 /* Pie chart and Legend Container */
 
-#pie-chart {
- display: flex;
-}
 
-.results-column {
-  width: 50%;
-  display: flex;
-}
-
-#pie-chart-canvas{
-  
-}
-
-#pie-chart-legend {
-  
-}
 
 
 

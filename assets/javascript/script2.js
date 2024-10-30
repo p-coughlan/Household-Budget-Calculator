@@ -413,23 +413,38 @@ function drawPieChart() {
     const color = categoryColours[index % categoryColours.length];
 
     // Create legend item
-    const legendItem = document.createElement("div");
-    legendItem.style.display = "flex";
-    legendItem.style.alignItems = "center";
-    legendItem.style.marginBottom = "5px";
+    const legendItem = document.createElement("div"); // Create a div for each legend item
+    legendItem.style.display = "flex"; // Set display to flex
+    legendItem.style.alignItems = "center"; // Align items to center
+    legendItem.style.marginBottom = "5px";  // Add margin to bottom
 
     // Color box
     const colorBox = document.createElement("div");
-    colorBox.style.width = "20px";
-    colorBox.style.height = "20px";
-    colorBox.style.backgroundColor = color;
-    colorBox.style.marginRight = "10px";
+    colorBox.style.width = "30px";
+    colorBox.style.height = "30px";
+    colorBox.style.borderRadius = "1.5rem"; // Make the box round
+    colorBox.style.backgroundColor = color; // Set the background color from the categoryColours array
+    colorBox.style.marginRight = "10px"; // Add margin to right of box
 
     // Legend text
     const legendText = document.createElement("span");
     legendText.textContent = `${
       cat.category
     }: ${categoryPercentage}% (£${categoryValue.toFixed(2)})`;
+
+    // if % is 0 then hide the legend item
+    if (categoryPercentage === "0.0") { // if category percentage is 0
+      legendItem.style.display = "none"; // hide the legend item
+    }
+
+    //If no data is entered in the expenditure table, hide the pie chart and legend
+    if (totalExpenditure === 0) {
+      canvas.style.display = "none"; // Hide the pie chart
+      legendContainer.style.display = "none"; // Hide the legend
+    } else {
+      canvas.style.display = "block"; // Show the pie chart
+      legendContainer.style.display = "block"; // Show the legend
+    }
 
     // Append to legend container
     legendItem.appendChild(colorBox);
@@ -518,13 +533,13 @@ document.addEventListener("click", function (event) {
     <table>
     <th colspan="2">RESULTS</th>
     <tr>
-    <td>Your total monthly income is: </td><td>£${totalIncome.toFixed(2)}</td>
+    <td>Your total monthly income is: </td><td class="td-results">£${totalIncome.toFixed(2)}</td>
     </tr>
     <tr>
-    <td>Your total monthly expenditure is: </td><td>£${totalExpenditure.toFixed(2)}</td>
+    <td>Your total monthly expenditure is: </td><td class="td-results">£${totalExpenditure.toFixed(2)}</td>
     </tr>
     <tr>
-    <td>After all expenses, your total monthly budget is: </td><td>£${totalBudget.toFixed(2)}</td>
+    <td>After all expenses, your total monthly budget is: </td><td class="td-results">£${totalBudget.toFixed(2)}</td>
     </tr>
     </div>
     </table>`;
