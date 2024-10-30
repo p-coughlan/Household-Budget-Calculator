@@ -420,8 +420,8 @@ function drawPieChart() {
 
     // Color box
     const colorBox = document.createElement("div");
-    colorBox.style.width = "15px";
-    colorBox.style.height = "15px";
+    colorBox.style.width = "20px";
+    colorBox.style.height = "20px";
     colorBox.style.backgroundColor = color;
     colorBox.style.marginRight = "10px";
 
@@ -514,6 +514,7 @@ document.addEventListener("click", function (event) {
     // Display results
     // Results Table
     document.getElementById("results-table").innerHTML = `
+    <div class="results-table-div">
     <table>
     <th colspan="2">RESULTS</th>
     <tr>
@@ -525,13 +526,11 @@ document.addEventListener("click", function (event) {
     <tr>
     <td>After all expenses, your total monthly budget is: </td><td>£${totalBudget.toFixed(2)}</td>
     </tr>
+    </div>
     </table>`;
 
     // Pie Chart
     drawPieChart(); // Draw the pie chart
-
-    // Create results heading
-    document.getElementById("results-heading").innerHTML = "<h3>RESULTS</h3>";
 
     // Scroll to results section when generated or updated
     document

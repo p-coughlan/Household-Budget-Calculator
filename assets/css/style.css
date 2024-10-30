@@ -27,16 +27,13 @@ body {
   justify-content: center;
   margin-top: 5%;
 }
-
+/*
 .results-section-container {
   display: flex;
-  align-items: center;
   justify-content: center;
-  text-align: center;
-  width: 80%;
-  margin: 0 auto;
+  margin-top: 5%;
 }
-
+*/
 
 .input-section {
   width: 80%;
@@ -45,10 +42,27 @@ body {
 
 .results-section {
   width: 80%;
+  padding-left: 20%;
   margin: 0 auto;
   text-align: center;
+  align-items: center;
+  text-align: center;
+
+  /* make width 100% of parent*/
 }
 
+.results-table-div {
+  width : 80%;
+  height: auto;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+#results table tr {
+  height : 50px;
+ 
+  
+}
 
 table {
   width: 100%;
@@ -171,6 +185,7 @@ button:hover {
   justify-content: space-between;
   margin-top: 20px;
 }
+
 #calculate-button {
   flex-grow: 1;
 }
@@ -178,6 +193,25 @@ button:hover {
 #reset {
   flex-shrink: 1;
   background-color: #555;
+}
+
+/* Pie chart and Legend Container */
+
+#pie-chart {
+ display: flex;
+}
+
+.results-column {
+  width: 50%;
+  display: flex;
+}
+
+#pie-chart-canvas{
+  
+}
+
+#pie-chart-legend {
+  
 }
 
 
@@ -249,7 +283,8 @@ footer {
 @media (max-width: 768px) {
   /* Table - Take up 90-95% viewport width */
   .input-section,
-  .results-section {
+  .results-section,
+  .results-table-div {
     width: 95%;
   }
 
