@@ -24,6 +24,7 @@ let categoryTotals = []; // Array to store the total of each category
 let IncomeTable; // Variable to store the IncomeTable
 let ExpenditureTable; // Variable to store the ExpenditureTable
 let categoryTotalsPercentages = []; // Array to store the total of each category as a percentage of the total budget
+let resultsTable; // Variable to store the results table
 
 //-----------------------------------------------------------------
 
@@ -348,6 +349,16 @@ function calculateTotalBudget() {
 //}
 
 //-----------------------------------------------------------------
+
+//FUNVCION TO DISPLAY RESULT TABLE
+/**
+ * Displays the total income, total expenditure, and total budget in the results section
+ * Calls the buildCategoryTotals function to calculate the total of each expenditure category
+ */
+
+
+
+//-----------------------------------------------------------------
 // Create Pie Chart
 
 function drawPieChart() {
@@ -467,9 +478,8 @@ function resetBudget() {
   });
 
   // Clear results section
-  document.getElementById("income-results").innerHTML = "";
-  document.getElementById("expenditure-results").innerHTML = "";
-  document.getElementById("budget-results").innerHTML = "";
+  // results table
+  document.getElementById("results-table").innerHTML = "";
   document.getElementById("pie-chart-legend").innerHTML = "";
 
   // Clear pie chart
@@ -501,18 +511,23 @@ document.addEventListener("click", function (event) {
     totalExpenditure = calculateTotalExpenditure(); // Calculate total expenditure
     totalBudget = calculateTotalBudget(); // Calculate total budget
 
-    document.getElementById(
-      "income-results"
-    ).innerHTML = `Your total monthly income is: £${totalIncome.toFixed(2)}`;
-    document.getElementById(
-      "expenditure-results"
-    ).innerHTML = `Your total monthly expenditure is: £${totalExpenditure.toFixed(
-      2
-    )}`;
-    document.getElementById(
-      "budget-results"
-    ).innerHTML = `Your total monthly budget is: £${totalBudget.toFixed(2)}`;
+    // Display results
+    // Results Table
+    document.getElementById("results-table").innerHTML = `
+    <table>
+    <th colspan="2">RESULTS</th>
+    <tr>
+    <td>Your total monthly income is: </td><td>£${totalIncome.toFixed(2)}</td>
+    </tr>
+    <tr>
+    <td>Your total monthly expenditure is: </td><td>£${totalExpenditure.toFixed(2)}</td>
+    </tr>
+    <tr>
+    <td>After all expenses, your total monthly budget is: </td><td>£${totalBudget.toFixed(2)}</td>
+    </tr>
+    </table>`;
 
+    // Pie Chart
     drawPieChart(); // Draw the pie chart
 
     // Create results heading
