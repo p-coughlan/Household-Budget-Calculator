@@ -20,120 +20,9 @@ body {
   color: var(--font-color-primary); /* Use the primary font color */
   letter-spacing: 0.5px; /* Add a little space between letters */
 }
-/*
-.input-section-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 5%;
-}
-*/
-/*
-.results-section-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 5%;
-}
-*/
 
-.input-section {
-  width: 80%;
-  margin: 0 auto;
-}
-
-.results-section {
-  width: 80%;
-  margin: 0 auto;
-  text-align: center;
-  align-items: center;
-  text-align: center;
-
-  /* make width 100% of parent*/
-}
-/* RESULTS TABLE AND CONTAINER */
-.results-table-div {
-  width : 80%;
-  height: auto;
-  margin: 0 auto;
-  margin-top: 20px;
-}
-
-
-
-#results-table tr {
-  height : 60px;
- }
-
-.td-results {
-  text-align: right;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 0 auto;
-  border: 0.5px solid #555;
-  
-}
-
-th { 
-  border: 1px solid #333;
-  padding: 8px;
-  text-align: left;
-  font-size:large;
-}
-
-td {
-  padding: 5px 8px 5px 8px;
-  text-align: left;
-  /*border: 1px solid #333;*/
-  width: 120px;
-}
-
-tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-tr:nth-child(odd) {
-  background-color: #fff;
-}
-
-input, select {
-  float: right;
-  width: 120px;
-  padding: 12px 20px;
-  margin: 4px 0;
-  border: 1px solid #ccc;
-  border-radius: 1.5rem;
-  font-size: 16px;
-  text-align: center;
-  font-family: var(--font-family-sans);
-  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
-}
-
-
-.sticky-banner {
-  display: flex;
-  background-color: #333;
-  position: sticky;
-  top: 50%;
-  left: 0;
-  width: 50px; /* Adjust the width as needed */
-  height: 50px; /* Full height of the viewport */
-  border-top-right-radius: 50%;
-  border-bottom-right-radius: 50%;
-  transform: translateY(-50%);
-}
-
-.calc-container {
-  width: 80%;
-  margin: 0 auto;
-  color: white;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  font-size: 2rem;
-}
-
+/*----------------------------------------------------------------------*/
+/* HEADER STYLES */
 header {
   height: auto;
   display: flex;
@@ -165,6 +54,108 @@ h3 h4 {
   font-weight: inherit;
 }
 
+/*----------------------------------------------------------------------*/
+
+/*
+.input-section-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5%;
+}
+*/
+/*
+.results-section-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+}
+*/
+/* INPUT SECTION - Income and expenditure tables */
+
+.input-section {
+  width: 80%; /* Take up 80% of the viewport width */
+  margin: 0 auto; /* Center the container */
+}
+/*----------------------------------------------------------------------*/
+
+/* RESULTS SECTION - Results table */
+.results-section {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+  align-items: center;
+  text-align: center;
+}
+
+/*----------------------------------------------------------------------*/
+
+/* RESULTS TABLE AND CONTAINER */
+.results-table-div {
+  width : 80%;
+  height: auto;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* TABLE STYLES */
+/* General table styles */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+  border: 0.5px solid #555;
+}
+
+th { 
+  border: 1px solid #333;
+  padding: 8px;
+  text-align: left;
+  font-size:large;
+}
+
+td {
+  padding: 5px 8px 5px 8px;
+  text-align: left;
+  /*border: 1px solid #333;*/
+  width: 120px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+/* Results table specific styling */
+#results-table tr {
+  height : 60px;
+ }
+
+.td-results {
+  text-align: right;
+}
+
+/*----------------------------------------------------------------------*/
+/* INPUT FIELDS */
+input, select {
+  float: right;
+  width: 120px;
+  padding: 12px 20px;
+  margin: 4px 0;
+  border: 1px solid #ccc;
+  border-radius: 1.5rem;
+  font-size: 16px;
+  text-align: center;
+  font-family: var(--font-family-sans);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+/*----------------------------------------------------------------------*/
+/* BUTTONS */
 
 button {
   background-color: #4CAF50; /* Calm financial green */
@@ -200,15 +191,43 @@ button:hover {
   background-color: #555;
 }
 
+
+/*----------------------------------------------------------------------*/
 /* Pie chart and Legend Container */
+#pie-chart {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+}
+.results-column {
+  flex: 1;
+  justify-items: center;
+}
+
+/* Canvas and Legend */
+#pie-chart-canvas {
+  width: 100%;
+  margin: 0 auto;
+}
+
+#pie-chart-legend {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: center;
+}
+
+canvas {
+  
+}
 
 
 
 
+/*----------------------------------------------------------------------*/
 
-
-
-/* Dropdown Button */
+/* Dropdown button for selecting alternate timeframe display*/
 .dropbtn {
   background-color: #04AA6D;
   color: white;
@@ -261,11 +280,7 @@ footer {
   width: 100%;
 }
 
-#pie-chart {
-  display: block;
-  margin: 20px auto;
-}
-
+/*----------------------------------------------------------------------*/
 
 /* MEDIA QUERIES */
 
@@ -326,4 +341,37 @@ footer {
     padding-left: 5%;
     padding-right: 5%;
   }
+
+  /* Adjust Pie chart and Legend display to stacked */
+  #pie-chart {
+    flex-direction: column;
+  }
 }
+
+/*----------------------------------------------------------------------*/
+/* STICKY CALCULATOR STYLING WIP */
+/*
+.sticky-banner {
+  display: flex;
+  background-color: #333;
+  position: sticky;
+  top: 50%;
+  left: 0;
+  width: 50px; 
+  height: 50px;
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+  transform: translateY(-50%);
+}
+
+.calc-container {
+  width: 80%;
+  margin: 0 auto;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-size: 2rem;
+}
+*/
+/*----------------------------------------------------------------------*/

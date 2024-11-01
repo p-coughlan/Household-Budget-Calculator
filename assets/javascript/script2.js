@@ -415,7 +415,7 @@ function drawPieChart() {
     // Create legend item
     const legendItem = document.createElement("div"); // Create a div for each legend item
     legendItem.style.display = "flex"; // Set display to flex
-    legendItem.style.alignItems = "center"; // Align items to center
+    legendItem.style.alignItems = "center"; // Align items to center on cross axis
     legendItem.style.marginBottom = "5px";  // Add margin to bottom
 
     // Color box
