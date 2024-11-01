@@ -134,7 +134,7 @@ let categoryColours = ["crimson", "teal", "green", "orange", "purple", "grey"];
  */
 function buildIncomeTable() {
   // Create a table element
-  let incomeTable = "<form><H3>INCOME</H3><table id='income-table'>"; // wrap in form element and add table id
+  let incomeTable = "<form><H2>INCOME</H2><table id='income-table'>"; // wrap in form element and add table id
   // add table headers
   incomeTable += "<tr></tr>";
   // Loop through the incomes array
@@ -173,7 +173,7 @@ function buildIncomeTable() {
  */
 function buildExpenditureTable() {
   let expenditureTable =
-    "<form><h3>EXPENDITURE</H3><table id='expenditure-table'>";
+    "<form><h2>EXPENDITURE</H2><table id='expenditure-table'>";
   // Loop through expenditures to dynamically build the table
   //categoryObj = object, catIndex = index
   expenditures.forEach((categoryObj, catIndex) => {

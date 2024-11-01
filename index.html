@@ -37,17 +37,24 @@
     <header>
       <div>
         <!--- Container for Heading and Sub-Heading --->
-        <h1>
-          <i class="fa-solid fa-people-roof"></i> Household Budget Calculator
-        </h1>
+        <div id="h1-container">
+          <h1>
+            <span id="logo"><i class="fa-solid fa-people-roof"></i></span>
+          </h1>
+          <h1 id="logo-text">Household Budget Calculator</h1>
+        </div>
+
+        <hr>
+
         <h2>
           Mangaging your finances can be a real headache at times, our budget
           calculator will help.
         </h2>
       </div>
+      <hr>
     </header>
 
-    <hr />
+    
 
     <!------------------------------- MAIN FORM AND RESULTS SECTION ------------------------------->
 
@@ -60,7 +67,7 @@
           will show you what you spend.
         </h3>
 
-    <!------------------------------- WIP JS POPULATION ------------------------------->
+        <!------------------------------- WIP JS POPULATION ------------------------------->
         <div id="income-section"></div>
 
         <div id="expenditure-section"></div>
@@ -76,22 +83,21 @@
     <!------------------------------- RESULTS SECTION ------------------------------->
 
     <!---CONTAINER FOR RESULTS TABLE--->
-      <div id="results-section"> 
-        <!---Results table, dynamically built and populated by JS--->
-        <div id="results-table"></div>
-      </div>
+    <div id="results-section">
+      <!---Results table, dynamically built and populated by JS--->
+      <div id="results-table"></div>
+    </div>
 
-        <div id="pie-chart">
-          <div class="results-column"><canvas id="pie-chart-canvas"></canvas></div>
-          <div class="results-column"><div id="pie-chart-legend"></div></div>
-        </div>
-      
-    
+    <div id="pie-chart">
+      <div class="results-column"><canvas id="pie-chart-canvas"></canvas></div>
+      <div class="results-column"><div id="pie-chart-legend"></div></div>
+    </div>
 
     <!------------------------------- FOOTER ------------------------------->
 
     <footer>
-      <p>&copy; 2024 Household Budget Calculator</p>
+      <p><i class="fa-solid fa-people-roof"></i> Household Budget Calculator</p>
+      <p>&copy; Patrick Coughlan 2024</p>
     </footer>
 
     <script src="assets/javascript/script2.js"></script>

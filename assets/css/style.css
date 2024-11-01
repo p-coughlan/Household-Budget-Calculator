@@ -4,7 +4,16 @@
   --font-size-base: 18px;
   --font-size-large: calc(2rem + 1vw); /* what is this?  */
   --font-size-medium: calc(1.5rem + 1vw);
-  --font-color-primary: #333;
+  --font-color-primary: #020b02; /* #45a049 darkening towards black */
+
+  /* Colors */
+  --color-primary: #4caf50; /* Calm financial green - used in button*/
+  --color-secondary: #419844; /* as above darkening towards black */
+  --color-tertiary: #225624; /* as above darkening towards black - used in header logo and H1*/
+  --color-quaternary: #4c97af; /* complementary blue - used in reset*/
+  --color-quinary: #418398; /* as above darkening towards black - used in reset*/
+
+
 }
 
 * {
@@ -34,24 +43,48 @@ header {
 }
 
 hr {
-  width: 80%;
-  color: #4CAF50;
+  width: 100%;
+  color: var(--color-quinary);
+  background-color: var(--color-quinary);
+  height: 3px;
+  border-radius: 1.5rem;
 }
+
+/*----------------------------------------------------------------------*/
+/* Logo styles */
+#h1-container {
+  display: flex;;
+}
+
+#logo {
+display: inline-block;
+height: 100%;
+margin-right: 20px;
+color: #225624;
+}
+
+#logo-text {
+display: inline-block;
+text-align: left;
+color: #225624;
+}
+
+/*----------------------------------------------------------------------*/
 
 h1 {
   font-size: var(--font-size-large); /* Use the large font size */
-  font-weight: lighter;
+  font-weight: normal;
   text-transform: uppercase;
 }
 
 h2 {
   font-size: var(--font-size-medium); /* Use the medium font size */
-  font-weight: inherit;
+  font-weight: normal;
 }
 
-h3 h4 {
+h3{
   font-size: var(--font-size-base); /* Use the base font size */
-  font-weight: inherit;
+  font-weight: normal;
 }
 
 /*----------------------------------------------------------------------*/
@@ -111,9 +144,11 @@ table {
 
 th { 
   border: 1px solid #333;
-  padding: 8px;
+  padding: 16px 8px 16px 8px;
   text-align: left;
   font-size:large;
+  font-weight: 500;
+  
 }
 
 td {
@@ -158,21 +193,21 @@ input, select {
 /* BUTTONS */
 
 button {
-  background-color: #4CAF50; /* Calm financial green */
+  background-color: var(--color-primary);
   width : 200px;
   color: white;
   padding: 10px 20px;
   border: 0.5px solid #333;
   border-radius: 1.5rem;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 18px;
   transition: background-color 0.3s;
   font-family: var(--font-family-sans);
   text-transform: uppercase;
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: var(--color-secondary);
 }
 
 
@@ -188,7 +223,11 @@ button:hover {
 
 #reset {
   flex-shrink: 1;
-  background-color: #555;
+  background-color: var(--color-quaternary);
+}
+
+#reset:hover {
+  background-color: var(--color-quinary);
 }
 
 
@@ -214,16 +253,9 @@ button:hover {
   width: 100%;
   margin: 0 auto;
   display: flex;
-  flex-wrap: wrap; 
   justify-content: center;
-}
-
-canvas {
   
 }
-
-
-
 
 /*----------------------------------------------------------------------*/
 
@@ -272,7 +304,7 @@ canvas {
 
 
 footer {
-  background-color: #333;
+  background-color: var(--font-color-primary);
   color: white;
   text-align: center;
   padding: 1rem;
@@ -290,7 +322,7 @@ footer {
   .input-section,
   .results-section,
   .results-table-div {
-    width: 95%;
+    width: 90%;
   }
 
   table {
@@ -329,13 +361,6 @@ footer {
     width: 100%;
   }
 
-  /* Adjust container width */
-  .container {
-    width: 96%;
-    padding: 0;
-    margin: 0 auto;
-  }
-
   /* Adjust header for mobile */
   header {
     padding-left: 5%;
@@ -346,8 +371,10 @@ footer {
   #pie-chart {
     flex-direction: column;
   }
+  #pie-chart-canvas {
+    padding-bottom: 20px;
 }
-
+}
 /*----------------------------------------------------------------------*/
 /* STICKY CALCULATOR STYLING WIP */
 /*
