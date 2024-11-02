@@ -398,6 +398,7 @@ function drawPieChart() {
 
     // Update startAngle for the next slice
     startAngle += sliceAngle;
+    
   });
 
   // Draw legend
@@ -420,8 +421,15 @@ function drawPieChart() {
 
     // Color box
     const colorBox = document.createElement("div");
-    colorBox.style.width = "30px";
-    colorBox.style.height = "30px";
+    
+    colorBox.style.width = "30px"; // Set width of box
+    colorBox.style.height = "30px"; // Set height of box
+
+    colorBox.style.border = "0.5px solid #333"; // Add border to box
+
+    colorBox.style.minWidth = "30px"; // Limit the shrinkage of the box
+    colorBox.style.maxWidth = "30px"; // Limit the shrinkage of the box
+
     colorBox.style.borderRadius = "1.5rem"; // Make the box round
     colorBox.style.backgroundColor = color; // Set the background color from the categoryColours array
     colorBox.style.marginRight = "10px"; // Add margin to right of box
@@ -509,7 +517,65 @@ function resetBudget() {
   document.body.scrollIntoView({ behavior: "smooth" });
   
 }
+//-----------------------------------------------------------------
 
+// FUNCTION FOR SWITCHING RESULTS DISPLAY TIMEFRAME
+// updates the innerHTML of the results table based on the selected timeframe and redraws the pie chart
+function switchResultsDisplay() {
+
+  const timeframe = document.getElementById("select-timeframe").value;
+  let totalIncome = 0;
+  let totalExpenditure = 0;
+  let totalBudget = 0;
+
+  // Calculate new totals based on timeframe
+  // Default is monthly
+
+// MONTHLY CALCULATION NOT WORKING CORRECTLY - NEED TO FIX!!!! 
+// WEEKLY, QUARTERLY, YEARLY WORKING CORRECTLY - ASSESS RETRIEVAL OF DATA FOR THIS FUNCTION
+
+
+  if (timeframe === "weekly") {
+    totalIncome = calculateTotalIncome() / 4.33;
+    totalExpenditure = calculateTotalExpenditure() / 4.33;
+    totalBudget = calculateTotalBudget() / 4.33;
+  } else if (timeframe === "quarterly") {
+    totalIncome = calculateTotalIncome() * 3;
+    totalExpenditure = calculateTotalExpenditure() * 3;
+    totalBudget = calculateTotalBudget() * 3;
+  }
+  else if (timeframe === "yearly") {
+    totalIncome = calculateTotalIncome() * 12;
+    totalExpenditure = calculateTotalExpenditure() * 12;
+    totalBudget = calculateTotalBudget() * 12;
+  } else {
+    totalIncome = calculateTotalIncome();
+    totalExpenditure = calculateTotalExpenditure();
+    totalBudget = calculateTotalBudget
+  }
+
+
+  // Display results
+  document.getElementById("results-table").innerHTML = `
+  <div class="results-table-div">
+  <table>
+  <th colspan="2">RESULTS</th>
+  <tr>
+  <td>Your total ${timeframe} income is: </td><td class="td-results">£${totalIncome.toFixed(2)}</td>
+  </tr>
+  <tr>
+  <td>Your total ${timeframe} expenditure is: </td><td class="td-results">£${totalExpenditure.toFixed(2)}</td>
+  </tr>
+  <tr>
+  <td>After all expenses, your total ${timeframe} budget is: </td><td class="td-results">£${totalBudget.toFixed(2)}</td>
+  </tr>
+  </div>
+  </table>`;
+  drawPieChart(); // Redraw the pie chart
+}
+
+
+//-----------------------------------------------------------------
 // EVENT LISTENER FOR CALCULATE BUTTON AND DISPLAY RESULTS
 
 /**
@@ -555,6 +621,8 @@ document.addEventListener("click", function (event) {
   }
 });
 
+//-----------------------------------------------------------------
+
 // EVENT LISTENER FOR RESET BUTTON
 /**
  * Event listener for the reset button
@@ -564,5 +632,13 @@ document.getElementById("reset").addEventListener("click", resetBudget);
 
 //-----------------------------------------------------------------
 
+// EVENT LISTENER FOR TIMEFRAME SELECT
+// event listener with if statement to check if the target is the timeframe select, then call the switchResultsDisplay function
+document.getElementById("select-timeframe").addEventListener("change", switchResultsDisplay);
+
+
+//******* FUNCTION NOT WORKING CORRECTLY!!  ********/
+
+//-----------------------------------------------------------------
 buildIncomeTable();
 buildExpenditureTable();

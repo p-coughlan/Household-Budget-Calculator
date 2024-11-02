@@ -44,17 +44,15 @@
           <h1 id="logo-text">Household Budget Calculator</h1>
         </div>
 
-        <hr>
+        <hr />
 
         <h2>
           Mangaging your finances can be a real headache at times, our budget
           calculator will help.
         </h2>
       </div>
-      <hr>
+      <hr />
     </header>
-
-    
 
     <!------------------------------- MAIN FORM AND RESULTS SECTION ------------------------------->
 
@@ -91,6 +89,18 @@
     <div id="pie-chart">
       <div class="results-column"><canvas id="pie-chart-canvas"></canvas></div>
       <div class="results-column"><div id="pie-chart-legend"></div></div>
+    </div>
+
+    <!---Button to switch display amount frequency--->
+    <!---Button container div-->
+    <div id="select-timeframe-div">
+      <select name="" id="select-timeframe">
+      <option value="">Change Timeframe Display</option> <!--MAKE THIS NOT SELECTABLE-->
+      <option value="weekly">Display Weekly</option>
+      <option value="monthly">Display Monthly</option>
+      <option value="quarterly">Display Quarterly</option>
+      <option value="yearly">Display Yearly</option>
+      </select>
     </div>
 
     <!------------------------------- FOOTER ------------------------------->
