@@ -27,30 +27,23 @@
   <!------------------------------- BODY SECTION ------------------------------->
 
   <body>
-    <div class="sticky-banner">
-      <!--Container for calculator button-->
-      <div class="calc-container">
-        <i class="fa-solid fa-calculator"></i>
-      </div>
-    </div>
-
+    <!------------------------------- HEADER ------------------------------->
     <header>
+      <!--- Container for logo and title --->
+      <div id="h1-container">
+        <h1>
+          <span id="logo"><i class="fa-solid fa-people-roof"></i></span>
+        </h1>
+        <h1 id="logo-text">Household Budget Calculator</h1>
+      </div>
+
       <div>
-        <!--- Container for Heading and Sub-Heading --->
-        <div id="h1-container">
-          <h1>
-            <span id="logo"><i class="fa-solid fa-people-roof"></i></span>
-          </h1>
-          <h1 id="logo-text">Household Budget Calculator</h1>
-        </div>
-
-        <hr />
-
-        <h2>
+        <h2 id="intro-text">
           Mangaging your finances can be a real headache at times, our budget
           calculator will help.
         </h2>
       </div>
+
       <hr />
     </header>
 
@@ -95,11 +88,12 @@
     <!---Button container div-->
     <div id="select-timeframe-div">
       <select name="" id="select-timeframe">
-      <option value="">Change Timeframe Display</option> <!--MAKE THIS NOT SELECTABLE-->
-      <option value="weekly">Display Weekly</option>
-      <option value="monthly">Display Monthly</option>
-      <option value="quarterly">Display Quarterly</option>
-      <option value="yearly">Display Yearly</option>
+        <option value="">Change Timeframe Display</option>
+        <!--MAKE THIS NOT SELECTABLE-->
+        <option value="weekly">Display Weekly</option>
+        <option value="monthly">Display Monthly</option>
+        <option value="quarterly">Display Quarterly</option>
+        <option value="yearly">Display Yearly</option>
       </select>
     </div>
 

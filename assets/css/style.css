@@ -39,7 +39,7 @@ header {
 }
 
 hr {
-  width: 100%;
+  width: 80%;
   color: var(--color-quinary);
   background-color: var(--color-quinary);
   height: 3px;
@@ -73,6 +73,8 @@ color: #f2f2f2;
 #intro-text {
   width: 80%;
   margin: 0 auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 /*----------------------------------------------------------------------*/
 
@@ -261,7 +263,18 @@ button:hover {
   justify-content: center;
   
 }
+#select-timeframe-div {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
 
+#select-timeframe {
+  width: 80%;
+  background-color: var(--color-quaternary);
+  color: #fff;
+}
 /*----------------------------------------------------------------------*/
 
 /* Dropdown button for selecting alternate timeframe display*/
@@ -325,7 +338,8 @@ footer {
   .input-section,
   .results-section,
   .results-table-div,
-  #intro-text{
+  #intro-text,
+  hr {
   width: 90%; /* Take up 90% of the viewport width */
   }
 

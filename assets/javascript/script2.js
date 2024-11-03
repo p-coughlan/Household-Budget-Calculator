@@ -26,6 +26,7 @@ let ExpenditureTable; // Variable to store the ExpenditureTable
 let categoryTotalsPercentages = []; // Array to store the total of each category as a percentage of the total budget
 let resultsTable; // Variable to store the results table
 
+
 //-----------------------------------------------------------------
 
 // INCOMES ARRAY //
@@ -524,36 +525,35 @@ function resetBudget() {
 function switchResultsDisplay() {
 
   const timeframe = document.getElementById("select-timeframe").value;
-  let totalIncome = 0;
-  let totalExpenditure = 0;
-  let totalBudget = 0;
+  
+  let totalIncome = 0; // reset total income
+  let totalExpenditure = 0; // reset total expenditure
+  let totalBudget = 0; // reset total budget
 
   // Calculate new totals based on timeframe
   // Default is monthly
 
-// MONTHLY CALCULATION NOT WORKING CORRECTLY - NEED TO FIX!!!! 
-// WEEKLY, QUARTERLY, YEARLY WORKING CORRECTLY - ASSESS RETRIEVAL OF DATA FOR THIS FUNCTION
-
-
+  //if statement to check if the timeframe is weekly
   if (timeframe === "weekly") {
     totalIncome = calculateTotalIncome() / 4.33;
     totalExpenditure = calculateTotalExpenditure() / 4.33;
     totalBudget = calculateTotalBudget() / 4.33;
+//if statement to check if the timeframe is monthly (default)
+  } else if (timeframe === "monthly") { 
+    totalIncome = calculateTotalIncome();
+    totalExpenditure = calculateTotalExpenditure();
+    totalBudget = calculateTotalBudget();
+//if statement to check if the timeframe is quarterly
   } else if (timeframe === "quarterly") {
     totalIncome = calculateTotalIncome() * 3;
     totalExpenditure = calculateTotalExpenditure() * 3;
     totalBudget = calculateTotalBudget() * 3;
-  }
-  else if (timeframe === "yearly") {
+//else statement to check if the timeframe is yearly
+  } else {
     totalIncome = calculateTotalIncome() * 12;
     totalExpenditure = calculateTotalExpenditure() * 12;
     totalBudget = calculateTotalBudget() * 12;
-  } else {
-    totalIncome = calculateTotalIncome();
-    totalExpenditure = calculateTotalExpenditure();
-    totalBudget = calculateTotalBudget
   }
-
 
   // Display results
   document.getElementById("results-table").innerHTML = `
@@ -571,7 +571,12 @@ function switchResultsDisplay() {
   </tr>
   </div>
   </table>`;
-  drawPieChart(); // Redraw the pie chart
+
+  // Adjust the legend amounts based on the timeframe
+  // Get category totals array
+  // Create a function that recalculates the category totals based on the timeframe, updates the categoryTotals array, and redraws the pie chart
+  drawPieChart();
+
 }
 
 
