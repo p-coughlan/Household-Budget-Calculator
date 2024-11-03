@@ -2,18 +2,16 @@
 :root {
   --font-family-sans: "Rubik", sans-serif;
   --font-size-base: 18px;
-  --font-size-large: calc(2rem + 1vw); /* what is this?  */
+  --font-size-large: calc(2rem + 1vw);
   --font-size-medium: calc(1.5rem + 1vw);
   --font-color-primary: #020b02; /* #45a049 darkening towards black */
 
   /* Colors */
-  --color-primary: #4caf50; /* Calm financial green - used in button*/
+  --color-primary: #4caf50; /* PRIMARY -- Calm financial green - used in button*/ 
   --color-secondary: #419844; /* as above darkening towards black */
   --color-tertiary: #225624; /* as above darkening towards black - used in header logo and H1*/
   --color-quaternary: #4c97af; /* complementary blue - used in reset*/
   --color-quinary: #418398; /* as above darkening towards black - used in reset*/
-
-
 }
 
 * {
@@ -33,11 +31,9 @@ body {
 /*----------------------------------------------------------------------*/
 /* HEADER STYLES */
 header {
-  height: auto;
+  height: auto; 
   display: flex;
   flex-direction: column; /* This will make the items to be stacked vertically */
-  padding-left: 10%;
-  padding-right: 10%;
   text-align: left;
   color: var(--font-color-primary); /* Use the primary font color */
 }
@@ -53,22 +49,31 @@ hr {
 /*----------------------------------------------------------------------*/
 /* Logo styles */
 #h1-container {
-  display: flex;;
+  display: flex;
+  background-color: var(--color-tertiary);
+  width: 100%;
+  margin: 0 auto;
+  padding-left: 10%;
+  padding-right: 10%;
 }
 
 #logo {
 display: inline-block;
 height: 100%;
 margin-right: 20px;
-color: #225624;
+color: white;
 }
 
 #logo-text {
 display: inline-block;
 text-align: left;
-color: #225624;
+color: #f2f2f2;
 }
 
+#intro-text {
+  width: 80%;
+  margin: 0 auto;
+}
 /*----------------------------------------------------------------------*/
 
 h1 {
@@ -143,13 +148,11 @@ table {
 }
 
 th { 
-  font-family: var(--font-family-sans);
   border: 1px solid #333;
   padding: 16px 8px 16px 8px;
   text-align: left;
   font-size:large;
-  font-weight: 600;
-  letter-spacing: 2px;
+  font-weight: 500;
   
 }
 
@@ -239,7 +242,6 @@ button:hover {
   width: 80%;
   margin: 0 auto;
   display: flex;
-  margin-bottom: 20px;
 }
 .results-column {
   flex: 1;
@@ -262,35 +264,55 @@ button:hover {
 
 /*----------------------------------------------------------------------*/
 
-/* Select element for alternating timeframe display*/
-
-#select-timeframe-div {
-  display: flex;
-}
-
-#select-timeframe {
-  width: 80%;
-  margin: 0 auto;
-  background-color: var(--color-quinary);
+/* Dropdown button for selecting alternate timeframe display*/
+.dropbtn {
+  background-color: #04AA6D;
   color: white;
-  /* remove default arrow */
-  appearance: none;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
 }
 
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
 
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  text-align: center;
+}
 
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
 
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
 
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
 
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
 
-/*----------------------------------------------------------------------*/
 
 footer {
-  background-color: var(--font-color-primary);
-  color: white;
+  background-color: var(--color-tertiary);
+  color: #ddd;
   text-align: center;
   padding: 1rem;
-  margin-top: 10%;
   width: 100%;
 }
 
@@ -300,17 +322,16 @@ footer {
 
 /* Default styles for mobile */
 @media (max-width: 768px) {
-  /* Table - Take up 90-95% viewport width */
   .input-section,
   .results-section,
-  .results-table-div {
-    width: 90%;
+  .results-table-div,
+  #intro-text{
+  width: 90%; /* Take up 90% of the viewport width */
   }
 
   table {
-    width: 100%;
+    width: 100%; /* Full width */
     font-size: 0.9rem; /* Adjust font size for smaller screens */
-    margin: 0 auto;
   }
   
   /* Centered and resized select, number input fields */
@@ -319,15 +340,13 @@ footer {
     width: 100%; /* Full width */
     padding: 4px 8px; /* Slightly smaller padding for mobile */
     margin: 8px auto; /* Center and add space between */
-    font-size: 14px;
+    font-size: 14px; /* Smaller font size for mobile */
   }
 
   /* Ensure buttons take up full width for accessibility on smaller screens */
   .button-div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    display: flex; /* Flex container */
+    flex-direction: column; /* Stack buttons vertically */
   }
 
   button {
@@ -335,16 +354,13 @@ footer {
     margin-top: 10px;
   }
 
-  #calculate-button {
-    width: 100%;
-  }
-
+  #calculate-button,
   #reset {
     width: 100%;
   }
 
   /* Adjust header for mobile */
-  header {
+  #h1-container {
     padding-left: 5%;
     padding-right: 5%;
   }
@@ -354,10 +370,8 @@ footer {
     flex-direction: column;
   }
   #pie-chart-canvas {
+    padding-bottom: 20px;
 }
-  #pie-chart-legend {
-    font-size: 16px;
-  }
 }
 /*----------------------------------------------------------------------*/
 /* STICKY CALCULATOR STYLING WIP */
