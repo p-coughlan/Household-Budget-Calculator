@@ -85,6 +85,9 @@ Gifts (Additional Expenses Section) <i class="fa-solid fa-gifts"></i>
 
     Parse float - why did I use this?
 
+    Ensuring the input field only accepts numbers by using a regular expression - explain this:
+    <input type="number" placeholder="£0.00" oninput="this.value = this.value.replace(/[^0-9.]/g, '')">
+
 <h4>Here is the total amount you spend on each category.</h4>
 <h4><i class="fa-solid fa-house"></i> HOUSEHOLD BILLS:</h4>
 <h4><i class="fa-solid fa-plane-departure"></i> LEISURE</h4>

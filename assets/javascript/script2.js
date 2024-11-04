@@ -141,20 +141,20 @@ function buildIncomeTable() {
   // Loop through the incomes array
   for (income in incomes) {
     incomeTable += `
-        <tr class="table-row">
-        <td class="table-category">${incomes[income][0]}</td>
-        <td>
-        <select name="" id=""> 
-              <option value="weekly">Weekly</option>
-              <option value="monthly" selected>Monthly</option>
-              <option value="quarterly">Quarterly</option>
-              <option value="yearly">Yearly</option>
-        </select>
-        </td>
-        <td>
-        <input type="number" placeholder="£0.00">
-        </td>
-        </tr>`;
+      <tr class="table-row">
+      <td class="table-category">${incomes[income][0]}</td>
+      <td>
+      <select name="" id=""> 
+          <option value="weekly">Weekly</option>
+          <option value="monthly" selected>Monthly</option>
+          <option value="quarterly">Quarterly</option>
+          <option value="yearly">Yearly</option>
+      </select>
+      </td>
+      <td>
+      <input type="number" placeholder="£0.00" oninput="this.value = this.value.replace(/[^0-9.]/g, '')">
+      </td>
+      </tr>`;
   }
   // Close the table
   incomeTable += "</table></form>";
@@ -365,7 +365,7 @@ function calculateTotalBudget() {
 function drawPieChart() {
   const canvas = document.getElementById("pie-chart-canvas");
   const ctx = canvas.getContext("2d");
-  const totalExpenditure = categoryTotals.reduce(
+  const totalExpenditure = categoryTotals.reduce( // Calculate the total expenditure by summing the total of each category
     (sum, cat) => sum + parseFloat(cat.total),
     0
   );
@@ -376,7 +376,7 @@ function drawPieChart() {
   // Draw pie chart
   let startAngle = 0;
   categoryTotals.forEach((cat, index) => {
-    const categoryValue = parseFloat(cat.total);
+    const categoryValue = parseFloat(cat.total); // Get the total value of the category
     const categoryPercentage = (categoryValue / totalExpenditure) * 100;
     const sliceAngle = (categoryPercentage / 100) * 2 * Math.PI;
 
@@ -407,7 +407,7 @@ function drawPieChart() {
   legendContainer.innerHTML = ""; // Clear existing legend
 
   categoryTotals.forEach((cat, index) => {
-    const categoryValue = parseFloat(cat.total);
+    const categoryValue = parseFloat(cat.total); //
     const categoryPercentage = (
       (categoryValue / totalExpenditure) *
       100
@@ -436,10 +436,25 @@ function drawPieChart() {
     colorBox.style.marginRight = "10px"; // Add margin to right of box
 
     // Legend text
-    const legendText = document.createElement("span");
-    legendText.textContent = `${
-      cat.category
-    }: ${categoryPercentage}% (£${categoryValue.toFixed(2)})`;
+    // Legend text will display the category, percentage, and value
+    // It will also display the value based on the selected timeframe (weekly, monthly, quarterly, yearly) in the select element
+
+    let timeframe = document.getElementById("select-timeframe").value; // Get the selected timeframe
+    const legendText = document.createElement("span"); // Create a span for the legend text
+    if (timeframe === "weekly") {
+      legendText.textContent = `${
+        cat.category
+      }: ${categoryPercentage}% (£${(categoryValue / 4.33).toFixed(2)})`;
+    }
+    else if (timeframe === "monthly") {
+      legendText.textContent = `${cat.category}: ${categoryPercentage}% (£${categoryValue.toFixed(2)})`;
+    }
+    else if (timeframe === "quarterly") {
+      legendText.textContent = `${cat.category}: ${categoryPercentage}% (£${(categoryValue * 3).toFixed(2)})`;
+    }
+    else {
+      legendText.textContent = `${cat.category}: ${categoryPercentage}% (£${(categoryValue * 12).toFixed(2)})`;
+    }
 
     // if % is 0 then hide the legend item
     if (categoryPercentage === "0.0") { // if category percentage is 0
@@ -524,7 +539,7 @@ function resetBudget() {
 // updates the innerHTML of the results table based on the selected timeframe and redraws the pie chart
 function switchResultsDisplay() {
 
-  const timeframe = document.getElementById("select-timeframe").value;
+  const timeframe = document.getElementById("select-timeframe").value; // Get the selected timeframe
   
   let totalIncome = 0; // reset total income
   let totalExpenditure = 0; // reset total expenditure
@@ -538,6 +553,7 @@ function switchResultsDisplay() {
     totalIncome = calculateTotalIncome() / 4.33;
     totalExpenditure = calculateTotalExpenditure() / 4.33;
     totalBudget = calculateTotalBudget() / 4.33;
+    
 //if statement to check if the timeframe is monthly (default)
   } else if (timeframe === "monthly") { 
     totalIncome = calculateTotalIncome();
