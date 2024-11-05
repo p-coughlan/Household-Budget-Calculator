@@ -263,6 +263,11 @@ button:hover {
   justify-content: center;
   
 }
+
+.hidden {
+  display: none;
+}
+
 #select-timeframe-div {
   width: 100%;
   margin: 0 auto;
@@ -275,6 +280,7 @@ button:hover {
   background-color: var(--color-quaternary);
   color: #fff;
 }
+
 /*----------------------------------------------------------------------*/
 
 /* Dropdown button for selecting alternate timeframe display*/

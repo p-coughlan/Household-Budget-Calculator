@@ -26,7 +26,6 @@ let ExpenditureTable; // Variable to store the ExpenditureTable
 let categoryTotalsPercentages = []; // Array to store the total of each category as a percentage of the total budget
 let resultsTable; // Variable to store the results table
 
-
 //-----------------------------------------------------------------
 
 // INCOMES ARRAY //
@@ -357,15 +356,14 @@ function calculateTotalBudget() {
  * Calls the buildCategoryTotals function to calculate the total of each expenditure category
  */
 
-
-
 //-----------------------------------------------------------------
 // Create Pie Chart
 
 function drawPieChart() {
   const canvas = document.getElementById("pie-chart-canvas");
   const ctx = canvas.getContext("2d");
-  const totalExpenditure = categoryTotals.reduce( // Calculate the total expenditure by summing the total of each category
+  const totalExpenditure = categoryTotals.reduce(
+    // Calculate the total expenditure by summing the total of each category
     (sum, cat) => sum + parseFloat(cat.total),
     0
   );
@@ -399,7 +397,6 @@ function drawPieChart() {
 
     // Update startAngle for the next slice
     startAngle += sliceAngle;
-    
   });
 
   // Draw legend
@@ -418,11 +415,11 @@ function drawPieChart() {
     const legendItem = document.createElement("div"); // Create a div for each legend item
     legendItem.style.display = "flex"; // Set display to flex
     legendItem.style.alignItems = "center"; // Align items to center on cross axis
-    legendItem.style.marginBottom = "5px";  // Add margin to bottom
+    legendItem.style.marginBottom = "5px"; // Add margin to bottom
 
     // Color box
     const colorBox = document.createElement("div");
-    
+
     colorBox.style.width = "30px"; // Set width of box
     colorBox.style.height = "30px"; // Set height of box
 
@@ -442,22 +439,26 @@ function drawPieChart() {
     let timeframe = document.getElementById("select-timeframe").value; // Get the selected timeframe
     const legendText = document.createElement("span"); // Create a span for the legend text
     if (timeframe === "weekly") {
+      legendText.textContent = `${cat.category}: ${categoryPercentage}% (£${(
+        categoryValue / 4.33
+      ).toFixed(2)})`;
+    } else if (timeframe === "monthly") {
       legendText.textContent = `${
         cat.category
-      }: ${categoryPercentage}% (£${(categoryValue / 4.33).toFixed(2)})`;
-    }
-    else if (timeframe === "monthly") {
-      legendText.textContent = `${cat.category}: ${categoryPercentage}% (£${categoryValue.toFixed(2)})`;
-    }
-    else if (timeframe === "quarterly") {
-      legendText.textContent = `${cat.category}: ${categoryPercentage}% (£${(categoryValue * 3).toFixed(2)})`;
-    }
-    else {
-      legendText.textContent = `${cat.category}: ${categoryPercentage}% (£${(categoryValue * 12).toFixed(2)})`;
+      }: ${categoryPercentage}% (£${categoryValue.toFixed(2)})`;
+    } else if (timeframe === "quarterly") {
+      legendText.textContent = `${cat.category}: ${categoryPercentage}% (£${(
+        categoryValue * 3
+      ).toFixed(2)})`;
+    } else {
+      legendText.textContent = `${cat.category}: ${categoryPercentage}% (£${(
+        categoryValue * 12
+      ).toFixed(2)})`;
     }
 
     // if % is 0 then hide the legend item
-    if (categoryPercentage === "0.0") { // if category percentage is 0
+    if (categoryPercentage === "0.0") {
+      // if category percentage is 0
       legendItem.style.display = "none"; // hide the legend item
     }
 
@@ -526,21 +527,21 @@ function resetBudget() {
   const ctx = canvas.getContext("2d");
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // Clear results heading
-  document.getElementById("results-heading").innerHTML = "";
-
   // scroll to top of page smoothly
   document.body.scrollIntoView({ behavior: "smooth" });
-  
+
+  // Add hidden class to pie chart and legend, and select timeframe dropdown
+  // this will hide the pie chart and legend, and select timeframe dropdown
+  addHiddenClass();
+  // reload page
 }
 //-----------------------------------------------------------------
 
 // FUNCTION FOR SWITCHING RESULTS DISPLAY TIMEFRAME
 // updates the innerHTML of the results table based on the selected timeframe and redraws the pie chart
 function switchResultsDisplay() {
-
   const timeframe = document.getElementById("select-timeframe").value; // Get the selected timeframe
-  
+
   let totalIncome = 0; // reset total income
   let totalExpenditure = 0; // reset total expenditure
   let totalBudget = 0; // reset total budget
@@ -553,18 +554,18 @@ function switchResultsDisplay() {
     totalIncome = calculateTotalIncome() / 4.33;
     totalExpenditure = calculateTotalExpenditure() / 4.33;
     totalBudget = calculateTotalBudget() / 4.33;
-    
-//if statement to check if the timeframe is monthly (default)
-  } else if (timeframe === "monthly") { 
+
+    //if statement to check if the timeframe is monthly (default)
+  } else if (timeframe === "monthly") {
     totalIncome = calculateTotalIncome();
     totalExpenditure = calculateTotalExpenditure();
     totalBudget = calculateTotalBudget();
-//if statement to check if the timeframe is quarterly
+    //if statement to check if the timeframe is quarterly
   } else if (timeframe === "quarterly") {
     totalIncome = calculateTotalIncome() * 3;
     totalExpenditure = calculateTotalExpenditure() * 3;
     totalBudget = calculateTotalBudget() * 3;
-//else statement to check if the timeframe is yearly
+    //else statement to check if the timeframe is yearly
   } else {
     totalIncome = calculateTotalIncome() * 12;
     totalExpenditure = calculateTotalExpenditure() * 12;
@@ -577,13 +578,19 @@ function switchResultsDisplay() {
   <table>
   <th colspan="2">RESULTS</th>
   <tr>
-  <td>Your total ${timeframe} income is: </td><td class="td-results">£${totalIncome.toFixed(2)}</td>
+  <td>Your total ${timeframe} income is: </td><td class="td-results">£${totalIncome.toFixed(
+    2
+  )}</td>
   </tr>
   <tr>
-  <td>Your total ${timeframe} expenditure is: </td><td class="td-results">£${totalExpenditure.toFixed(2)}</td>
+  <td>Your total ${timeframe} expenditure is: </td><td class="td-results">£${totalExpenditure.toFixed(
+    2
+  )}</td>
   </tr>
   <tr>
-  <td>After all expenses, your total ${timeframe} budget is: </td><td class="td-results">£${totalBudget.toFixed(2)}</td>
+  <td>After all expenses, your total ${timeframe} budget is: </td><td class="td-results">£${totalBudget.toFixed(
+    2
+  )}</td>
   </tr>
   </div>
   </table>`;
@@ -592,9 +599,45 @@ function switchResultsDisplay() {
   // Get category totals array
   // Create a function that recalculates the category totals based on the timeframe, updates the categoryTotals array, and redraws the pie chart
   drawPieChart();
-
 }
 
+//-----------------------------------------------------------------
+// Mini function for removing hidden class from pie chart and legend, and select timeframe dropdown
+function removeHiddenClass() {
+  document.getElementById("pie-chart-legend").classList.remove("hidden");
+  document.getElementById("pie-chart-canvas").classList.remove("hidden");
+  document.getElementById("select-timeframe").classList.remove("hidden");
+  document.getElementById("select-timeframe-div").classList.remove("hidden");
+  // loop through the results columns and remove hidden class
+  for (
+    let i = 0;
+    i < document.getElementsByClassName("results-column").length;
+    i++
+  ) {
+    document
+      .getElementsByClassName("results-column")
+      [i].classList.remove("hidden");
+  }
+}
+
+// Mini function for adding hidden class to pie chart and legend, and select timeframe dropdown on reset and page load
+function addHiddenClass() {
+  document.getElementById("pie-chart-legend").classList.add("hidden");
+  document.getElementById("pie-chart-canvas").classList.add("hidden");
+  document.getElementById("select-timeframe").classList.add("hidden");
+  document.getElementById("select-timeframe-div").classList.add("hidden");
+  document.getElementsByClassName("results-column");
+  // loop through the results columns and add hidden class
+  for (
+    let i = 0;
+    i < document.getElementsByClassName("results-column").length;
+    i++
+  ) {
+    document
+      .getElementsByClassName("results-column")
+      [i].classList.add("hidden");
+  }
+}
 
 //-----------------------------------------------------------------
 // EVENT LISTENER FOR CALCULATE BUTTON AND DISPLAY RESULTS
@@ -620,16 +663,25 @@ document.addEventListener("click", function (event) {
     <table>
     <th colspan="2">RESULTS</th>
     <tr>
-    <td>Your total monthly income is: </td><td class="td-results">£${totalIncome.toFixed(2)}</td>
+    <td>Your total monthly income is: </td><td class="td-results">£${totalIncome.toFixed(
+      2
+    )}</td>
     </tr>
     <tr>
-    <td>Your total monthly expenditure is: </td><td class="td-results">£${totalExpenditure.toFixed(2)}</td>
+    <td>Your total monthly expenditure is: </td><td class="td-results">£${totalExpenditure.toFixed(
+      2
+    )}</td>
     </tr>
     <tr>
-    <td>After all expenses, your total monthly budget is: </td><td class="td-results">£${totalBudget.toFixed(2)}</td>
+    <td>After all expenses, your total monthly budget is: </td><td class="td-results">£${totalBudget.toFixed(
+      2
+    )}</td>
     </tr>
     </div>
     </table>`;
+
+    // Remove hidden class from pie chart and legend, and select timeframe dropdown
+    removeHiddenClass();
 
     // Pie Chart
     drawPieChart(); // Draw the pie chart
@@ -638,7 +690,6 @@ document.addEventListener("click", function (event) {
     document
       .getElementById("results-section")
       .scrollIntoView({ behavior: "smooth" });
-    //
   }
 });
 
@@ -655,11 +706,14 @@ document.getElementById("reset").addEventListener("click", resetBudget);
 
 // EVENT LISTENER FOR TIMEFRAME SELECT
 // event listener with if statement to check if the target is the timeframe select, then call the switchResultsDisplay function
-document.getElementById("select-timeframe").addEventListener("change", switchResultsDisplay);
-
+document
+  .getElementById("select-timeframe")
+  .addEventListener("change", switchResultsDisplay);
 
 //******* FUNCTION NOT WORKING CORRECTLY!!  ********/
 
 //-----------------------------------------------------------------
 buildIncomeTable();
 buildExpenditureTable();
+// add hidden class to pie chart and legend, and select timeframe dropdown on page load
+addHiddenClass();
