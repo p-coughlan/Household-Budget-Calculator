@@ -186,7 +186,7 @@ tr:nth-child(odd) {
 input, select {
   float: right;
   width: 120px;
-  padding: 12px 20px;
+  padding: 12px 12px;
   margin: 4px 0;
   border: 1px solid #ccc;
   border-radius: 1.5rem;
@@ -211,6 +211,7 @@ button {
   transition: background-color 0.3s;
   font-family: var(--font-family-sans);
   text-transform: uppercase;
+  margin: 30px 0px 90px 0px;
 }
 
 button:hover {
@@ -371,7 +372,7 @@ footer {
 
   button {
     width: 100%;
-    margin-top: 10px;
+    margin: 10px 0px 10px 0px;
   }
 
   #calculate-button,
@@ -391,6 +392,10 @@ footer {
   }
   #pie-chart-canvas {
     padding-bottom: 20px;
+}
+footer {
+  margin-top: 20px;
+  line-height: 0.5; /* Adjust line height for smaller screens */
 }
 }
 /*----------------------------------------------------------------------*/
