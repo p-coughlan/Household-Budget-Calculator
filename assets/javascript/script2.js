@@ -123,7 +123,7 @@ console.log("logging from expenditures array section:", expenditures);
 //-----------------------------------------------------------------
 
 // CATEGORY COLOURS FOR PIE CHART
-let categoryColours = ["crimson", "teal", "green", "orange", "purple", "grey"];
+let categoryColours = ["#F47A1F", "#FDBB2F", "#377B2B", "#7AC142", "#007CC3", "#00529B"];
 
 //-----------------------------------------------------------------
 
@@ -313,8 +313,10 @@ function calculateTotalExpenditure() {
       total: categoryTotal.toFixed(2),
     });
 
-    // convert categoryTotals to percentages for use in pie chart and store in new array
   });
+  
+
+  
 
   console.log("Total Expenditure:", totalExpenditure.toFixed(2));
   console.log("Category Totals:", categoryTotals);
