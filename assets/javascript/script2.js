@@ -2,20 +2,23 @@
 Author: Patrick Coughlan
 
 Project Plan:
-1. Create an array of income types *DONE*
-2. Create an array of expenditure categories *DONE*
-3. Create a function to build the income table that takes user input *DONE*
+1. Create an array of income types 
+2. Create an array of expenditure categories 
+3. Create a function to build the income table that takes user input 
 4. Create a function to build the expenditure table that takes user input
 4. Create a function to calculate the total income, updating the totalIncome variable and the income array
 5. Create a function to calculate the total expenditure, updating the totalExpenditure variable and the expenditure array
 6. Create a function to calculate the total budget and the category totals, updating the totalBudget variable and the categoryTotals array
 7. Create a function to display the total income, total expenditure, total budget and category totals
-
+8. Create a function to draw a pie chart and legend using the category totals
+9. Create a function to switch the results display between weekly, monthly, quarterly, and yearly
+10. Create a function to reset the budgeting tool
+11. Add event listeners for the calculate button, reset button, and timeframe select
 */
 
 //-----------------------------------------------------------------
 
-// DECLARE VARIABLES //
+// DECLARE GLOBAL VARIABLES //
 
 let totalIncome; // Variable to store the total income
 let totalExpenditure; // Variable to store the total expenditure
@@ -123,21 +126,32 @@ console.log("logging from expenditures array section:", expenditures);
 //-----------------------------------------------------------------
 
 // CATEGORY COLOURS FOR PIE CHART
-let categoryColours = ["#F47A1F", "#FDBB2F", "#377B2B", "#7AC142", "#007CC3", "#00529B"];
+// https://www.schemecolor.com/orange-green-blue-pie-chart.php
+
+let categoryColours = [
+  "#F47A1F", // 'Princeton Orange' (Orange)
+  "#FDBB2F", // 'Saffron' (Golden Yellow)
+  "#377B2B", // 'Japanese Laurel' (Green)
+  "#7AC142", // 'Apple' (Green)
+  "#007CC3", // 'Ocean Boat Blue' (Blue)
+  "#00529B", // 'USAFA Blue' (Blue)
+];
 
 //-----------------------------------------------------------------
 
 // FUNCTION TO BUILD INCOME TABLE
 /**
- * Builds the income table using HTML and the incomes array
- * A table row is created for each income type, with input fields for the frequency and amount.
+ * Builds the income table using HTML and category data from the incomes array
+ * A table row is created for each income type, with input fields to select the frequency and amount
+ * The table is added to the income section in index.html
  */
+
 function buildIncomeTable() {
   // Create a table element
   let incomeTable = "<form><H2>INCOME</H2><table id='income-table'>"; // wrap in form element and add table id
   // add table headers
   incomeTable += "<tr></tr>";
-  // Loop through the incomes array
+  // Loop through the incomes array and build the table
   for (income in incomes) {
     incomeTable += `
       <tr class="table-row">
@@ -170,6 +184,8 @@ function buildIncomeTable() {
  * Builds the expenditure table using HTML and the expenditures array
  * A table row is created for the general category
  * A table row is created for each item within the category, with input fields for the frequency and amount.
+ * Data attributes are used to store the indices for easy reference
+ * The table is added to the expenditure section in index.html
  */
 function buildExpenditureTable() {
   let expenditureTable =
@@ -204,10 +220,6 @@ function buildExpenditureTable() {
   expenditureTable += "</table></form>";
   document.getElementById("expenditure-section").innerHTML = expenditureTable;
 }
-
-// CONSOLE LOGS FOR ABOVE SECTION
-
-//-----------------------------------------------------------------
 
 //-----------------------------------------------------------------
 
@@ -312,11 +324,7 @@ function calculateTotalExpenditure() {
       category: categoryObj.category,
       total: categoryTotal.toFixed(2),
     });
-
   });
-  
-
-  
 
   console.log("Total Expenditure:", totalExpenditure.toFixed(2));
   console.log("Category Totals:", categoryTotals);
@@ -325,7 +333,9 @@ function calculateTotalExpenditure() {
 }
 
 // CONSOLE LOGS FOR ABOVE SECTION (inside function)
+
 //-----------------------------------------------------------------
+
 // FUNCTION TO CALCULATE TOTAL BUDGET
 /**
  * Calculates the total budget by subtracting the total expenditure from the total income
@@ -340,26 +350,16 @@ function calculateTotalBudget() {
   );
   return totalBudget;
 }
+
 //-----------------------------------------------------------------
-// FUNCTION TO SWITCH RESULTS DISPLAY TO WEEKLY, MONTHLY, QUARTERLY, YEARLY
+
+// FUNCTION TO DRAW PIE CHART AND LEGEND
 /**
- * This function will switch the results display between weekly, monthly, quarterly, and yearly
- * It will update the total income, total expenditure, and total budget based on the selected frequency
- * It will update the category totals based on the selected frequency
+ * Draws a pie chart on the canvas element using the categoryTotals array
+ * The pie chart will display the percentage of each category as a slice
+ * The legend will display the category name, percentage, and value
+ * The legend will display the value based on the selected timeframe (weekly, monthly, quarterly, yearly) in the select element that is created in the switchResultsDisplay function
  */
-// function switchResultsDisplay() {
-//}
-
-//-----------------------------------------------------------------
-
-//FUNVCION TO DISPLAY RESULT TABLE
-/**
- * Displays the total income, total expenditure, and total budget in the results section
- * Calls the buildCategoryTotals function to calculate the total of each expenditure category
- */
-
-//-----------------------------------------------------------------
-// Create Pie Chart
 
 function drawPieChart() {
   const canvas = document.getElementById("pie-chart-canvas");
@@ -490,7 +490,11 @@ function drawPieChart() {
  * Resets the amounts in the incomes and expenditures arrays to 0
  * Clears the input fields in the income and expenditure tables
  * Clears the results section
+ * Clears the pie chart and legend
+ * Adds the hidden class to the pie chart, legend, and select timeframe dropdown, hiding them until the calculate button is clicked
+ * Scrolls to the top of the page
  */
+
 function resetBudget() {
   totalIncome = 0;
   totalExpenditure = 0;
@@ -532,15 +536,21 @@ function resetBudget() {
   // scroll to top of page smoothly
   document.body.scrollIntoView({ behavior: "smooth" });
 
-  // Add hidden class to pie chart and legend, and select timeframe dropdown
-  // this will hide the pie chart and legend, and select timeframe dropdown
+  // Add hidden class to pie chart and legend, and select timeframe dropdown, hiding them
   addHiddenClass();
-  // reload page
 }
+
 //-----------------------------------------------------------------
 
 // FUNCTION FOR SWITCHING RESULTS DISPLAY TIMEFRAME
 // updates the innerHTML of the results table based on the selected timeframe and redraws the pie chart
+/**
+ * Switches the results display between weekly, monthly, quarterly, and yearly
+ * Updates the total income, total expenditure, and total budget (arrays) based on the selected timeframe
+ * Updates the category totals based on the selected timeframe
+ * Redraws the pie chart with the updated category totals
+ */
+
 function switchResultsDisplay() {
   const timeframe = document.getElementById("select-timeframe").value; // Get the selected timeframe
 
@@ -597,14 +607,18 @@ function switchResultsDisplay() {
   </div>
   </table>`;
 
-  // Adjust the legend amounts based on the timeframe
-  // Get category totals array
-  // Create a function that recalculates the category totals based on the timeframe, updates the categoryTotals array, and redraws the pie chart
+  // Redraw pie chart
   drawPieChart();
 }
 
 //-----------------------------------------------------------------
-// Mini function for removing hidden class from pie chart and legend, and select timeframe dropdown
+
+// FUNCTIONS FOR REMOVING AND ADDING HIDDEN CLASS
+/**
+ * Mini function for removing hidden class from pie chart and legend, and select timeframe dropdown on calculate button click
+ * This function is called when the calculate button is clicked, to display the pie chart, legend, and select timeframe dropdown
+ */
+
 function removeHiddenClass() {
   document.getElementById("pie-chart-legend").classList.remove("hidden");
   document.getElementById("pie-chart-canvas").classList.remove("hidden");
@@ -622,7 +636,13 @@ function removeHiddenClass() {
   }
 }
 
-// Mini function for adding hidden class to pie chart and legend, and select timeframe dropdown on reset and page load
+/**
+ * Mini function for adding hidden class to pie chart and legend, and select timeframe dropdown on page load
+ * This function is called on page load or reset, to hide the pie chart, legend, and select timeframe dropdown
+ * It also hides the results columns
+ * The results columns are displayed when the calculate button is clicked
+ */
+
 function addHiddenClass() {
   document.getElementById("pie-chart-legend").classList.add("hidden");
   document.getElementById("pie-chart-canvas").classList.add("hidden");
@@ -640,27 +660,17 @@ function addHiddenClass() {
       [i].classList.add("hidden");
   }
 }
-
 //-----------------------------------------------------------------
-// EVENT LISTENER FOR CALCULATE BUTTON AND DISPLAY RESULTS
-
+// FUCNTION TO DISPLAY RESULTS TABLE
 /**
- * Event listener for the calculate button
- * Calls the calculateTotalIncome function to calculate the total income
- * Displays the total income, total expenditure, and total budget in the results section
- * Calls the buildCategoryTotals function to calculate the total of each expenditure category
- * Stores the total of each category in the categoryTotals array for later use
+ * Generates the html for the results table
+ * Displays the total income, total expenditure, and total budget in the results section using the totalIncome, totalExpenditure, and totalBudget variables
  */
 
-document.addEventListener("click", function (event) {
-  if (event.target.id === "calculate-button") {
-    totalIncome = calculateTotalIncome(); // Calculate total income
-    totalExpenditure = calculateTotalExpenditure(); // Calculate total expenditure
-    totalBudget = calculateTotalBudget(); // Calculate total budget
-
-    // Display results
-    // Results Table
-    document.getElementById("results-table").innerHTML = `
+function displayResultsTable() {
+  // Display results
+  // Results Table
+  document.getElementById("results-table").innerHTML = `
     <div class="results-table-div">
     <table>
     <th colspan="2">RESULTS</th>
@@ -681,9 +691,30 @@ document.addEventListener("click", function (event) {
     </tr>
     </div>
     </table>`;
+}
 
-    // Remove hidden class from pie chart and legend, and select timeframe dropdown
-    removeHiddenClass();
+//-----------------------------------------------------------------
+// EVENT LISTENER FOR CALCULATE BUTTON AND DISPLAY RESULTS
+
+/**
+ * Event listener for the calculate button
+ * Calls the calculateTotalIncome function to calculate the total income
+ * Calls the calculateTotalExpenditure function to calculate the total expenditure
+ * Calls the calculateTotalBudget function to calculate the total budget
+ * Displays the total income, total expenditure, and total budget in the results section
+ * Calls the drawPieChart function to draw the pie chart
+ * Scrolls to the results section when generated or updated
+ * Calls the removeHiddenClass function to display the pie chart, legend, and select timeframe dropdown
+ */
+
+document.addEventListener("click", function (event) {
+  if (event.target.id === "calculate-button") {
+    totalIncome = calculateTotalIncome(); // Calculate total income
+    totalExpenditure = calculateTotalExpenditure(); // Calculate total expenditure
+    totalBudget = calculateTotalBudget(); // Calculate total budget
+
+    // Display results table
+    displayResultsTable();
 
     // Pie Chart
     drawPieChart(); // Draw the pie chart
@@ -692,6 +723,9 @@ document.addEventListener("click", function (event) {
     document
       .getElementById("results-section")
       .scrollIntoView({ behavior: "smooth" });
+
+    // Remove hidden class from pie chart and legend, and select timeframe dropdown
+    removeHiddenClass();
   }
 });
 
@@ -712,10 +746,20 @@ document
   .getElementById("select-timeframe")
   .addEventListener("change", switchResultsDisplay);
 
-//******* FUNCTION NOT WORKING CORRECTLY!!  ********/
-
 //-----------------------------------------------------------------
-buildIncomeTable();
-buildExpenditureTable();
-// add hidden class to pie chart and legend, and select timeframe dropdown on page load
-addHiddenClass();
+
+// CALL FUNCTIONS ON PAGE LOAD
+// Call the functions to build the income and expenditure tables on page load
+// Call the addHiddenClass function to hide the pie chart, legend, and select timeframe dropdown on page load
+// Call the switchResultsDisplay function to switch the results display to monthly on page load
+// Call the resetBudget function to reset the budgeting tool on page load
+
+document.addEventListener("DOMContentLoaded", function () {
+  buildIncomeTable();
+  buildExpenditureTable();
+  addHiddenClass();
+  switchResultsDisplay();
+  resetBudget();
+});
+
+// END OF SCRIPT

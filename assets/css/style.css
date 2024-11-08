@@ -1,4 +1,7 @@
-/* font variables */
+/* CSS STYLESHEET FOR HOUSEHOLD BUDGET CALCULATOR APP */
+
+/* Root variables for font family, font sizes, and colors */
+/* Use the Rubik font family, import from Google Fonts */
 :root {
   --font-family-sans: "Rubik", sans-serif;
   --font-size-base: 18px;
@@ -7,11 +10,12 @@
   --font-color-primary: #020b02; /* #45a049 darkening towards black */
 
   /* Colors */
-  --color-primary: #4caf50; /* PRIMARY -- Calm financial green - used in button*/ 
+  --color-primary: #4caf50; /* Calm financial green - used in button*/
   --color-secondary: #419844; /* as above darkening towards black */
   --color-tertiary: #225624; /* as above darkening towards black - used in header logo and H1*/
   --color-quaternary: #4c97af; /* complementary blue - used in reset*/
   --color-quinary: #418398; /* as above darkening towards black - used in reset*/
+  --color-white: #f2f2f2; /* off-white - used in logo text */
 }
 
 * {
@@ -29,28 +33,28 @@ body {
 }
 
 /*----------------------------------------------------------------------*/
-/* HEADER STYLES */
+
+/* Header */
 header {
-  height: auto; 
+  height: auto;
   display: flex;
   flex-direction: column; /* This will make the items to be stacked vertically */
   text-align: left;
   color: var(--font-color-primary); /* Use the primary font color */
-;
 }
-
+/* Horizontal Rule */
 hr {
-  /* remove default styling */
   border: 0;
-  width: 80%;
-  color: var(--color-quinary);
+  width: 80%; /* Take up 80% of the viewport width */
   background-color: var(--color-tertiary);
-  height: 5px;
-  border-radius: 1.5rem;
+  height: 4px;
+  border-radius: 1.5rem; /* Rounded corners */
 }
 
 /*----------------------------------------------------------------------*/
+
 /* Logo styles */
+/* Container for the logo (font awesome icon) and logo text */
 #h1-container {
   display: flex;
   background-color: var(--color-tertiary);
@@ -60,27 +64,30 @@ hr {
   padding-right: 10%;
 }
 
+/* Logo (font awesome) icon */
 #logo {
-display: inline-block;
-height: 100%;
-margin-right: 20px;
-color: white;
+  display: inline-block;
+  height: 100%;
+  margin-right: 20px;
+  color: white;
 }
 
+/* Logo H1 text */
 #logo-text {
-display: inline-block;
-text-align: left;
-color: #f2f2f2;
+  display: inline-block;
+  text-align: left;
+  color: #f2f2f2;
 }
 
+/* Intro text H2 */
 #intro-text {
   width: 80%;
   margin: 0 auto;
-  padding-top: 20px;
+  padding-top: 25px;
   padding-bottom: 20px;
 }
 /*----------------------------------------------------------------------*/
-
+/* Heading styles */
 h1 {
   font-size: var(--font-size-large); /* Use the large font size */
   font-weight: normal;
@@ -93,59 +100,21 @@ h2 {
   font-weight: normal;
 }
 
-h3{
+h3 {
   font-size: var(--font-size-base); /* Use the base font size */
   font-weight: normal;
 }
 
 /*----------------------------------------------------------------------*/
+/* MAIN CONTENT */
 
-/*
-.input-section-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 5%;
-}
-*/
-/*
-.results-section-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 5%;
-}
-*/
-/* INPUT SECTION - Income and expenditure tables */
-
+/* Container for the income and expenditure input fields */
 .input-section {
   width: 80%; /* Take up 80% of the viewport width */
   margin: 0 auto; /* Center the container */
 }
-/*----------------------------------------------------------------------*/
 
-/* RESULTS SECTION - Results table */
-.results-section {
-  width: 80%;
-  margin: 0 auto;
-  text-align: center;
-  align-items: center;
-  text-align: center;
-}
-
-/*----------------------------------------------------------------------*/
-
-/* RESULTS TABLE AND CONTAINER */
-.results-table-div {
-  width : 80%;
-  height: auto;
-  margin: 0 auto;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-/* TABLE STYLES */
 /* General table styles */
-
 table {
   width: 100%;
   border-collapse: collapse;
@@ -153,23 +122,25 @@ table {
   border: 0.5px solid #555;
 }
 
-th { 
+/* Table header styles */
+th {
   border: 1px solid #333;
   padding: 16px 8px 16px 8px;
   text-align: left;
-  font-size:large;
+  font-size: large;
   font-weight: 500;
-  background-color: var(--color-quaternary);
+  background-image: linear-gradient(to right, #4c97af, #f2f2f2 );
   color: white;
 }
 
+/* Table data styles */
 td {
   padding: 5px 8px 5px 8px;
   text-align: left;
-  /*border: 1px solid #333;*/
   width: 120px;
 }
 
+/* Alternating row colors */
 tr:nth-child(even) {
   background-color: #f2f2f2;
 }
@@ -179,8 +150,8 @@ tr:nth-child(odd) {
 
 /* Results table specific styling */
 #results-table tr {
-  height : 60px;
- }
+  height: 60px;
+}
 
 .td-results {
   text-align: right;
@@ -188,11 +159,13 @@ tr:nth-child(odd) {
 
 /*----------------------------------------------------------------------*/
 /* INPUT FIELDS */
-input, select {
+/* General styling for select dropdown and number input in tables*/
+input,
+select {
   float: right;
   width: 160px;
   padding: 10px 10px;
-  margin: 4px 0;
+  margin: 4px 0 6px 0;
   border: 1px solid #ccc;
   border-radius: 1.5rem;
   font-size: 16px;
@@ -202,11 +175,31 @@ input, select {
 }
 
 /*----------------------------------------------------------------------*/
-/* BUTTONS */
 
+/* Container for the results table */
+.results-section {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+  align-items: center;
+  text-align: center;
+}
+/* Results table */
+.results-table-div {
+  width: 80%;
+  height: auto;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+/*----------------------------------------------------------------------*/
+
+/* BUTTONS */
+/* General button styling */
 button {
   background-color: var(--color-primary);
-  width : 200px;
+  width: 200px;
   color: white;
   padding: 10px 20px;
   border: 0.5px solid #555;
@@ -219,62 +212,69 @@ button {
   margin: 30px 0px 60px 0px;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
 }
-
+/* Button hover effect */
 button:hover {
   background-color: var(--color-secondary);
 }
 
-
+/* Container for calculate and reset buttons */
 .button-div {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
 }
 
+/* Calculate button - flex-grow: 1 will make the button take up the remaining space as reset button has a fixed width */
 #calculate-button {
   flex-grow: 1;
 }
-
+/* Reset button - fixed width */
 #reset {
   flex-shrink: 1;
   background-color: var(--color-quaternary);
 }
 
+/* Reset button hover effect */
 #reset:hover {
   background-color: var(--color-quinary);
 }
 
-
 /*----------------------------------------------------------------------*/
+
+/* PIE CHART, LEGEND, AND TIMEFRAME SELECT */
+
 /* Pie chart and Legend Container */
 #pie-chart {
   width: 80%;
   margin: 0 auto;
   display: flex;
 }
+/* Class applied to both the pie chart and legend columns for responsive design */
 .results-column {
   flex: 1;
   justify-items: center;
 }
 
-/* Canvas and Legend */
+/* Pie chart canvas */
 #pie-chart-canvas {
   width: 100%;
   margin: 0 auto;
 }
 
+/* Legend */
 #pie-chart-legend {
   width: 100%;
   margin: 0 auto;
   display: flex;
   justify-content: center;
-  
 }
 
+/* hidden class applied to results section to be toggled on and off */
 .hidden {
   display: none;
 }
 
+/* Select timeframe dropdown container for responsive design */
 #select-timeframe-div {
   width: 100%;
   margin: 0 auto;
@@ -282,19 +282,19 @@ button:hover {
   justify-content: center;
 }
 
+/* Select timeframe dropdown button */
 #select-timeframe {
-
-
   width: 80%;
   background-color: var(--color-quaternary);
   color: #fff;
   border: 0.5px solid #555;
   font-size: 18px;
   text-transform: uppercase;
-  margin : 20px 0px 20px 0px;
+  margin: 40px 0px 60px 0px;
   cursor: pointer;
 }
 
+/* Select timeframe dropdown button hover effect */
 #select-timeframe:hover {
   background-color: var(--color-quinary);
   transition: background-color 0.3s;
@@ -302,50 +302,7 @@ button:hover {
 
 /*----------------------------------------------------------------------*/
 
-/* Dropdown button for selecting alternate timeframe display*/
-.dropbtn {
-  background-color: #04AA6D;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-}
-
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-  text-align: center;
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #ddd;}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {display: block;}
-
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {background-color: #3e8e41;}
-
-
+/* FOOTER */
 footer {
   background-color: var(--color-tertiary);
   color: #ddd;
@@ -365,16 +322,17 @@ footer {
   .results-table-div,
   #intro-text,
   hr {
-  width: 90%; /* Take up 90% of the viewport width */
+    width: 90%; /* Take up 90% of the viewport width */
   }
 
   table {
     width: 100%; /* Full width */
     font-size: 0.9rem; /* Adjust font size for smaller screens */
   }
-  
+
   /* Centered and resized select, number input fields */
-  input, select {
+  input,
+  select {
     float: none; /* Reset floating */
     width: 100%; /* Full width */
     padding: 4px 8px; /* Slightly smaller padding for mobile */
@@ -410,36 +368,15 @@ footer {
   }
   #pie-chart-canvas {
     padding-bottom: 20px;
-}
-footer {
-  margin-top: 20px;
-  font-size: 12px;
-}
-}
-/*----------------------------------------------------------------------*/
-/* STICKY CALCULATOR STYLING WIP */
-/*
-.sticky-banner {
-  display: flex;
-  background-color: #333;
-  position: sticky;
-  top: 50%;
-  left: 0;
-  width: 50px; 
-  height: 50px;
-  border-top-right-radius: 50%;
-  border-bottom-right-radius: 50%;
-  transform: translateY(-50%);
-}
+  }
 
-.calc-container {
-  width: 80%;
-  margin: 0 auto;
-  color: white;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  font-size: 2rem;
+  #select-timeframe {
+    width: 90%;
+  }
+  footer {
+    margin-top: 20px;
+    font-size: 12px;
+  }
 }
-*/
 /*----------------------------------------------------------------------*/
+/* End of CSS */
