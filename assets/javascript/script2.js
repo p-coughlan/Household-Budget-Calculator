@@ -31,6 +31,80 @@ let resultsTable; // Variable to store the results table
 
 //-----------------------------------------------------------------
 
+// EVENT LISTENERS //
+// EVENT LISTENER FOR CALCULATE BUTTON AND DISPLAY RESULTS
+
+/**
+ * Event listener for the calculate button
+ * Calls the calculateTotalIncome function to calculate the total income
+ * Calls the calculateTotalExpenditure function to calculate the total expenditure
+ * Calls the calculateTotalBudget function to calculate the total budget
+ * Displays the total income, total expenditure, and total budget in the results section
+ * Calls the drawPieChart function to draw the pie chart
+ * Scrolls to the results section when generated or updated
+ * Calls the removeHiddenClass function to display the pie chart, legend, and select timeframe dropdown
+ */
+document.addEventListener("click", function (event) {
+  if (event.target.id === "calculate-button") {
+
+    totalIncome = calculateTotalIncome(); // Calculate total income
+    totalExpenditure = calculateTotalExpenditure(); // Calculate total expenditure
+    totalBudget = calculateTotalBudget(); // Calculate total budget
+
+    // Display results table
+    displayResultsTable();
+
+    // Pie Chart
+    drawPieChart(); // Draw the pie chart
+
+    // Scroll to results section when generated or updated
+    document
+      .getElementById("results-section")
+      .scrollIntoView({ behavior: "smooth" });
+
+    // reset selected timeframe button to 'switch-timeframe' on calculate button click
+    document.getElementById("select-timeframe").value = "switch-timeframe";
+
+    // Remove hidden class from pie chart and legend, and select timeframe dropdown
+    removeHiddenClass();
+  }
+});
+
+//-----------------------------------------------------------------
+
+// EVENT LISTENER FOR RESET BUTTON
+/**
+ * Event listener for the reset button
+ * Calls the resetBudget function to reset the budgeting tool
+ */
+document.getElementById("reset").addEventListener("click", resetBudget);
+
+//-----------------------------------------------------------------
+
+// EVENT LISTENER FOR TIMEFRAME SELECT
+// event listener with if statement to check if the target is the timeframe select, then call the switchResultsDisplay function
+document
+  .getElementById("select-timeframe")
+  .addEventListener("change", switchResultsDisplay);
+
+//-----------------------------------------------------------------
+
+// CALL FUNCTIONS ON PAGE LOAD
+// Call the functions to build the income and expenditure tables on page load
+// Call the addHiddenClass function to hide the pie chart, legend, and select timeframe dropdown on page load
+// Call the switchResultsDisplay function to switch the results display to monthly on page load
+// Call the resetBudget function to reset the budgeting tool on page load
+
+document.addEventListener("DOMContentLoaded", function () {
+  buildIncomeTable();
+  buildExpenditureTable();
+  addHiddenClass();
+  switchResultsDisplay();
+  resetBudget();
+});
+
+//-----------------------------------------------------------------
+
 // INCOMES ARRAY //
 // 0 = income type, 1 = frequency, 2 = amount
 let incomes = [
@@ -56,7 +130,6 @@ Each category object has a category property (a string) and an items property (a
 Item Objects:
 Each item object within the items array has description, frequency, and value properties.
  */
-
 let expenditures = [
   {
     category: "HOUSEHOLD BILLS",
@@ -145,7 +218,6 @@ let categoryColours = [
  * A table row is created for each income type, with input fields to select the frequency and amount
  * The table is added to the income section in index.html
  */
-
 function buildIncomeTable() {
   // Create a table element
   let incomeTable = "<form><H2>INCOME</H2><table id='income-table'>"; // wrap in form element and add table id
@@ -230,7 +302,6 @@ function buildExpenditureTable() {
  * Updates the amount in the incomes array based on user input
  * @returns {number} The total income
  */
-
 function calculateTotalIncome() {
   let totalIncome = 0;
   const rows = document.querySelectorAll("#income-table .table-row");
@@ -279,7 +350,6 @@ function calculateTotalIncome() {
  * Returns the total expenditure
  * @returns {number} The total expenditure
  */
-
 function calculateTotalExpenditure() {
   let totalExpenditure = 0;
   categoryTotals = []; // Reset category totals before calculation
@@ -360,7 +430,6 @@ function calculateTotalBudget() {
  * The legend will display the category name, percentage, and value
  * The legend will display the value based on the selected timeframe (weekly, monthly, quarterly, yearly) in the select element that is created in the switchResultsDisplay function
  */
-
 function drawPieChart() {
   const canvas = document.getElementById("pie-chart-canvas");
   const ctx = canvas.getContext("2d");
@@ -494,7 +563,6 @@ function drawPieChart() {
  * Adds the hidden class to the pie chart, legend, and select timeframe dropdown, hiding them until the calculate button is clicked
  * Scrolls to the top of the page
  */
-
 function resetBudget() {
   totalIncome = 0;
   totalExpenditure = 0;
@@ -550,7 +618,6 @@ function resetBudget() {
  * Updates the category totals based on the selected timeframe
  * Redraws the pie chart with the updated category totals
  */
-
 function switchResultsDisplay() {
   const timeframe = document.getElementById("select-timeframe").value; // Get the selected timeframe
 
@@ -618,7 +685,6 @@ function switchResultsDisplay() {
  * Mini function for removing hidden class from pie chart and legend, and select timeframe dropdown on calculate button click
  * This function is called when the calculate button is clicked, to display the pie chart, legend, and select timeframe dropdown
  */
-
 function removeHiddenClass() {
   document.getElementById("pie-chart-legend").classList.remove("hidden");
   document.getElementById("pie-chart-canvas").classList.remove("hidden");
@@ -642,7 +708,6 @@ function removeHiddenClass() {
  * It also hides the results columns
  * The results columns are displayed when the calculate button is clicked
  */
-
 function addHiddenClass() {
   document.getElementById("pie-chart-legend").classList.add("hidden");
   document.getElementById("pie-chart-canvas").classList.add("hidden");
@@ -666,7 +731,6 @@ function addHiddenClass() {
  * Generates the html for the results table
  * Displays the total income, total expenditure, and total budget in the results section using the totalIncome, totalExpenditure, and totalBudget variables
  */
-
 function displayResultsTable() {
   // Display results
   // Results Table
@@ -694,72 +758,5 @@ function displayResultsTable() {
 }
 
 //-----------------------------------------------------------------
-// EVENT LISTENER FOR CALCULATE BUTTON AND DISPLAY RESULTS
-
-/**
- * Event listener for the calculate button
- * Calls the calculateTotalIncome function to calculate the total income
- * Calls the calculateTotalExpenditure function to calculate the total expenditure
- * Calls the calculateTotalBudget function to calculate the total budget
- * Displays the total income, total expenditure, and total budget in the results section
- * Calls the drawPieChart function to draw the pie chart
- * Scrolls to the results section when generated or updated
- * Calls the removeHiddenClass function to display the pie chart, legend, and select timeframe dropdown
- */
-
-document.addEventListener("click", function (event) {
-  if (event.target.id === "calculate-button") {
-    totalIncome = calculateTotalIncome(); // Calculate total income
-    totalExpenditure = calculateTotalExpenditure(); // Calculate total expenditure
-    totalBudget = calculateTotalBudget(); // Calculate total budget
-
-    // Display results table
-    displayResultsTable();
-
-    // Pie Chart
-    drawPieChart(); // Draw the pie chart
-
-    // Scroll to results section when generated or updated
-    document
-      .getElementById("results-section")
-      .scrollIntoView({ behavior: "smooth" });
-
-    // Remove hidden class from pie chart and legend, and select timeframe dropdown
-    removeHiddenClass();
-  }
-});
-
-//-----------------------------------------------------------------
-
-// EVENT LISTENER FOR RESET BUTTON
-/**
- * Event listener for the reset button
- * Calls the resetBudget function to reset the budgeting tool
- */
-document.getElementById("reset").addEventListener("click", resetBudget);
-
-//-----------------------------------------------------------------
-
-// EVENT LISTENER FOR TIMEFRAME SELECT
-// event listener with if statement to check if the target is the timeframe select, then call the switchResultsDisplay function
-document
-  .getElementById("select-timeframe")
-  .addEventListener("change", switchResultsDisplay);
-
-//-----------------------------------------------------------------
-
-// CALL FUNCTIONS ON PAGE LOAD
-// Call the functions to build the income and expenditure tables on page load
-// Call the addHiddenClass function to hide the pie chart, legend, and select timeframe dropdown on page load
-// Call the switchResultsDisplay function to switch the results display to monthly on page load
-// Call the resetBudget function to reset the budgeting tool on page load
-
-document.addEventListener("DOMContentLoaded", function () {
-  buildIncomeTable();
-  buildExpenditureTable();
-  addHiddenClass();
-  switchResultsDisplay();
-  resetBudget();
-});
 
 // END OF SCRIPT
