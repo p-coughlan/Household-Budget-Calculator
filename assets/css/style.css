@@ -25,7 +25,7 @@
 body {
   margin: 0; /* This will remove the default margin of the body */
   padding: 0; /* This will remove the default padding of the body */
-  background: url(/assets/images/budget-lg.jpg) no-repeat center/cover fixed;
+  background: url(../images/budget-lg.jpg) no-repeat center/cover fixed;
   font-family: var(--font-family-sans); /* Use the sans-serif font family */
   font-size: var(--font-size-base); /* Use the base font size */
   color: var(--font-color-primary); /* Use the primary font color */
