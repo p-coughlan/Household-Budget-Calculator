@@ -8,7 +8,9 @@
 
 - [Description](#description)
 - [Features](#features)
+- [Screenshots](#screenshots)
 - [Technologies](#technologies)
+- [Javascript Functionality](#javascript-functionality)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Project Structure](#project-structure)
@@ -33,12 +35,53 @@ The Household Budget Calculator is a client-side web application built with HTML
 - **Reset Functionality**: Clears all inputs and results to start a new calculation.
 - **Responsive Design**: Styled with CSS variables, Flexbox, and Google Fonts for a clean, accessible interface.
 
+## Screenshots
+
+![](assets/readme/screenshot-1.jpg)  
+_Frequency of income/expenditure type selection_  
+
+![](assets/readme/screenshot-2.jpg)  
+_Adding amounts to expenditures with differing frequencies_  
+
+![](assets/readme/screenshot-3.jpg)  
+_Budget breakdown and pie-chart display_  
+
+![](assets/readme/screenshot-4.jpg)  
+_Results timeframe selector_  
+
 ## Technologies
 
 - **HTML5** for markup structure  
 - **CSS3** with custom variables and Flexbox for layout  
 - **JavaScript (ES6)** for dynamic functionality and Canvas API for chart rendering  
 - **Font Awesome** for icons  
+
+## JavaScript Functionality
+
+1. **Dynamic Table Generation**  
+   - On page load, the script reads a predefined list of income and expense categories and injects rows into the corresponding `<table>` elements.
+
+2. **Frequency Conversion Logic**  
+   - Each input row has a dropdown for frequency (Weekly / Monthly / Quarterly / Yearly).  
+   - When the user calculates or switches timeframe, all values are normalized to a monthly baseline using conversion factors (×4.33 for weekly, ÷3 for quarterly, ÷12 for yearly, etc.).
+
+3. **Budget Calculation**  
+   - Gathers all normalized income and expense values, sums them, and computes the net budget.  
+   - Updates the DOM to display total income, expenditure, and remaining budget.
+
+4. **Chart Rendering**  
+   - Uses the HTML5 Canvas API to draw a pie chart.  
+   - Calculates each category’s percentage of total expenditure, assigns colors, and renders slices and labels dynamically.
+
+5. **Event Handling**  
+   - **Calculate Budget** button: triggers normalization, calculation, and chart redraw.  
+   - **Switch Timeframe** dropdown: re-normalizes existing figures without a full page reload.  
+   - **Reset** button: clears all inputs, removes result text, and resets the canvas.
+
+6. **Error Handling & Validation**  
+   - Non-numeric inputs are safely coerced to zero.  
+   - Edge cases (all zeros, missing selections) are handled gracefully to avoid NaN or empty-chart states.
+
 
 ## Installation
 
